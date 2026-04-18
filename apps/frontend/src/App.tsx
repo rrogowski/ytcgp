@@ -1,8 +1,12 @@
+import type { Timestamp } from "firebase/firestore";
 import { useAuth, useUser } from "./lib/auth";
 import { useRouter } from "./lib/router";
+import { useTransaction } from "./lib/transaction";
+import { getClaimableAllowancesCount, useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
 import { Packs } from "./screens/packs";
 import "./styles.css";
+import { claimAllowanceTransaction } from "./transactions/allowance";
 
 const App: React.FC = () => {
   const auth = useAuth();
@@ -30,18 +34,62 @@ const App: React.FC = () => {
 const NavigationBar: React.FC = () => {
   const router = useRouter();
   const user = useUser();
+  const profile = useProfile();
+
+  const [isClaimingAllowance, claimAllowance] = useTransaction(
+    claimAllowanceTransaction,
+  );
+
+  const allowanceCount = profile.data
+    ? getClaimableAllowancesCount(profile.data)
+    : 0;
 
   return (
     <div>
       <button onClick={() => router.navigate("/binder")}>Binder</button>
       <button onClick={() => router.navigate("/packs")}>Packs</button>
       <>{user.displayName}</>
+      <button
+        disabled={
+          isClaimingAllowance || profile.isLoading || allowanceCount === 0
+        }
+        onClick={() => claimAllowance(user.uid)}
+      >
+        Claim Allowance (x{allowanceCount})
+      </button>
+      Next Allowance At:{" "}
+      {allowanceCount > 0 ? "NOW" : formatDate(profile.data?.nextAllowanceAt)}
     </div>
   );
 };
 
+const formatDate = (timestamp?: Timestamp) => {
+  if (!timestamp) {
+    return "-";
+  }
+
+  const formatter = new Intl.DateTimeFormat("en-us", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+  return formatter.format(timestamp.toDate());
+};
+
 const RouterView: React.FC = () => {
   const router = useRouter();
+  const profile = useProfile();
+
+  if (profile.isLoading) {
+    return <>Loading...</>;
+  }
+
+  if (!profile.data) {
+    return <>Please create a profile by claiming your first allowance</>;
+  }
 
   switch (router.path) {
     case "/":
