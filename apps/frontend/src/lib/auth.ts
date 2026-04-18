@@ -10,7 +10,7 @@ import { firebase } from "./firebase";
 const auth = getAuth(firebase);
 
 export const useAuth = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<Error>();
 
@@ -18,16 +18,16 @@ export const useAuth = () => {
     auth.onAuthStateChanged(
       (user) => {
         setUser(user);
-        setIsLoading(false);
+        setIsAuthenticating(false);
       },
       (error) => {
         setError(error);
-        setIsLoading(false);
+        setIsAuthenticating(false);
       },
     );
   }, []);
 
-  return [isLoading, user, error] as const;
+  return [isAuthenticating, user, error] as const;
 };
 
 export const signInWithGoogle = () => {

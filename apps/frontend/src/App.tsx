@@ -1,10 +1,14 @@
+import type { User } from "firebase/auth";
 import { signInWithGoogle, useAuth } from "./lib/auth";
+import { useRouter } from "./lib/router";
+import { Binder } from "./screens/binder";
+import { Packs } from "./screens/packs";
 import "./styles.css";
 
 const App: React.FC = () => {
-  const [isLoading, user, error] = useAuth();
+  const [isAuthenticating, user, error] = useAuth();
 
-  if (isLoading) {
+  if (isAuthenticating) {
     return <>Loading...</>;
   }
 
@@ -16,7 +20,38 @@ const App: React.FC = () => {
     return <button onClick={signInWithGoogle}>Sign In With Google</button>;
   }
 
-  return <>User: {user.displayName}</>;
+  return (
+    <>
+      <NavigationBar user={user}></NavigationBar>
+      <RouterView></RouterView>
+    </>
+  );
+};
+
+const NavigationBar: React.FC<{ user: User }> = ({ user }) => {
+  const router = useRouter();
+
+  return (
+    <div>
+      <button onClick={() => router.navigate("/binder")}>Binder</button>
+      <button onClick={() => router.navigate("/packs")}>Packs</button>
+      <>{user.displayName}</>
+    </div>
+  );
+};
+
+const RouterView: React.FC = () => {
+  const router = useRouter();
+
+  switch (router.path) {
+    case "/":
+    case "/binder":
+      return <Binder></Binder>;
+    case "/packs":
+      return <Packs></Packs>;
+    default:
+      return <>Page Not Found: {router.path}</>;
+  }
 };
 
 export default App;
