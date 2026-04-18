@@ -10,7 +10,7 @@ export const RouterContext = createContext<RouterContextValue | null>(null);
 export const useRouter = () => {
   const context = useContext(RouterContext);
   if (!context) {
-    throw Error(`useRouter must be called within a RouterProvider`);
+    throw Error(`useRouter must be called within RouterProvider`);
   }
 
   return context;

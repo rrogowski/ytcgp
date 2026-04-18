@@ -1,35 +1,29 @@
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  type User,
-} from "firebase/auth";
-import { useEffect, useState } from "react";
-import { firebase } from "./firebase";
+import type { User } from "firebase/auth";
+import { createContext, useContext } from "react";
 
-const auth = getAuth(firebase);
+interface AuthContextValue {
+  isAuthenticating: boolean;
+  user: User | null;
+  error: Error | null;
+  signInWithGoogle: () => void;
+}
+
+export const AuthContext = createContext<AuthContextValue | null>(null);
 
 export const useAuth = () => {
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
-  const [error, setError] = useState<Error>();
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw Error(`useAuth must be called within AuthProvider`);
+  }
 
-  useEffect(() => {
-    auth.onAuthStateChanged(
-      (user) => {
-        setUser(user);
-        setIsAuthenticating(false);
-      },
-      (error) => {
-        setError(error);
-        setIsAuthenticating(false);
-      },
-    );
-  }, []);
-
-  return [isAuthenticating, user, error] as const;
+  return context;
 };
 
-export const signInWithGoogle = () => {
-  return signInWithPopup(auth, new GoogleAuthProvider());
+export const useUser = () => {
+  const { user } = useAuth();
+  if (!user) {
+    throw Error(`User is not authenticated`);
+  }
+
+  return user;
 };

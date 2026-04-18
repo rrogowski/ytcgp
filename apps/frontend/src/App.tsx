@@ -1,35 +1,35 @@
-import type { User } from "firebase/auth";
-import { signInWithGoogle, useAuth } from "./lib/auth";
+import { useAuth, useUser } from "./lib/auth";
 import { useRouter } from "./lib/router";
 import { Binder } from "./screens/binder";
 import { Packs } from "./screens/packs";
 import "./styles.css";
 
 const App: React.FC = () => {
-  const [isAuthenticating, user, error] = useAuth();
+  const auth = useAuth();
 
-  if (isAuthenticating) {
+  if (auth.isAuthenticating) {
     return <>Loading...</>;
   }
 
-  if (error) {
-    return <>{error.message}</>;
+  if (auth.error) {
+    return <>{auth.error.message}</>;
   }
 
-  if (user === null) {
-    return <button onClick={signInWithGoogle}>Sign In With Google</button>;
+  if (auth.user === null) {
+    return <button onClick={auth.signInWithGoogle}>Sign In With Google</button>;
   }
 
   return (
     <>
-      <NavigationBar user={user}></NavigationBar>
+      <NavigationBar></NavigationBar>
       <RouterView></RouterView>
     </>
   );
 };
 
-const NavigationBar: React.FC<{ user: User }> = ({ user }) => {
+const NavigationBar: React.FC = () => {
   const router = useRouter();
+  const user = useUser();
 
   return (
     <div>
