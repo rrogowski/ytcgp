@@ -1,4 +1,17 @@
-export const ALL_CARDS = [
+export interface CardMetadata {
+  code: string;
+  name: string;
+  rarity:
+    | "Common"
+    | "Rare"
+    | "Super Rare"
+    | "Ultra Rare"
+    | "Secret Rare"
+    | "Short Print"
+    | "Super Short Print";
+}
+
+export const ALL_CARDS: CardMetadata[] = [
   { code: "LOB-EN000", name: "Tri-Horned Dragon", rarity: "Secret Rare" },
   { code: "LOB-EN001", name: "Blue-Eyes White Dragon", rarity: "Ultra Rare" },
   { code: "LOB-EN002", name: "Hitotsu-Me Giant", rarity: "Common" },
@@ -158,3 +171,7 @@ export const ALL_CARDS = [
     rarity: "Secret Rare",
   },
 ];
+
+export const getCardsInSet = (code: string) => {
+  return ALL_CARDS.filter((card) => card.code.startsWith(code));
+};

@@ -3,6 +3,7 @@ import { useUser } from "../lib/auth";
 import { createCollectionRef, useDocumentWithId } from "../lib/firestore";
 
 export interface ProfileModel {
+  displayName: string;
   nextAllowanceAt: Timestamp;
   money: number;
 }

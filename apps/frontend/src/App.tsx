@@ -53,7 +53,7 @@ const NavigationBar: React.FC = () => {
         disabled={
           isClaimingAllowance || profile.isLoading || allowanceCount === 0
         }
-        onClick={() => claimAllowance(user.uid)}
+        onClick={() => claimAllowance(user)}
       >
         Claim Allowance (x{allowanceCount})
       </button>

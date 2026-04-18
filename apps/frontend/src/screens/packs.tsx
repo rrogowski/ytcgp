@@ -20,7 +20,7 @@ export const Packs: React.FC = () => {
             <img src={pack.imageUrl}></img>
             <button
               disabled={isBuyingPack}
-              onClick={() => buyPack(user.uid, pack.code)}
+              onClick={() => buyPack(user, pack.code)}
             >
               Buy
             </button>
