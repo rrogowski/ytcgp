@@ -1,0 +1,15 @@
+{
+  "name": "ytcgp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm --filter frontend build",
+    "start": "pnpm --filter frontend start",
+    "exports:check": "pnpm --filter frontend exports:check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0"
+}
