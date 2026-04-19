@@ -49,6 +49,7 @@ const NavigationBar: React.FC = () => {
       <button onClick={() => router.navigate("/binder")}>Binder</button>
       <button onClick={() => router.navigate("/packs")}>Packs</button>
       <>{user.displayName}</>
+      <>¥{profile.data?.money}</>
       <button
         disabled={
           isClaimingAllowance || profile.isLoading || allowanceCount === 0

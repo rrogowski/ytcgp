@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { ALL_PACKS } from "../data/packs";
+import { ALL_PACKS, PACK_COST } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useRouter } from "../lib/router";
 import { useTransaction } from "../lib/transaction";
@@ -22,10 +22,10 @@ export const Packs: React.FC = () => {
               disabled={isBuyingPack}
               onClick={() => buyPack(user, pack.code)}
             >
-              Buy
+              Buy (¥{PACK_COST})
             </button>
             <button
-              disabled={isBuyingPack}
+              disabled
               onClick={() => router.navigate(`/craft?code=${pack.code}`)}
             >
               Craft
