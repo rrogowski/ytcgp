@@ -20,8 +20,8 @@ export const Packs: React.FC = () => {
 
   const handleBuyPack = async (user: User, code: string) => {
     const cards = await buyPack(user, code);
-    router.navigate("/pack");
-    router.setParams({ codes: cards.map((card) => card.code).join(",") });
+    const codes = cards.map((card) => card.code).join(",");
+    router.navigate(`/pack?codes=${codes}`);
   };
 
   return (

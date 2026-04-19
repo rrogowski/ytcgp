@@ -12,27 +12,22 @@ export const RouterProvider: React.FC<React.PropsWithChildren> = ({
       setPath(window.location.pathname);
     };
 
-    const handleNavigate = (event: NavigateEvent) => {
-      const url = new URL(event.destination.url);
-      setPath(url.pathname);
-      event.intercept();
-    };
-
     window.addEventListener("popstate", handlePopState);
-    window.navigation.addEventListener("navigate", handleNavigate);
 
     return () => {
       window.removeEventListener("popstate", handlePopState);
-      window.navigation.removeEventListener("navigate", handleNavigate);
     };
   }, []);
 
   const navigate = useCallback((path: string) => {
-    window.navigation.navigate(path);
+    const url = new URL(path, window.location.href);
+    window.history.pushState(null /* state */, "" /* unused */, url);
+    setPath(url.pathname);
+    setParams(Object.fromEntries(url.searchParams));
   }, []);
 
   return (
-    <RouterContext.Provider value={{ path, params, navigate, setParams }}>
+    <RouterContext.Provider value={{ path, params, navigate }}>
       {children}
     </RouterContext.Provider>
   );
