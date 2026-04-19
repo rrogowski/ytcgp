@@ -11,6 +11,7 @@ export const ALL_PACKS = [
 ];
 
 export const PACK_COST = 500;
+export const POINTS_PER_PACK = 5;
 
 const RARITY_TABLE: { rarity: CardMetadata["rarity"]; odds: number }[][] = [
   [{ rarity: "Common", odds: 1 / 1 }],
