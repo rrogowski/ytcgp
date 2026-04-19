@@ -1,3 +1,4 @@
+import type { User } from "firebase/auth";
 import { Fragment } from "react";
 import { ALL_PACKS, PACK_COST } from "../data/packs";
 import { useUser } from "../lib/auth";
@@ -11,6 +12,12 @@ export const Packs: React.FC = () => {
 
   const [isBuyingPack, buyPack] = useTransaction(buyPackTransaction);
 
+  const handleBuyPack = async (user: User, code: string) => {
+    const cards = await buyPack(user, code);
+    router.navigate("/pack");
+    router.setParams({ codes: cards.map((card) => card.code).join(",") });
+  };
+
   return (
     <>
       {ALL_PACKS.map((pack) => {
@@ -20,7 +27,7 @@ export const Packs: React.FC = () => {
             <img src={pack.imageUrl}></img>
             <button
               disabled={isBuyingPack}
-              onClick={() => buyPack(user, pack.code)}
+              onClick={() => handleBuyPack(user, pack.code)}
             >
               Buy (¥{PACK_COST})
             </button>

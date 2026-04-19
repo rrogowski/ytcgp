@@ -4,6 +4,7 @@ import { useRouter } from "./lib/router";
 import { useTransaction } from "./lib/transaction";
 import { getClaimableAllowancesCount, useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
+import { Pack } from "./screens/pack";
 import { Packs } from "./screens/packs";
 import "./styles.css";
 import { claimAllowanceTransaction } from "./transactions/allowance";
@@ -98,6 +99,8 @@ const RouterView: React.FC = () => {
       return <Binder></Binder>;
     case "/packs":
       return <Packs></Packs>;
+    case "/pack":
+      return <Pack></Pack>;
     default:
       return <>Page Not Found: {router.path}</>;
   }

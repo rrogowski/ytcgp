@@ -5,6 +5,7 @@ import {
   getFirestore,
   onSnapshot,
   runTransaction,
+  Transaction,
   type DocumentData,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -12,7 +13,11 @@ import { firebase } from "./firebase";
 
 const firestore = getFirestore(firebase);
 
-export const executeTransaction = runTransaction.bind(null, firestore);
+export const executeTransaction = <T>(
+  updateFunction: (t: Transaction) => Promise<T>,
+) => {
+  return runTransaction(firestore, updateFunction);
+};
 
 export const createCollectionRef = <T extends DocumentData>(path: string) => {
   return collection(firestore, path) as CollectionReference<T, T>;

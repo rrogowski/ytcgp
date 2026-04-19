@@ -4,20 +4,23 @@ export const useTransaction = <
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends (...args: any[]) => any,
   U extends Parameters<T>,
+  V extends ReturnType<T>,
 >(
   transaction: T,
 ) => {
   const [isPending, setIsPending] = useState(false);
 
   const execute = useCallback(
-    async (...args: U) => {
+    async (...args: U): Promise<V> => {
       setIsPending(true);
       try {
-        await transaction(...args);
+        const result = await transaction(...args);
+        return result;
       } catch (error) {
         console.error(error);
         alert(error instanceof Error ? error.message : JSON.stringify(error));
         setIsPending(false);
+        throw error;
       }
     },
     [transaction],

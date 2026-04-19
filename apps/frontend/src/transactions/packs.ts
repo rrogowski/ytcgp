@@ -30,5 +30,7 @@ export const buyPackTransaction = async (user: User, code: string) => {
     } else {
       t.set(binderRef, changes);
     }
+
+    return cards;
   });
 };

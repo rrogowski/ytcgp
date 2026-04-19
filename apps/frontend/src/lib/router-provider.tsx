@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { RouterContext } from "./router";
+import { RouterContext, type SearchParams } from "./router";
 
 export const RouterProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [path, setPath] = useState(window.location.pathname);
+  const [params, setParams] = useState<SearchParams>({});
 
   useEffect(() => {
     const handlePopState = () => {
@@ -31,7 +32,7 @@ export const RouterProvider: React.FC<React.PropsWithChildren> = ({
   }, []);
 
   return (
-    <RouterContext.Provider value={{ path, navigate }}>
+    <RouterContext.Provider value={{ path, params, navigate, setParams }}>
       {children}
     </RouterContext.Provider>
   );

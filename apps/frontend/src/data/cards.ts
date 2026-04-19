@@ -900,3 +900,12 @@ export const ALL_CARDS: CardMetadata[] = [
 export const getCardsInSet = (code: string) => {
   return ALL_CARDS.filter((card) => card.code.startsWith(code));
 };
+
+export const findCardByCode = (code: string) => {
+  const card = ALL_CARDS.find((card) => card.code === code);
+  if (!card) {
+    throw Error(`could not find card by code: ${code}`);
+  }
+
+  return card;
+};
