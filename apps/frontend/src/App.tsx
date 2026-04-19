@@ -25,15 +25,26 @@ const App: React.FC = () => {
   }
 
   return (
-    <>
-      <NavigationBar></NavigationBar>
-      <RouterView></RouterView>
-    </>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100dvh",
+        padding: "0.5rem",
+        margin: "0 auto",
+        maxWidth: "40rem",
+      }}
+    >
+      <TopNavigationBar></TopNavigationBar>
+      <div style={{ flexGrow: 1, overflow: "auto", margin: "0.5rem 0" }}>
+        <RouterView></RouterView>
+      </div>
+      <BottomNavigationBar></BottomNavigationBar>
+    </div>
   );
 };
 
-const NavigationBar: React.FC = () => {
-  const router = useRouter();
+const TopNavigationBar: React.FC = () => {
   const user = useUser();
   const profile = useProfile();
 
@@ -46,21 +57,42 @@ const NavigationBar: React.FC = () => {
     : 0;
 
   return (
-    <div>
-      <button onClick={() => router.navigate("/binder")}>Binder</button>
-      <button onClick={() => router.navigate("/packs")}>Packs</button>
-      <>{user.displayName}</>
-      <>¥{profile.data?.money}</>
+    <>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <button
+          disabled={
+            isClaimingAllowance || profile.isLoading || allowanceCount === 0
+          }
+          onClick={() => claimAllowance(user)}
+        >
+          Claim Allowance (x{allowanceCount})
+        </button>{" "}
+        <span>
+          ¥{profile.data?.money} | {user.displayName}
+        </span>
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        Next Allowance At:{" "}
+        {allowanceCount > 0 ? "NOW" : formatDate(profile.data?.nextAllowanceAt)}
+      </div>
+    </>
+  );
+};
+
+const BottomNavigationBar: React.FC = () => {
+  const router = useRouter();
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
       <button
-        disabled={
-          isClaimingAllowance || profile.isLoading || allowanceCount === 0
-        }
-        onClick={() => claimAllowance(user)}
+        style={{ flexGrow: 1 }}
+        onClick={() => router.navigate("/binder")}
       >
-        Claim Allowance (x{allowanceCount})
+        Binder
       </button>
-      Next Allowance At:{" "}
-      {allowanceCount > 0 ? "NOW" : formatDate(profile.data?.nextAllowanceAt)}
+      <button style={{ flexGrow: 1 }} onClick={() => router.navigate("/packs")}>
+        Packs
+      </button>
     </div>
   );
 };
