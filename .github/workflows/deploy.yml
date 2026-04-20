@@ -1,0 +1,20 @@
+name: Deploy Frontend
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install && pnpm build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          entryPoint: ./apps/frontend
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_YTCGP_5F2D8 }}
+          channelId: live
+          projectId: ytcgp-5f2d8
