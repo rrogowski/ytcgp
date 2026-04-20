@@ -1,16 +1,19 @@
 import { useMemo, useState } from "react";
 import { ALL_CARDS } from "../data/cards";
 import { useUser } from "../lib/auth";
-import { useDocumentWithId } from "../lib/firestore";
+import { useCollection, useDocumentWithId } from "../lib/firestore";
 import { bindersRef } from "../models/binder";
+import { profilesRef } from "../models/profile";
 
 export const Binder: React.FC = () => {
   const user = useUser();
 
-  const binder = useDocumentWithId(bindersRef, user.uid);
-
+  const [userUid, setUserUid] = useState(user.uid);
   const [code, setCode] = useState("");
   const [filter, setFilter] = useState("");
+
+  const binder = useDocumentWithId(bindersRef, userUid);
+  const profiles = useCollection(profilesRef);
 
   const cardsToDisplay = useMemo(() => {
     if (filter === "only-missing") {
@@ -34,6 +37,25 @@ export const Binder: React.FC = () => {
           marginBottom: "0.5rem",
         }}
       >
+        <div>
+          Player:{" "}
+          <select
+            value={userUid}
+            onChange={(event) => setUserUid(event.currentTarget.value)}
+          >
+            <option value={user.uid}>{user.displayName}</option>
+            {profiles.docs.map((profile) => {
+              if (profile.id === user.uid) {
+                return null;
+              }
+              return (
+                <option key={profile.id} value={profile.id}>
+                  {profile.data.displayName}
+                </option>
+              );
+            })}
+          </select>
+        </div>
         <div>
           Set:{" "}
           <select

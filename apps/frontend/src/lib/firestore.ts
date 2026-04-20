@@ -52,3 +52,29 @@ export const useDocumentWithId = <T>(
 
   return { isLoading, error, data };
 };
+
+export const useCollection = <T>(ref: CollectionReference<T>) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [docs, setDocs] = useState<{ id: string; data: T }[]>([]);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      ref,
+      (snapshot) => {
+        setError(null);
+        setDocs(snapshot.docs.map((d) => ({ id: d.id, data: d.data() })));
+        setIsLoading(false);
+      },
+      (error) => {
+        setError(error);
+        setDocs([]);
+        setIsLoading(false);
+      },
+    );
+
+    return unsubscribe;
+  }, [ref]);
+
+  return { isLoading, error, docs };
+};
