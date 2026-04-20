@@ -16,6 +16,7 @@ export const Pack: React.FC = () => {
         rowGap: "1rem",
         height: "100%",
         justifyContent: "center",
+        overflow: "auto",
       }}
     >
       {codes.map((code) => {
@@ -27,13 +28,13 @@ export const Pack: React.FC = () => {
               alignItems: "center",
               display: "flex",
               flexDirection: "column",
-              width: "120px",
+              width: "110px",
             }}
           >
             <img
               src={card.imageUrl}
               style={{
-                height: "10rem",
+                height: "9rem",
                 width: "auto",
               }}
             ></img>

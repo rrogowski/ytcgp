@@ -5,7 +5,9 @@ export const RouterProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [path, setPath] = useState(window.location.pathname);
-  const [params, setParams] = useState<SearchParams>({});
+  const [params, setParams] = useState<SearchParams>(
+    Object.fromEntries(new URLSearchParams(window.location.search)),
+  );
 
   useEffect(() => {
     const handlePopState = () => {

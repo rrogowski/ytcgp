@@ -1,5 +1,9 @@
-import { getAuth, signInWithPopup, type User } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  type User,
+} from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
 import { AuthContext } from "./auth";
 import { firebase } from "./firebase";
@@ -29,7 +33,9 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
   }, []);
 
   const signInWithGoogle = useCallback(() => {
-    return signInWithPopup(auth, new GoogleAuthProvider());
+    return signInWithPopup(auth, new GoogleAuthProvider()).catch((error) => {
+      alert(error instanceof Error ? error.message : JSON.stringify(error));
+    });
   }, []);
 
   return (

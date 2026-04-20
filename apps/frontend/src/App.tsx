@@ -13,7 +13,7 @@ const App: React.FC = () => {
   const auth = useAuth();
 
   if (auth.isAuthenticating) {
-    return <>Loading...</>;
+    return null;
   }
 
   if (auth.error) {
@@ -52,9 +52,15 @@ const TopNavigationBar: React.FC = () => {
     claimAllowanceTransaction,
   );
 
-  const allowanceCount = profile.data
-    ? getClaimableAllowancesCount(profile.data)
-    : 0;
+  const allowanceCount = profile.isLoading
+    ? 0
+    : profile.data
+      ? getClaimableAllowancesCount(profile.data)
+      : 1;
+
+  if (profile.isLoading) {
+    return null;
+  }
 
   return (
     <>
@@ -68,7 +74,7 @@ const TopNavigationBar: React.FC = () => {
           Claim Allowance (x{allowanceCount})
         </button>{" "}
         <span>
-          ¥{profile.data?.money} | {user.displayName}
+          ¥{profile.data?.money ?? 0} | {user.displayName}
         </span>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>

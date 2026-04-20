@@ -74,7 +74,7 @@ export const Binder: React.FC = () => {
                 alignItems: "center",
                 display: "flex",
                 flexDirection: "column",
-                width: "120px",
+                width: "110px",
               }}
             >
               <img

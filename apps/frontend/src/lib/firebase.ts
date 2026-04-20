@@ -7,5 +7,4 @@ export const firebase = initializeApp({
   storageBucket: "ytcgp-5f2d8.firebasestorage.app",
   messagingSenderId: "366530540791",
   appId: "1:366530540791:web:6f8bec6c69dd51325e0ff2",
-  measurementId: "G-MW7RPM1BPC",
 });

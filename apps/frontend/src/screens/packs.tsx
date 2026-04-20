@@ -1,5 +1,4 @@
 import type { User } from "firebase/auth";
-import { Fragment } from "react";
 import { ALL_PACKS, PACK_COST } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
@@ -25,27 +24,46 @@ export const Packs: React.FC = () => {
   };
 
   return (
-    <>
+    <div
+      style={{
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "center",
+        height: "100%",
+      }}
+    >
       {ALL_PACKS.map((pack) => {
         return (
-          <Fragment key={pack.code}>
-            {pack.name}
-            <img src={pack.imageUrl}></img>
-            <button
-              disabled={isBuyingPack || (profile.data?.money ?? 0) < PACK_COST}
-              onClick={() => handleBuyPack(user, pack.code)}
-            >
-              Buy (¥{PACK_COST})
-            </button>
-            <button
-              disabled
-              onClick={() => router.navigate(`/craft?code=${pack.code}`)}
-            >
-              Craft ({pointsWallet.data?.[pack.code] ?? 0} Points)
-            </button>
-          </Fragment>
+          <div
+            key={pack.code}
+            style={{
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <img src={pack.imageUrl} style={{ width: "15rem" }}></img>
+            <div style={{ display: "flex", gap: "0.25rem", width: "100%" }}>
+              <button
+                disabled={
+                  isBuyingPack || (profile.data?.money ?? 0) < PACK_COST
+                }
+                style={{ flexGrow: 1, width: "50%" }}
+                onClick={() => handleBuyPack(user, pack.code)}
+              >
+                Buy (¥{PACK_COST})
+              </button>
+              <button
+                disabled
+                style={{ flexGrow: 1, width: "50%" }}
+                onClick={() => router.navigate(`/craft?code=${pack.code}`)}
+              >
+                Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
+              </button>
+            </div>
+          </div>
         );
       })}
-    </>
+    </div>
   );
 };
