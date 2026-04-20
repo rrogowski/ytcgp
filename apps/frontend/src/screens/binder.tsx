@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { ALL_CARDS } from "../data/cards";
+import { getCardsInSet } from "../data/cards";
+import { ALL_PACKS } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection, useDocumentWithId } from "../lib/firestore";
 import { bindersRef } from "../models/binder";
@@ -9,20 +10,21 @@ export const Binder: React.FC = () => {
   const user = useUser();
 
   const [userUid, setUserUid] = useState(user.uid);
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(ALL_PACKS[0].code);
   const [filter, setFilter] = useState("");
 
   const binder = useDocumentWithId(bindersRef, userUid);
   const profiles = useCollection(profilesRef);
 
   const cardsToDisplay = useMemo(() => {
+    const cards = getCardsInSet(code);
     if (filter === "only-missing") {
-      return ALL_CARDS.filter((card) => {
+      return cards.filter((card) => {
         return (binder.data?.[card.code] ?? 0) === 0;
       });
     }
-    return ALL_CARDS;
-  }, [binder.data, filter]);
+    return cards;
+  }, [binder.data, code, filter]);
 
   if (binder.isLoading) {
     return <>Loading...</>;
@@ -62,8 +64,13 @@ export const Binder: React.FC = () => {
             value={code}
             onChange={(event) => setCode(event.currentTarget.value)}
           >
-            <option value="">All Sets</option>
-            <option value="LOB">Legend of Blue Eyes White Dragon</option>
+            {ALL_PACKS.map((pack) => {
+              return (
+                <option key={pack.code} value={pack.code}>
+                  {pack.name}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div>

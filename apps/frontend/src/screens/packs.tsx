@@ -28,7 +28,7 @@ export const Packs: React.FC = () => {
       style={{
         alignItems: "center",
         display: "flex",
-        justifyContent: "center",
+        gap: "0.5rem",
         height: "100%",
       }}
     >
@@ -40,9 +40,13 @@ export const Packs: React.FC = () => {
               alignItems: "center",
               display: "flex",
               flexDirection: "column",
+              margin: "0 auto",
             }}
           >
-            <img src={pack.imageUrl} style={{ width: "15rem" }}></img>
+            <img
+              src={pack.imageUrl}
+              style={{ height: "425px", width: "15rem" }}
+            ></img>
             <div style={{ display: "flex", gap: "0.25rem", width: "100%" }}>
               <button
                 disabled={

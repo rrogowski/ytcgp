@@ -8,6 +8,18 @@ export const ALL_PACKS = [
     imageUrl:
       "https://ms.yugipedia.com//b/bb/LOB-BoosterEN-25thAnniversaryEdition.png",
   },
+  // {
+  //   code: "MRD",
+  //   name: "Metal Raiders",
+  //   imageUrl:
+  //     "https://ms.yugipedia.com//5/5d/MRD-BoosterEN-25thAnniversaryEdition.png",
+  // },
+  // {
+  //   code: "SRL",
+  //   name: "Spell Ruler",
+  //   imageUrl:
+  //     "https://ms.yugipedia.com//f/f2/SRL-BoosterEN-25thAnniversaryEdition.png",
+  // },
 ];
 
 export const PACK_COST = 500;
