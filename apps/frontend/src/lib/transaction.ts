@@ -19,8 +19,9 @@ export const useTransaction = <
       } catch (error) {
         console.error(error);
         alert(error instanceof Error ? error.message : JSON.stringify(error));
-        setIsPending(false);
         throw error;
+      } finally {
+        setIsPending(false);
       }
     },
     [transaction],

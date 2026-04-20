@@ -1,9 +1,12 @@
 import type { Timestamp } from "firebase/firestore";
 import { useAuth, useUser } from "./lib/auth";
+import { useDocumentWithId } from "./lib/firestore";
 import { useRouter } from "./lib/router";
 import { useTransaction } from "./lib/transaction";
+import { pointsWalletsRef } from "./models/points-wallet";
 import { getClaimableAllowancesCount, useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
+import { Craft } from "./screens/craft";
 import { Pack } from "./screens/pack";
 import { Packs } from "./screens/packs";
 import "./styles.css";
@@ -57,8 +60,13 @@ const App: React.FC = () => {
 };
 
 const TopNavigationBar: React.FC = () => {
+  const router = useRouter();
   const user = useUser();
   const profile = useProfile();
+
+  const pointsWallet = useDocumentWithId(pointsWalletsRef, user.uid);
+
+  const code = router.params["code"] ?? "";
 
   const [isClaimingAllowance, claimAllowance] = useTransaction(
     claimAllowanceTransaction,
@@ -70,7 +78,7 @@ const TopNavigationBar: React.FC = () => {
       ? getClaimableAllowancesCount(profile.data)
       : 1;
 
-  if (profile.isLoading) {
+  if (profile.isLoading || pointsWallet.isLoading) {
     return null;
   }
 
@@ -86,6 +94,7 @@ const TopNavigationBar: React.FC = () => {
           Claim Allowance (x{allowanceCount})
         </button>{" "}
         <span>
+          {router.path === "/craft" && `${pointsWallet.data?.[code] ?? 0} ₱ | `}
           ¥{profile.data?.money ?? 0} | {user.displayName}
         </span>
       </div>
@@ -151,6 +160,8 @@ const RouterView: React.FC = () => {
       return <Packs></Packs>;
     case "/pack":
       return <Pack></Pack>;
+    case "/craft":
+      return <Craft></Craft>;
     default:
       return <>Page Not Found: {router.path}</>;
   }

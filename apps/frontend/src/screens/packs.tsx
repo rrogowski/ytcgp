@@ -54,7 +54,7 @@ export const Packs: React.FC = () => {
                 Buy (¥{PACK_COST})
               </button>
               <button
-                disabled
+                disabled={isBuyingPack}
                 style={{ flexGrow: 1, width: "50%" }}
                 onClick={() => router.navigate(`/craft?code=${pack.code}`)}
               >
