@@ -3,7 +3,7 @@ import { doc, Timestamp } from "firebase/firestore";
 import { executeTransaction } from "../lib/firestore";
 import { getClaimableAllowancesCount, profilesRef } from "../models/profile";
 
-const ALLOWANCE_AMOUNT = 1000;
+const ALLOWANCE_AMOUNT = 3600;
 
 export const claimAllowanceTransaction = (user: User) => {
   return executeTransaction(async (t) => {
