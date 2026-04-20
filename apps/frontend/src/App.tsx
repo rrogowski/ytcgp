@@ -21,7 +21,19 @@ const App: React.FC = () => {
   }
 
   if (auth.user === null) {
-    return <button onClick={auth.signInWithGoogle}>Sign In With Google</button>;
+    return (
+      <div
+        style={{
+          alignItems: "center",
+          display: "flex",
+          height: "100dvh",
+          justifyContent: "center",
+          width: "100dvw",
+        }}
+      >
+        <button onClick={auth.signInWithGoogle}>Sign In With Google</button>
+      </div>
+    );
   }
 
   return (
