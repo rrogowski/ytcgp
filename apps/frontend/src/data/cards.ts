@@ -2672,19 +2672,19 @@ export const getPackPointsCost = (code: string) => {
 export const getDisenchantValue = (card: CardMetadata) => {
   switch (card.rarity) {
     case "Common":
-      return 1;
+      return Math.round(0.032 * 500 * (1 / 8));
     case "Rare":
-      return 3;
+      return Math.round(0.034 * 500 * 1);
     case "Super Rare":
-      return 10;
+      return Math.round(0.0448 * 500 * 5);
     case "Ultra Rare":
-      return 30;
+      return Math.round(0.053 * 500 * 12);
     case "Secret Rare":
-      return 72;
+      return Math.round(0.06625 * 500 * 24);
     case "Short Print":
-      return 105;
+      return Math.round(0.06893 * 500 * 30);
     case "Super Short Print":
-      return 240;
+      return Math.round(0.07157 * 500 * 60);
     default:
       throw Error(`unknown rarity: ${card.rarity}`);
   }
