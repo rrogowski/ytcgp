@@ -1,10 +1,16 @@
 import { useMemo, useState } from "react";
-import { getCardsInSet } from "../data/cards";
+import { getCardsInSet, getDisenchantValue } from "../data/cards";
 import { ALL_PACKS } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection, useDocumentWithId } from "../lib/firestore";
-import { bindersRef } from "../models/binder";
+import { useTransaction } from "../lib/transaction";
+import {
+  bindersRef,
+  getDisenchantTotalValue,
+  getExtraCards,
+} from "../models/binder";
 import { profilesRef } from "../models/profile";
+import { disenchantAllExtrasTransaction } from "../transactions/disenchant";
 
 export const Binder: React.FC = () => {
   const user = useUser();
@@ -16,6 +22,10 @@ export const Binder: React.FC = () => {
   const binder = useDocumentWithId(bindersRef, userUid);
   const profiles = useCollection(profilesRef);
 
+  const [isDisenchanting, disenchantAllExtras] = useTransaction(
+    disenchantAllExtrasTransaction,
+  );
+
   const cardsToDisplay = useMemo(() => {
     const cards = getCardsInSet(code);
     if (filter === "only-missing") {
@@ -25,6 +35,29 @@ export const Binder: React.FC = () => {
     }
     return cards;
   }, [binder.data, code, filter]);
+
+  const extraCards = useMemo(() => {
+    return getExtraCards(cardsToDisplay, binder.data);
+  }, [cardsToDisplay, binder.data]);
+
+  const handleDisenchantAllExtras = async () => {
+    const extraCardsText = extraCards
+      .map((card) => {
+        const quantity = (binder.data?.[card.code] ?? 0) - 3;
+        const value = getDisenchantValue(card);
+        return `${card.name} x${quantity} (¥${value} each)`;
+      })
+      .join("\n");
+    const totalValue = getDisenchantTotalValue(extraCards, binder.data);
+    if (
+      !confirm(
+        `Are you sure you want to disenchant the following cards for ¥${totalValue}?\n${extraCardsText}`,
+      )
+    ) {
+      return;
+    }
+    await disenchantAllExtras(user, code);
+  };
 
   if (binder.isLoading) {
     return <>Loading...</>;
@@ -73,6 +106,22 @@ export const Binder: React.FC = () => {
             })}
           </select>
         </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          marginBottom: "0.5rem",
+        }}
+      >
+        <button
+          disabled={
+            isDisenchanting || userUid !== user.uid || extraCards.length === 0
+          }
+          onClick={handleDisenchantAllExtras}
+        >
+          Disenchant All Extras
+        </button>
         <div>
           Filter:{" "}
           <select
