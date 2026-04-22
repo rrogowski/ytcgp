@@ -1,4 +1,8 @@
-import { getDisenchantValue, type CardMetadata } from "../data/cards";
+import {
+  findCardByCode,
+  getDisenchantValue,
+  type CardMetadata,
+} from "../data/cards";
 import { createCollectionRef } from "../lib/firestore";
 
 export interface BinderModel {
@@ -6,6 +10,25 @@ export interface BinderModel {
 }
 
 export const bindersRef = createCollectionRef<BinderModel>("binders");
+
+export const getTotalCards = (binder: BinderModel | null) => {
+  if (!binder) {
+    return 0;
+  }
+  return Object.entries(binder).reduce((accumulator, [, quantity]) => {
+    return accumulator + quantity;
+  }, 0);
+};
+
+export const getTotalBinderValue = (binder: BinderModel | null) => {
+  if (!binder) {
+    return 0;
+  }
+  return Object.entries(binder).reduce((accumulator, [code, quantity]) => {
+    const card = findCardByCode(code);
+    return accumulator + getDisenchantValue(card) * quantity;
+  }, 0);
+};
 
 export const getExtraCards = (
   cards: CardMetadata[],

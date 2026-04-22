@@ -6,6 +6,7 @@ import { useTransaction } from "./lib/transaction";
 import { pointsWalletsRef } from "./models/points-wallet";
 import { getClaimableAllowancesCount, useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
+import { Community } from "./screens/community";
 import { Craft } from "./screens/craft";
 import { Pack } from "./screens/pack";
 import { Packs } from "./screens/packs";
@@ -120,6 +121,12 @@ const BottomNavigationBar: React.FC = () => {
       <button style={{ flexGrow: 1 }} onClick={() => router.navigate("/packs")}>
         Packs
       </button>
+      <button
+        style={{ flexGrow: 1 }}
+        onClick={() => router.navigate("/community")}
+      >
+        Community
+      </button>
     </div>
   );
 };
@@ -162,6 +169,8 @@ const RouterView: React.FC = () => {
       return <Pack></Pack>;
     case "/craft":
       return <Craft></Craft>;
+    case "/community":
+      return <Community></Community>;
     default:
       return <>Page Not Found: {router.path}</>;
   }

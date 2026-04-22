@@ -4,6 +4,8 @@ import {
   doc,
   getFirestore,
   onSnapshot,
+  query,
+  QueryConstraint,
   runTransaction,
   Transaction,
   type DocumentData,
@@ -53,14 +55,17 @@ export const useDocumentWithId = <T>(
   return { isLoading, error, data };
 };
 
-export const useCollection = <T>(ref: CollectionReference<T>) => {
+export const useCollection = <T>(
+  ref: CollectionReference<T>,
+  constraints?: QueryConstraint[],
+) => {
   const [isLoading, setIsLoading] = useState(true);
   const [docs, setDocs] = useState<{ id: string; data: T }[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
-      ref,
+      query(ref, ...(constraints ?? [])),
       (snapshot) => {
         setError(null);
         setDocs(snapshot.docs.map((d) => ({ id: d.id, data: d.data() })));
@@ -74,7 +79,7 @@ export const useCollection = <T>(ref: CollectionReference<T>) => {
     );
 
     return unsubscribe;
-  }, [ref]);
+  }, [ref, constraints]);
 
   return { isLoading, error, docs };
 };
