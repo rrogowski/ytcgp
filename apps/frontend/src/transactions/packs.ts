@@ -1,8 +1,9 @@
 import type { User } from "firebase/auth";
-import { doc } from "firebase/firestore";
+import { doc, Timestamp } from "firebase/firestore";
 import { generatePack, PACK_COST, POINTS_PER_PACK } from "../data/packs";
 import { executeTransaction } from "../lib/firestore";
 import { bindersRef } from "../models/binder";
+import { packsRef } from "../models/pack";
 import { pointsWalletsRef } from "../models/points-wallet";
 import { profilesRef } from "../models/profile";
 
@@ -43,6 +44,12 @@ export const buyPackTransaction = async (user: User, code: string) => {
     } else {
       t.set(pointsWalletRef, walletUpdate);
     }
+
+    t.set(doc(packsRef), {
+      codes: cards.map((card) => card.code),
+      createdAt: Timestamp.now(),
+      userUid: user.uid,
+    });
 
     return cards;
   });
