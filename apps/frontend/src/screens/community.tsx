@@ -2,10 +2,12 @@ import { limit, orderBy, Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { findCardByCode } from "../data/cards";
+import { ALL_PACKS } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection } from "../lib/firestore";
 import {
   bindersRef,
+  getMasterSets,
   getTotalBinderValue,
   getTotalCards,
 } from "../models/binder";
@@ -47,15 +49,41 @@ export const Community: React.FC = () => {
           <th>Player</th>
           <th># Cards</th>
           <th>Binder Value</th>
+          <th>Achievements</th>
         </thead>
         <tbody>
           {profiles.docs.map((profile) => {
             const binder = binders.docs.find((d) => d.id === profile.id);
+            const masterSets = getMasterSets(binder?.data ?? null);
             return (
               <tr key={profile.id}>
                 <td>{profile.data.displayName}</td>
                 <td>{getTotalCards(binder?.data ?? null)}</td>
                 <td>¥{getTotalBinderValue(binder?.data ?? null)}</td>
+                <td
+                  style={{
+                    alignItems: "center",
+                    borderLeft: "none",
+                    display: "flex",
+                    gap: "0.4rem",
+                    justifyContent: "center",
+                    height: "100%",
+                  }}
+                >
+                  {ALL_PACKS.map((pack) => {
+                    return (
+                      <img
+                        key={pack.code}
+                        src={pack.imageUrl}
+                        style={{
+                          opacity: masterSets.includes(pack) ? 1 : 0.3,
+                          height: "2rem",
+                          transform: "scale(1.3)",
+                        }}
+                      ></img>
+                    );
+                  })}
+                </td>
               </tr>
             );
           })}

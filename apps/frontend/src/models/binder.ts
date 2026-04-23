@@ -1,8 +1,10 @@
 import {
   findCardByCode,
+  getCardsInSet,
   getDisenchantValue,
   type CardMetadata,
 } from "../data/cards";
+import { ALL_PACKS } from "../data/packs";
 import { createCollectionRef } from "../lib/firestore";
 
 export interface BinderModel {
@@ -53,4 +55,15 @@ export const getDisenchantTotalValue = (
       return getDisenchantValue(card) * extraQuantity;
     })
     .reduce((accumulator, value) => accumulator + value, 0);
+};
+
+export const getMasterSets = (binder: BinderModel | null) => {
+  if (!binder) {
+    return [];
+  }
+  return ALL_PACKS.filter((pack) => {
+    return getCardsInSet(pack.code).every((card) => {
+      return (binder[card.code] ?? 0) >= 1;
+    });
+  });
 };
