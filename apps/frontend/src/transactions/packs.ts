@@ -1,6 +1,6 @@
 import type { User } from "firebase/auth";
 import { doc, Timestamp } from "firebase/firestore";
-import { findPackByCode, generatePack } from "../data/packs";
+import { findPackByCode, generatePack, POINTS_PER_PACK } from "../data/packs";
 import { executeTransaction } from "../lib/firestore";
 import { bindersRef } from "../models/binder";
 import { packsRef } from "../models/pack";
