@@ -32,6 +32,10 @@ export const Binder: React.FC = () => {
       return cards.filter((card) => {
         return (binder.data?.[card.code] ?? 0) === 0;
       });
+    } else if (filter === "exclude-missing") {
+      return cards.filter((card) => {
+        return (binder.data?.[card.code] ?? 0) > 0;
+      });
     }
     return cards;
   }, [binder.data, code, filter]);
@@ -130,6 +134,7 @@ export const Binder: React.FC = () => {
           >
             <option value="">All Cards</option>
             <option value="only-missing">Only Missing</option>
+            <option value="exclude-missing">Exclude Missing</option>
           </select>
         </div>
       </div>
