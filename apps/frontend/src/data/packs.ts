@@ -1,31 +1,12 @@
 import { shuffle } from "../lib/random";
 import { getCardsInSet, type CardMetadata } from "./cards";
 
-export const ALL_PACKS = [
-  {
-    code: "LOB",
-    name: "Legend of Blue Eyes White Dragon",
-    imageUrl:
-      "https://ms.yugipedia.com//b/bb/LOB-BoosterEN-25thAnniversaryEdition.png",
-  },
-  // {
-  //   code: "MRD",
-  //   name: "Metal Raiders",
-  //   imageUrl:
-  //     "https://ms.yugipedia.com//5/5d/MRD-BoosterEN-25thAnniversaryEdition.png",
-  // },
-  // {
-  //   code: "SRL",
-  //   name: "Spell Ruler",
-  //   imageUrl:
-  //     "https://ms.yugipedia.com//f/f2/SRL-BoosterEN-25thAnniversaryEdition.png",
-  // },
-];
-
-export const PACK_COST = 500;
 export const POINTS_PER_PACK = 5;
 
-const RARITY_TABLE: { rarity: CardMetadata["rarity"]; odds: number }[][] = [
+const STANDARD_PACK_RARITY_TABLE: {
+  rarity: CardMetadata["rarity"];
+  odds: number;
+}[][] = [
   [{ rarity: "Common", odds: 1 / 1 }],
   [{ rarity: "Common", odds: 1 / 1 }],
   [{ rarity: "Common", odds: 1 / 1 }],
@@ -46,11 +27,73 @@ const RARITY_TABLE: { rarity: CardMetadata["rarity"]; odds: number }[][] = [
   ],
 ];
 
+// const PRECONSTRUCTED_DECK_RARITY_TABLE: {
+//   rarity: CardMetadata["rarity"];
+//   odds: number;
+// }[][] = [
+//   [{ rarity: "Common", odds: 1 / 1 }],
+//   [{ rarity: "Common", odds: 1 / 1 }],
+//   [{ rarity: "Common", odds: 1 / 1 }],
+//   [{ rarity: "Common", odds: 1 / 1 }],
+//   [
+//     { rarity: "Ultra Rare", odds: 1 / 12 },
+//     { rarity: "Super Rare", odds: 1 / 5 },
+//     { rarity: "Common", odds: 1 / 1 },
+//   ],
+// ];
+
+export const ALL_PACKS = [
+  {
+    code: "LOB",
+    name: "Legend of Blue Eyes White Dragon",
+    cost: 500,
+    rarityTable: STANDARD_PACK_RARITY_TABLE,
+    imageUrl:
+      "https://ms.yugipedia.com//b/bb/LOB-BoosterEN-25thAnniversaryEdition.png",
+  },
+  // {
+  //   code: "SDY",
+  //   name: "Starter Deck: Yugi",
+  //   cost: 300,
+  //   rarityTable: PRECONSTRUCTED_DECK_RARITY_TABLE,
+  //   imageUrl: "https://ms.yugipedia.com//4/4c/SDY-DeckEU.png",
+  // },
+  // {
+  //   code: "SDK",
+  //   name: "Starter Deck: Kaiba",
+  //   cost: 300,
+  //   rarityTable: PRECONSTRUCTED_DECK_RARITY_TABLE,
+  //   imageUrl:
+  //     "https://tcgplayer-cdn.tcgplayer.com/product/153329_in_1000x1000.jpg",
+  // },
+  // {
+  //   code: "MRD",
+  //   name: "Metal Raiders",
+  //   imageUrl:
+  //     "https://ms.yugipedia.com//5/5d/MRD-BoosterEN-25thAnniversaryEdition.png",
+  // },
+  // {
+  //   code: "SRL",
+  //   name: "Spell Ruler",
+  //   imageUrl:
+  //     "https://ms.yugipedia.com//f/f2/SRL-BoosterEN-25thAnniversaryEdition.png",
+  // },
+];
+
+export const findPackByCode = (code: string) => {
+  const pack = ALL_PACKS.find((p) => p.code === code);
+  if (!pack) {
+    throw Error(`could not find pack with code: ${code}`);
+  }
+  return pack;
+};
+
 export const generatePack = (code: string) => {
+  const pack = findPackByCode(code);
   let cards = shuffle(getCardsInSet(code));
   const result: CardMetadata[] = [];
-  for (let position = 0; position < RARITY_TABLE.length; position++) {
-    const rolls = RARITY_TABLE[position];
+  for (let position = 0; position < pack.rarityTable.length; position++) {
+    const rolls = pack.rarityTable[position];
 
     let index = 0;
     let roll = rolls[index];

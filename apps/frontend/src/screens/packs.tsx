@@ -1,5 +1,5 @@
 import type { User } from "firebase/auth";
-import { ALL_PACKS, PACK_COST } from "../data/packs";
+import { ALL_PACKS } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
 import { useRouter } from "../lib/router";
@@ -50,12 +50,12 @@ export const Packs: React.FC = () => {
             <div style={{ display: "flex", gap: "0.25rem", width: "100%" }}>
               <button
                 disabled={
-                  isBuyingPack || (profile.data?.money ?? 0) < PACK_COST
+                  isBuyingPack || (profile.data?.money ?? 0) < pack.cost
                 }
                 style={{ flexGrow: 1, width: "50%" }}
                 onClick={() => handleBuyPack(user, pack.code)}
               >
-                Buy (¥{PACK_COST})
+                Buy (¥{pack.cost})
               </button>
               <button
                 disabled={isBuyingPack}

@@ -1,6 +1,6 @@
 import type { User } from "firebase/auth";
 import { doc, Timestamp } from "firebase/firestore";
-import { generatePack, PACK_COST, POINTS_PER_PACK } from "../data/packs";
+import { findPackByCode, generatePack } from "../data/packs";
 import { executeTransaction } from "../lib/firestore";
 import { bindersRef } from "../models/binder";
 import { packsRef } from "../models/pack";
@@ -15,7 +15,8 @@ export const buyPackTransaction = async (user: User, code: string) => {
       throw Error(`profile does not exist: ${user.uid}`);
     }
 
-    if (profile.money < PACK_COST) {
+    const pack = findPackByCode(code);
+    if (profile.money < pack.cost) {
       throw Error("Not enough money");
     }
 
@@ -29,7 +30,7 @@ export const buyPackTransaction = async (user: User, code: string) => {
       return { ...accumulator, [card.code]: (binder?.[card.code] ?? 0) + 1 };
     }, {});
 
-    t.update(profileRef, { money: profile.money - PACK_COST });
+    t.update(profileRef, { money: profile.money - pack.cost });
     if (binder) {
       t.update(binderRef, binderUpdate);
     } else {
