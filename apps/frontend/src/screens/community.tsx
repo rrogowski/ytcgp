@@ -1,8 +1,8 @@
 import { limit, orderBy, Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Fragment } from "react/jsx-runtime";
-import { findCardByCode } from "../data/cards";
-import { ALL_PACKS } from "../data/packs";
+import { findCardByCode, getCardsInSet } from "../data/cards";
+import { ALL_PACKS, findPackByCode } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection } from "../lib/firestore";
 import {
@@ -28,6 +28,19 @@ export const Community: React.FC = () => {
   if (binders.isLoading || packs.isLoading || profiles.isLoading) {
     return <>Loading...</>;
   }
+
+  const showPackProgress = (code: string) => {
+    const pack = findPackByCode(code);
+    const cards = getCardsInSet(code);
+    const lines = profiles.docs.map((profile) => {
+      const binder = binders.docs.find((d) => d.id === profile.id);
+      const ownedCards = cards.filter((card) => {
+        return (binder?.data[card.code] ?? 0) > 0;
+      });
+      return `${profile.data.displayName}: ${ownedCards.length} / ${cards.length}`;
+    });
+    alert([`${pack.name}\n`, ...lines].join("\n"));
+  };
 
   const filteredPacks = packs.docs.filter((pack) => {
     return userUid.length > 0 ? pack.data.userUid === userUid : true;
@@ -76,10 +89,12 @@ export const Community: React.FC = () => {
                         key={pack.code}
                         src={pack.imageUrl}
                         style={{
-                          opacity: masterSets.includes(pack) ? 1 : 0.3,
+                          cursor: "pointer",
                           height: "2rem",
+                          opacity: masterSets.includes(pack) ? 1 : 0.3,
                           transform: "scale(1.3)",
                         }}
+                        onClick={() => showPackProgress(pack.code)}
                       ></img>
                     );
                   })}
