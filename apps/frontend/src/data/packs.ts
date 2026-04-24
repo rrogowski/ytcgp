@@ -69,12 +69,16 @@ export const ALL_PACKS = [
   // {
   //   code: "MRD",
   //   name: "Metal Raiders",
+  //   cost: 500,
+  //   rarityTable: STANDARD_PACK_RARITY_TABLE,
   //   imageUrl:
   //     "https://ms.yugipedia.com//5/5d/MRD-BoosterEN-25thAnniversaryEdition.png",
   // },
   // {
   //   code: "SRL",
   //   name: "Spell Ruler",
+  //   cost: 500,
+  //   rarityTable: STANDARD_PACK_RARITY_TABLE,
   //   imageUrl:
   //     "https://ms.yugipedia.com//f/f2/SRL-BoosterEN-25thAnniversaryEdition.png",
   // },
