@@ -4,6 +4,7 @@ import { executeTransaction } from "../lib/firestore";
 import { getClaimableAllowancesCount, profilesRef } from "../models/profile";
 
 const ALLOWANCE_AMOUNT = 3600;
+const WONDER_POINTS_AMOUNT = 50;
 
 export const claimAllowanceTransaction = (user: User) => {
   return executeTransaction(async (t) => {
@@ -21,12 +22,14 @@ export const claimAllowanceTransaction = (user: User) => {
         displayName: user.displayName ?? "",
         nextAllowanceAt: Timestamp.fromDate(nextAllowanceAt),
         money: ALLOWANCE_AMOUNT,
+        wonderPoints: WONDER_POINTS_AMOUNT,
       });
     } else {
       t.update(profileRef, {
         displayName: user.displayName ?? "",
         nextAllowanceAt: Timestamp.fromDate(nextAllowanceAt),
         money: profile.money + ALLOWANCE_AMOUNT * count,
+        wonderPoints: profile.wonderPoints + WONDER_POINTS_AMOUNT * count,
       });
     }
   });

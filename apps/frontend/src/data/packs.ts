@@ -1,5 +1,5 @@
 import { shuffle } from "../lib/random";
-import { getCardsInSet, type CardMetadata } from "./cards";
+import { findCardByCode, getCardsInSet, type CardMetadata } from "./cards";
 
 export const POINTS_PER_PACK = 5;
 
@@ -116,4 +116,18 @@ export const generatePack = (code: string) => {
   }
 
   return result;
+};
+
+export const getWonderPickCost = (codes: string[]) => {
+  const packCode = codes[0].split("-")[0];
+  const pack = findPackByCode(packCode);
+  const cards = codes.map(findCardByCode);
+  const cost = cards.reduce((accumulator, card, i) => {
+    const entry = pack.rarityTable[i].find((e) => e.rarity === card.rarity);
+    if (!entry) {
+      throw Error(`no rarity table entry found for card: ${card.name}`);
+    }
+    return accumulator + (entry.rarity === "Common" ? 0 : 1 / entry.odds);
+  }, 0);
+  return Math.round(cost);
 };

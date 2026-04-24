@@ -10,6 +10,7 @@ import { Community } from "./screens/community";
 import { Craft } from "./screens/craft";
 import { Pack } from "./screens/pack";
 import { Packs } from "./screens/packs";
+import { WonderPick } from "./screens/wonder-pick";
 import "./styles.css";
 import { claimAllowanceTransaction } from "./transactions/allowance";
 
@@ -96,7 +97,16 @@ const TopNavigationBar: React.FC = () => {
         </button>{" "}
         <span>
           {router.path === "/craft" && `${pointsWallet.data?.[code] ?? 0} ₱ | `}
-          ¥{profile.data?.money ?? 0} | {user.displayName}
+          <a
+            href="#"
+            onClick={(event) => {
+              event.preventDefault();
+              router.navigate("/wonder-pick");
+            }}
+          >
+            {profile.data?.wonderPoints} ₩
+          </a>{" "}
+          | ¥{profile.data?.money ?? 0} | {user.displayName}
         </span>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -171,6 +181,8 @@ const RouterView: React.FC = () => {
       return <Craft></Craft>;
     case "/community":
       return <Community></Community>;
+    case "/wonder-pick":
+      return <WonderPick></WonderPick>;
     default:
       return <>Page Not Found: {router.path}</>;
   }

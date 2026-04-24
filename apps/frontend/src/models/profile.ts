@@ -6,6 +6,7 @@ export interface ProfileModel {
   displayName: string;
   nextAllowanceAt: Timestamp;
   money: number;
+  wonderPoints: number;
 }
 
 export const profilesRef = createCollectionRef<ProfileModel>("profiles");

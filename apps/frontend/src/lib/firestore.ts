@@ -2,6 +2,8 @@ import {
   collection,
   CollectionReference,
   doc,
+  getDoc,
+  getDocs,
   getFirestore,
   onSnapshot,
   query,
@@ -10,7 +12,7 @@ import {
   Transaction,
   type DocumentData,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { firebase } from "./firebase";
 
 const firestore = getFirestore(firebase);
@@ -82,4 +84,48 @@ export const useCollection = <T>(
   }, [ref, constraints]);
 
   return { isLoading, error, docs };
+};
+
+export const useCollectionOnce = <T>(
+  ref: CollectionReference<T>,
+  constraints?: QueryConstraint[],
+) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [docs, setDocs] = useState<{ id: string; data: T }[]>([]);
+  const [error, setError] = useState<Error | null>(null);
+
+  const refresh = useCallback(async () => {
+    setIsRefreshing(true);
+    try {
+      const refs = docs.map((d) => doc(ref, d.id));
+      const snapshots = await Promise.all(refs.map((ref) => getDoc(ref)));
+      setError(null);
+      setDocs(snapshots.map((d) => ({ id: d.id, data: d.data() as T })));
+      setIsRefreshing(false);
+    } catch (error) {
+      setError(error as Error);
+      setDocs([]);
+      setIsRefreshing(false);
+    }
+  }, [docs, ref]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const snapshot = await getDocs(query(ref, ...(constraints ?? [])));
+        setError(null);
+        setDocs(snapshot.docs.map((d) => ({ id: d.id, data: d.data() })));
+        setIsLoading(false);
+      } catch (error) {
+        setError(error as Error);
+        setDocs([]);
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [ref, constraints]);
+
+  return { isLoading, isRefreshing, error, docs, refresh };
 };
