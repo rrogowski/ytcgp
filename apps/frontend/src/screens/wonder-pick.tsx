@@ -3,8 +3,13 @@ import { Fragment } from "react/jsx-runtime";
 import { findCardByCode } from "../data/cards";
 import { getWonderPickCost } from "../data/packs";
 import { useUser } from "../lib/auth";
-import { useCollection, useCollectionOnce } from "../lib/firestore";
+import {
+  useCollection,
+  useCollectionOnce,
+  useDocumentWithId,
+} from "../lib/firestore";
 import { useTransaction } from "../lib/transaction";
+import { bindersRef } from "../models/binder";
 import { packsRef } from "../models/pack";
 import { profilesRef } from "../models/profile";
 import { wonderPickTransaction } from "../transactions/packs";
@@ -15,10 +20,11 @@ export const WonderPick: React.FC = () => {
   const user = useUser();
   const profiles = useCollection(profilesRef);
   const packs = useCollectionOnce(packsRef, RECENT_PACKS_CONSTRAINTS);
+  const binder = useDocumentWithId(bindersRef, user.uid);
 
   const [isWonderPicking, wonderPick] = useTransaction(wonderPickTransaction);
 
-  if (packs.isLoading || profiles.isLoading) {
+  if (binder.isLoading || packs.isLoading || profiles.isLoading) {
     return <>Loading...</>;
   }
 
@@ -85,6 +91,7 @@ export const WonderPick: React.FC = () => {
                       style={{
                         border: `dashed ${isWonderPick ? "red" : "transparent"} 3px `,
                         height: "9rem",
+                        opacity: (binder?.data?.[code] ?? 0) > 0 ? 1 : 0.3,
                         width: "auto",
                       }}
                     ></img>
