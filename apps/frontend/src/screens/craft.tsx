@@ -1,4 +1,5 @@
 import type { User } from "firebase/auth";
+import { useMemo, useState } from "react";
 import {
   getCardsInSet,
   getPackPointsCost,
@@ -21,6 +22,9 @@ export const Craft: React.FC = () => {
 
   const [isCrafting, craft] = useTransaction(craftTransaction);
 
+  const [filter, setFilter] = useState("");
+  const [hideUncraftableCards, setHideUncraftableCards] = useState(false);
+
   const packCode = router.params["code"] ?? "";
 
   const handleCraft = async (user: User, card: CardMetadata) => {
@@ -35,53 +39,121 @@ export const Craft: React.FC = () => {
     await craft(user, packCode, card.code);
   };
 
+  const filteredCards = useMemo(() => {
+    const cards = getCardsInSet(packCode);
+    if (filter === "only-missing") {
+      return cards.filter((card) => {
+        return (binder.data?.[card.code] ?? 0) === 0;
+      });
+    } else if (filter === "incomplete") {
+      return cards.filter((card) => {
+        return (binder.data?.[card.code] ?? 0) < 3;
+      });
+    }
+    return cards;
+  }, [packCode, filter, binder.data]);
+
+  const cardsToDisplay = useMemo(() => {
+    if (hideUncraftableCards) {
+      return filteredCards.filter((card) => {
+        const pointsCost = getPackPointsCost(card.code);
+        return (pointsWallet.data?.[packCode] ?? 0) >= pointsCost;
+      });
+    }
+    return filteredCards;
+  }, [filteredCards, hideUncraftableCards, pointsWallet.data, packCode]);
+
   return (
     <div
       style={{
+        alignItems: "center",
         display: "flex",
-        flexGrow: 1,
-        flexWrap: "wrap",
-        gap: "0.25rem",
-        justifyContent: "center",
-        overflow: "auto",
+        flexDirection: "column",
+        height: "100%",
+        gap: "1rem",
       }}
     >
-      {getCardsInSet(packCode).map((card) => {
-        const pointsCost = getPackPointsCost(card.code);
-        const quantity = binder.data?.[card.code] ?? 0;
-        return (
-          <div
-            key={card.code}
-            style={{
-              alignItems: "center",
-              display: "flex",
-              flexDirection: "column",
-              width: "110px",
-            }}
-          >
-            <img
-              src={card.imageUrl}
-              style={{
-                height: "10rem",
-                opacity: quantity > 0 ? 1 : 0.3,
-                width: "auto",
-              }}
-            ></img>
-            <span>
-              {card.code} x{quantity}
-            </span>
-            <button
-              disabled={
-                isCrafting || (pointsWallet.data?.[packCode] ?? 0) < pointsCost
-              }
-              style={{ width: "100%" }}
-              onClick={() => handleCraft(user, card)}
-            >
-              Craft ({pointsCost} ₱)
-            </button>
-          </div>
-        );
-      })}
+      <div style={{ alignItems: "center", display: "flex", gap: "0.25rem" }}>
+        Filter:{" "}
+        <select
+          value={filter}
+          onChange={(event) => setFilter(event.currentTarget.value)}
+        >
+          <option value="">All Cards</option>
+          <option value="only-missing">Only Missing</option>
+          <option value="incomplete">Incomplete</option>
+        </select>
+        <input
+          checked={hideUncraftableCards}
+          type="checkbox"
+          onChange={(event) =>
+            setHideUncraftableCards(event.currentTarget.checked)
+          }
+        ></input>
+        Hide Uncraftable?
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexGrow: 1,
+          flexWrap: "wrap",
+          gap: "0.25rem",
+          justifyContent: "center",
+          overflow: "auto",
+        }}
+      >
+        {cardsToDisplay.map((card) => {
+          const pointsCost = getPackPointsCost(card.code);
+          const quantity = binder.data?.[card.code] ?? 0;
+          return (
+            <div key={card.code}>
+              <div
+                style={{
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "10rem",
+                  position: "relative",
+                  width: "130px",
+                }}
+              >
+                {Array.from({ length: 3 }).map((_, i) => {
+                  return (
+                    <div
+                      key={`${card.code}-${i}`}
+                      style={{
+                        backgroundColor: "white",
+                        height: "100%",
+                        left: `${i * 10}px`,
+                        position: "absolute",
+                      }}
+                    >
+                      <img
+                        src={card.imageUrl}
+                        style={{
+                          height: "10rem",
+                          opacity: quantity > 2 - i ? 1 : 0.3,
+                          width: "auto",
+                        }}
+                      ></img>
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                disabled={
+                  isCrafting ||
+                  (pointsWallet.data?.[packCode] ?? 0) < pointsCost
+                }
+                style={{ width: "100%" }}
+                onClick={() => handleCraft(user, card)}
+              >
+                Craft ({pointsCost} ₱)
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

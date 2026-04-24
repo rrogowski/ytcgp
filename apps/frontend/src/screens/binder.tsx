@@ -1,5 +1,9 @@
 import { useMemo, useState } from "react";
-import { getCardsInSet, getDisenchantValue } from "../data/cards";
+import {
+  type CardMetadata,
+  getCardsInSet,
+  getDisenchantValue,
+} from "../data/cards";
 import { ALL_PACKS } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection, useDocumentWithId } from "../lib/firestore";
@@ -18,6 +22,7 @@ export const Binder: React.FC = () => {
   const [userUid, setUserUid] = useState(user.uid);
   const [code, setCode] = useState(ALL_PACKS[0].code);
   const [filter, setFilter] = useState("");
+  const [previewCard, setPreviewCard] = useState<CardMetadata | null>(null);
 
   const binder = useDocumentWithId(bindersRef, userUid);
   const profiles = useCollection(profilesRef);
@@ -63,17 +68,72 @@ export const Binder: React.FC = () => {
     await disenchantAllExtras(user, code);
   };
 
+  const handleMouseDown = (card: CardMetadata) => {
+    setPreviewCard(card);
+
+    const handleMouseUp = () => {
+      setPreviewCard(null);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("drag", handleMouseUp);
+    };
+
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("drag", handleMouseUp);
+  };
+
+  const handleTouchStart = (card: CardMetadata) => {
+    setPreviewCard(card);
+
+    const handleTouchEnd = () => {
+      setPreviewCard(null);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("drag", handleTouchEnd);
+    };
+
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("drag", handleTouchEnd);
+  };
+
   if (binder.isLoading) {
     return <>Loading...</>;
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+    <div
+      style={{
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        position: "relative",
+      }}
+    >
+      {previewCard && (
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            height: "100%",
+            justifyContent: "center",
+            position: "absolute",
+            zIndex: 1000,
+          }}
+        >
+          <img
+            src={previewCard.imageUrl}
+            style={{
+              height: "100%",
+              width: "auto",
+            }}
+          ></img>
+        </div>
+      )}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           marginBottom: "0.5rem",
+          width: "100%",
         }}
       >
         <div>
@@ -116,6 +176,7 @@ export const Binder: React.FC = () => {
           display: "flex",
           justifyContent: "space-around",
           marginBottom: "0.5rem",
+          width: "100%",
         }}
       >
         <button
@@ -143,7 +204,7 @@ export const Binder: React.FC = () => {
           display: "flex",
           flexGrow: 1,
           flexWrap: "wrap",
-          gap: "0.25rem",
+          gap: "0.3rem",
           justifyContent: "center",
           overflow: "auto",
         }}
@@ -157,20 +218,35 @@ export const Binder: React.FC = () => {
                 alignItems: "center",
                 display: "flex",
                 flexDirection: "column",
-                width: "110px",
+                height: "10rem",
+                position: "relative",
+                width: "130px",
               }}
+              onMouseDown={() => handleMouseDown(card)}
+              onTouchStart={() => handleTouchStart(card)}
             >
-              <img
-                src={card.imageUrl}
-                style={{
-                  height: "10rem",
-                  opacity: quantity > 0 ? 1 : 0.3,
-                  width: "auto",
-                }}
-              ></img>
-              <span>
-                {card.code} x{quantity}
-              </span>
+              {Array.from({ length: 3 }).map((_, i) => {
+                return (
+                  <div
+                    key={`${card.code}-${i}`}
+                    style={{
+                      backgroundColor: "white",
+                      height: "100%",
+                      left: `${i * 10}px`,
+                      position: "absolute",
+                    }}
+                  >
+                    <img
+                      src={card.imageUrl}
+                      style={{
+                        height: "10rem",
+                        opacity: quantity > 2 - i ? 1 : 0.3,
+                        width: "auto",
+                      }}
+                    ></img>
+                  </div>
+                );
+              })}
             </div>
           );
         })}
