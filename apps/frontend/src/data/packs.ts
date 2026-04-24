@@ -45,39 +45,50 @@ export const ALL_PACKS = [
     ],
     godPackRarityTable: [
       [
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
       ],
       [
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
       ],
       [
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
       ],
       [
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
       ],
       [
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
       ],
       [
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
       ],
       [
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
       ],
       [
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Secret Rare", odds: 2 / 24 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
       ],
       [
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Secret Rare", odds: 2 / 24 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 },
