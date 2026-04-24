@@ -3,30 +3,6 @@ import { findCardByCode, getCardsInSet, type CardMetadata } from "./cards";
 
 export const POINTS_PER_PACK = 5;
 
-const STANDARD_PACK_RARITY_TABLE: {
-  rarity: CardMetadata["rarity"];
-  odds: number;
-}[][] = [
-  [{ rarity: "Common", odds: 1 / 1 }],
-  [{ rarity: "Common", odds: 1 / 1 }],
-  [{ rarity: "Common", odds: 1 / 1 }],
-  [{ rarity: "Common", odds: 1 / 1 }],
-  [{ rarity: "Common", odds: 1 / 1 }],
-  [{ rarity: "Common", odds: 1 / 1 }],
-  [
-    { rarity: "Super Short Print", odds: 1 / 60 },
-    { rarity: "Short Print", odds: 1 / 30 },
-    { rarity: "Common", odds: 1 / 1 },
-  ],
-  [{ rarity: "Rare", odds: 1 / 1 }],
-  [
-    { rarity: "Secret Rare", odds: 1 / 24 },
-    { rarity: "Ultra Rare", odds: 1 / 12 },
-    { rarity: "Super Rare", odds: 1 / 5 },
-    { rarity: "Common", odds: 1 / 1 },
-  ],
-];
-
 // const PRECONSTRUCTED_DECK_RARITY_TABLE: {
 //   rarity: CardMetadata["rarity"];
 //   odds: number;
@@ -47,7 +23,66 @@ export const ALL_PACKS = [
     code: "LOB",
     name: "Legend of Blue Eyes White Dragon",
     cost: 500,
-    rarityTable: STANDARD_PACK_RARITY_TABLE,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+      [
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+      [
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 },
+      ],
+    ],
     imageUrl:
       "https://ms.yugipedia.com//b/bb/LOB-BoosterEN-25thAnniversaryEdition.png",
   },
@@ -92,12 +127,13 @@ export const findPackByCode = (code: string) => {
   return pack;
 };
 
-export const generatePack = (code: string) => {
+export const generatePack = (code: string, isGodPack: boolean) => {
   const pack = findPackByCode(code);
   let cards = shuffle(getCardsInSet(code));
+  const rarityTable = isGodPack ? pack.godPackRarityTable : pack.rarityTable;
   const result: CardMetadata[] = [];
-  for (let position = 0; position < pack.rarityTable.length; position++) {
-    const rolls = pack.rarityTable[position];
+  for (let position = 0; position < rarityTable.length; position++) {
+    const rolls = rarityTable[position];
 
     let index = 0;
     let roll = rolls[index];
@@ -118,14 +154,20 @@ export const generatePack = (code: string) => {
   return result;
 };
 
-export const getWonderPickCost = (codes: string[]) => {
+export const getWonderPickCost = (codes: string[], isGodPack: boolean) => {
   const packCode = codes[0].split("-")[0];
   const pack = findPackByCode(packCode);
   const cards = codes.map(findCardByCode);
+  const rarityTable = isGodPack ? pack.godPackRarityTable : pack.rarityTable;
   const cost = cards.reduce((accumulator, card, i) => {
-    const entry = pack.rarityTable[i].find((e) => e.rarity === card.rarity);
+    const entry = rarityTable[i].find((e) => e.rarity === card.rarity);
     if (!entry) {
       throw Error(`no rarity table entry found for card: ${card.name}`);
+    }
+    if (isGodPack) {
+      return (
+        accumulator + (entry.rarity === "Super Rare" ? 5 : 1 / (entry.odds / 2))
+      );
     }
     return accumulator + (entry.rarity === "Common" ? 0 : 1 / entry.odds);
   }, 0);

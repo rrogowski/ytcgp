@@ -8,7 +8,11 @@ import { packsRef } from "../models/pack";
 import { pointsWalletsRef } from "../models/points-wallet";
 import { profilesRef } from "../models/profile";
 
+const GOD_PACK_CHANCE = 1 / 2555;
+
 export const buyPackTransaction = async (user: User, code: string) => {
+  const isGodPack = Math.random() < GOD_PACK_CHANCE;
+  const cards = generatePack(code, isGodPack);
   return executeTransaction(async (t) => {
     const profileRef = doc(profilesRef, user.uid);
     const profile = (await t.get(profileRef)).data();
@@ -24,7 +28,6 @@ export const buyPackTransaction = async (user: User, code: string) => {
     const pointsWalletRef = doc(pointsWalletsRef, user.uid);
     const pointsWallet = (await t.get(pointsWalletRef)).data();
 
-    const cards = generatePack(code);
     const binderRef = doc(bindersRef, user.uid);
     const binder = (await t.get(binderRef)).data();
     const binderUpdate = cards.reduce((accumulator, card) => {
@@ -50,6 +53,7 @@ export const buyPackTransaction = async (user: User, code: string) => {
     t.set(doc(packsRef), {
       codes: cards.map((card) => card.code),
       createdAt: Timestamp.now(),
+      isGodPack,
       userUid: user.uid,
     });
 
