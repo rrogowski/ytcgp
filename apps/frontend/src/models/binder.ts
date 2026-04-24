@@ -67,3 +67,14 @@ export const getMasterSets = (binder: BinderModel | null) => {
     });
   });
 };
+
+export const getGrandMasterSets = (binder: BinderModel | null) => {
+  if (!binder) {
+    return [];
+  }
+  return ALL_PACKS.filter((pack) => {
+    return getCardsInSet(pack.code).every((card) => {
+      return (binder[card.code] ?? 0) >= 3;
+    });
+  });
+};
