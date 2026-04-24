@@ -1,17 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { RouterContext, type SearchParams } from "./router";
 
 export const RouterProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [path, setPath] = useState(window.location.pathname);
-  const [params, setParams] = useState<SearchParams>(
-    Object.fromEntries(new URLSearchParams(window.location.search)),
-  );
+  const [url, setUrl] = useState(() => new URL(window.location.href));
+  const params = useMemo<SearchParams>(() => {
+    return Object.fromEntries(url.searchParams);
+  }, [url]);
 
   useEffect(() => {
     const handlePopState = () => {
-      setPath(window.location.pathname);
+      setUrl(new URL(window.location.href));
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -24,12 +24,11 @@ export const RouterProvider: React.FC<React.PropsWithChildren> = ({
   const navigate = useCallback((path: string) => {
     const url = new URL(path, window.location.href);
     window.history.pushState(null /* state */, "" /* unused */, url);
-    setPath(url.pathname);
-    setParams(Object.fromEntries(url.searchParams));
+    setUrl(url);
   }, []);
 
   return (
-    <RouterContext.Provider value={{ path, params, navigate }}>
+    <RouterContext.Provider value={{ path: url.pathname, params, navigate }}>
       {children}
     </RouterContext.Provider>
   );

@@ -91,7 +91,7 @@ export const WonderPick: React.FC = () => {
                       style={{
                         border: `dashed ${isWonderPick ? "red" : "transparent"} 3px `,
                         height: "9rem",
-                        opacity: (binder?.data?.[code] ?? 0) > 0 ? 1 : 0.3,
+                        opacity: (binder.data?.[code] ?? 0) > 0 ? 1 : 0.3,
                         width: "auto",
                       }}
                     ></img>
