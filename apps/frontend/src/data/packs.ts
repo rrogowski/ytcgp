@@ -177,7 +177,12 @@ export const getWonderPickCost = (codes: string[], isGodPack: boolean) => {
     }
     if (isGodPack) {
       return (
-        accumulator + (entry.rarity === "Super Rare" ? 5 : 1 / (entry.odds / 2))
+        accumulator +
+        (entry.rarity === "Common"
+          ? 0
+          : entry.rarity === "Super Rare"
+            ? 5
+            : 1 / (entry.odds / 2))
       );
     }
     return accumulator + (entry.rarity === "Common" ? 0 : 1 / entry.odds);
