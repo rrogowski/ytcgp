@@ -59,7 +59,10 @@ export const WonderPick: React.FC = () => {
     >
       {packs.docs.map((pack) => {
         const profile = profiles.docs.find((d) => d.id === pack.data.userUid);
-        const cost = getWonderPickCost(pack.data.codes);
+        const cost = getWonderPickCost(
+          pack.data.codes,
+          pack.data.isGodPack ?? false,
+        );
         return (
           <Fragment key={pack.id}>
             <hr style={{ width: "100%" }}></hr>
