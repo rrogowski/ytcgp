@@ -176,14 +176,14 @@ export const getWonderPickCost = (codes: string[], isGodPack: boolean) => {
       throw Error(`no rarity table entry found for card: ${card.name}`);
     }
     if (isGodPack) {
-      return (
-        accumulator +
+      const cost =
+        1 +
         (entry.rarity === "Common"
           ? 0
           : entry.rarity === "Super Rare"
             ? 5
-            : 1 / (entry.odds / 2))
-      );
+            : 1 / (entry.odds / 2));
+      return cost > accumulator ? cost : accumulator;
     }
     return accumulator + (entry.rarity === "Common" ? 0 : 1 / entry.odds);
   }, 0);
