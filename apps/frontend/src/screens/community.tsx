@@ -1,6 +1,8 @@
 import { limit, orderBy, Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Fragment } from "react/jsx-runtime";
+import { Card } from "../components/card";
+import { CardPreview } from "../components/card-preview";
 import { findCardByCode, getCardsInSet } from "../data/cards";
 import { ALL_PACKS, findPackByCode } from "../data/packs";
 import { useUser } from "../lib/auth";
@@ -24,6 +26,8 @@ export const Community: React.FC = () => {
   const [userUid, setUserUid] = useState("");
 
   const packs = useCollection(packsRef, RECENT_PACKS_CONSTRAINTS);
+
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
 
   if (binders.isLoading || packs.isLoading || profiles.isLoading) {
     return <>Loading...</>;
@@ -54,8 +58,10 @@ export const Community: React.FC = () => {
         flexDirection: "column",
         height: "100%",
         gap: "0.75rem",
+        position: "relative",
       }}
     >
+      <CardPreview imageUrl={previewImageUrl}></CardPreview>
       <h3>Collection Stats</h3>
       <table>
         <thead>
@@ -154,6 +160,8 @@ export const Community: React.FC = () => {
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
+                  gap: "0.25rem",
+                  rowGap: "1rem",
                   justifyContent: "center",
                 }}
               >
@@ -169,14 +177,12 @@ export const Community: React.FC = () => {
                         width: "110px",
                       }}
                     >
-                      <img
-                        src={card.imageUrl}
-                        style={{
-                          height: "9rem",
-                          width: "auto",
-                        }}
-                      ></img>
-                      <span>{card.code}</span>
+                      <Card
+                        imageUrl={card.imageUrl}
+                        height="9rem"
+                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
+                        onPreviewEnd={() => setPreviewImageUrl("")}
+                      ></Card>
                     </div>
                   );
                 })}

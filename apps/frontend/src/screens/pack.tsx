@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Card } from "../components/card";
+import { CardPreview } from "../components/card-preview";
 import { findCardByCode } from "../data/cards";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
@@ -9,6 +12,8 @@ export const Pack: React.FC = () => {
   const user = useUser();
 
   const binder = useDocumentWithId(bindersRef, user.uid);
+
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
 
   const codes = router.params["codes"] ? router.params["codes"].split(",") : [];
 
@@ -23,8 +28,10 @@ export const Pack: React.FC = () => {
         height: "100%",
         justifyContent: "center",
         overflow: "auto",
+        position: "relative",
       }}
     >
+      <CardPreview imageUrl={previewImageUrl}></CardPreview>
       {codes.map((code) => {
         const card = findCardByCode(code);
         const isNew = binder.data?.[code] === 1;
@@ -53,14 +60,12 @@ export const Pack: React.FC = () => {
                 New
               </span>
             )}
-            <img
-              src={card.imageUrl}
-              style={{
-                height: "9rem",
-                width: "auto",
-              }}
-            ></img>
-            <span>{card.code}</span>
+            <Card
+              imageUrl={card.imageUrl}
+              height="9rem"
+              onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
+              onPreviewEnd={() => setPreviewImageUrl("")}
+            ></Card>
           </div>
         );
       })}

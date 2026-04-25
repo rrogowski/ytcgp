@@ -1,9 +1,7 @@
 import { useMemo, useState } from "react";
-import {
-  type CardMetadata,
-  getCardsInSet,
-  getDisenchantValue,
-} from "../data/cards";
+import { Card } from "../components/card";
+import { CardPreview } from "../components/card-preview";
+import { getCardsInSet, getDisenchantValue } from "../data/cards";
 import { ALL_PACKS } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection, useDocumentWithId } from "../lib/firestore";
@@ -22,7 +20,7 @@ export const Binder: React.FC = () => {
   const [userUid, setUserUid] = useState(user.uid);
   const [code, setCode] = useState(ALL_PACKS[0].code);
   const [filter, setFilter] = useState("");
-  const [previewCard, setPreviewCard] = useState<CardMetadata | null>(null);
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
 
   const binder = useDocumentWithId(bindersRef, userUid);
   const profiles = useCollection(profilesRef);
@@ -68,32 +66,6 @@ export const Binder: React.FC = () => {
     await disenchantAllExtras(user, code);
   };
 
-  const handleMouseDown = (card: CardMetadata) => {
-    setPreviewCard(card);
-
-    const handleMouseUp = () => {
-      setPreviewCard(null);
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("drag", handleMouseUp);
-    };
-
-    window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("drag", handleMouseUp);
-  };
-
-  const handleTouchStart = (card: CardMetadata) => {
-    setPreviewCard(card);
-
-    const handleTouchEnd = () => {
-      setPreviewCard(null);
-      window.removeEventListener("touchend", handleTouchEnd);
-      window.removeEventListener("drag", handleTouchEnd);
-    };
-
-    window.addEventListener("touchend", handleTouchEnd);
-    window.addEventListener("drag", handleTouchEnd);
-  };
-
   if (binder.isLoading) {
     return <>Loading...</>;
   }
@@ -108,26 +80,7 @@ export const Binder: React.FC = () => {
         position: "relative",
       }}
     >
-      {previewCard && (
-        <div
-          style={{
-            alignItems: "center",
-            display: "flex",
-            height: "100%",
-            justifyContent: "center",
-            position: "absolute",
-            zIndex: 1000,
-          }}
-        >
-          <img
-            src={previewCard.imageUrl}
-            style={{
-              height: "100%",
-              width: "auto",
-            }}
-          ></img>
-        </div>
-      )}
+      <CardPreview imageUrl={previewImageUrl}></CardPreview>
       <div
         style={{
           display: "flex",
@@ -222,8 +175,6 @@ export const Binder: React.FC = () => {
                 position: "relative",
                 width: "130px",
               }}
-              onMouseDown={() => handleMouseDown(card)}
-              onTouchStart={() => handleTouchStart(card)}
             >
               {Array.from({ length: 3 }).map((_, i) => {
                 return (
@@ -236,14 +187,12 @@ export const Binder: React.FC = () => {
                       position: "absolute",
                     }}
                   >
-                    <img
-                      src={card.imageUrl}
-                      style={{
-                        height: "10rem",
-                        opacity: quantity > 2 - i ? 1 : 0.3,
-                        width: "auto",
-                      }}
-                    ></img>
+                    <Card
+                      imageUrl={card.imageUrl}
+                      opacity={quantity > 2 - i ? 1 : 0.3}
+                      onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
+                      onPreviewEnd={() => setPreviewImageUrl("")}
+                    ></Card>
                   </div>
                 );
               })}
