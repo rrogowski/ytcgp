@@ -258,7 +258,7 @@ export const Binder: React.FC = () => {
                   );
                 })}
               </div>
-              {shouldShowQuantities && (
+              {shouldShowQuantities && userUid === user.uid && (
                 <button
                   disabled={
                     quantity <= DISENCHANT_MIN_COPIES ||
