@@ -34,7 +34,7 @@ export const Pack: React.FC = () => {
       <CardPreview imageUrl={previewImageUrl}></CardPreview>
       {codes.map((code) => {
         const card = findCardByCode(code);
-        const isNew = binder.data?.[code] === 1;
+        const isNew = binder.data?.[code] === 1 && !binder.isFromCache;
         return (
           <div
             key={card.code}
