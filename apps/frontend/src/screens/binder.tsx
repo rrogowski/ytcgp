@@ -21,6 +21,7 @@ export const Binder: React.FC = () => {
   const [code, setCode] = useState(ALL_PACKS[0].code);
   const [filter, setFilter] = useState("");
   const [previewImageUrl, setPreviewImageUrl] = useState("");
+  const [shouldShowQuantities, setShouldShowQuantities] = useState(false);
 
   const binder = useDocumentWithId(bindersRef, userUid);
   const profiles = useCollection(profilesRef);
@@ -151,6 +152,16 @@ export const Binder: React.FC = () => {
             <option value="exclude-missing">Exclude Missing</option>
           </select>
         </div>
+        <div>
+          <input
+            checked={shouldShowQuantities}
+            type="checkbox"
+            onChange={(event) =>
+              setShouldShowQuantities(event.currentTarget.checked)
+            }
+          ></input>{" "}
+          Show Quantities?
+        </div>
       </div>
       <div
         style={{
@@ -176,6 +187,26 @@ export const Binder: React.FC = () => {
                 width: "130px",
               }}
             >
+              {shouldShowQuantities && (
+                <span
+                  style={{
+                    alignItems: "center",
+                    backgroundColor: "black",
+                    borderRadius: "0.25rem",
+                    display: "flex",
+                    color: "white",
+                    height: "1.5rem",
+                    justifyContent: "center",
+                    position: "absolute",
+                    width: "1.5rem",
+                    bottom: 0,
+                    right: 0,
+                    zIndex: 1000,
+                  }}
+                >
+                  {quantity}
+                </span>
+              )}
               {Array.from({ length: 3 }).map((_, i) => {
                 return (
                   <div
