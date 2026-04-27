@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 interface Props {
   imageUrl: string;
   border?: string;
@@ -8,6 +10,8 @@ interface Props {
 }
 
 export const Card: React.FC<Props> = (props) => {
+  const previewTimeout = useRef<number | undefined>(undefined);
+
   const handleMouseDown = () => {
     props.onPreviewStart?.();
 
@@ -22,10 +26,13 @@ export const Card: React.FC<Props> = (props) => {
   };
 
   const handleTouchStart = () => {
-    props.onPreviewStart?.();
+    previewTimeout.current = setTimeout(() => {
+      props.onPreviewStart?.();
+    }, 100);
 
     const handleTouchEnd = () => {
       props.onPreviewEnd?.();
+      window.clearTimeout(previewTimeout.current);
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("touchmove", handleTouchEnd);
       window.removeEventListener("touchcancel", handleTouchEnd);
