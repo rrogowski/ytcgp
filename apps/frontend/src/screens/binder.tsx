@@ -190,18 +190,18 @@ export const Binder: React.FC = () => {
               {shouldShowQuantities && (
                 <span
                   style={{
+                    zIndex: 500,
                     alignItems: "center",
                     backgroundColor: "black",
                     borderRadius: "0.25rem",
-                    display: "flex",
+                    bottom: 0,
                     color: "white",
+                    display: "flex",
                     height: "1.5rem",
                     justifyContent: "center",
                     position: "absolute",
-                    width: "1.5rem",
-                    bottom: 0,
                     right: 0,
-                    zIndex: 1000,
+                    width: "1.5rem",
                   }}
                 >
                   {quantity}
