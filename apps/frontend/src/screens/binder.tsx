@@ -142,7 +142,6 @@ export const Binder: React.FC = () => {
           Disenchant All Extras
         </button>
         <div>
-          Filter:{" "}
           <select
             value={filter}
             onChange={(event) => setFilter(event.currentTarget.value)}
@@ -160,7 +159,7 @@ export const Binder: React.FC = () => {
               setShouldShowQuantities(event.currentTarget.checked)
             }
           ></input>{" "}
-          Show Quantities?
+          Quantities?
         </div>
       </div>
       <div
@@ -182,9 +181,9 @@ export const Binder: React.FC = () => {
                 alignItems: "center",
                 display: "flex",
                 flexDirection: "column",
-                height: "10rem",
+                height: "8.5rem",
                 position: "relative",
-                width: "130px",
+                width: "116px",
               }}
             >
               {shouldShowQuantities && (
@@ -200,7 +199,7 @@ export const Binder: React.FC = () => {
                     height: "1.5rem",
                     justifyContent: "center",
                     position: "absolute",
-                    right: 0,
+                    right: "3px",
                     width: "1.5rem",
                   }}
                 >
@@ -220,6 +219,7 @@ export const Binder: React.FC = () => {
                   >
                     <Card
                       imageUrl={card.imageUrl}
+                      height="8.5rem"
                       opacity={quantity > 2 - i ? 1 : 0.3}
                       onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
                       onPreviewEnd={() => setPreviewImageUrl("")}
