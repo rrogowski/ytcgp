@@ -21,6 +21,7 @@ import {
   disenchantAllExtrasTransaction,
   disenchantTransaction,
 } from "../transactions/disenchant";
+import { sendCardTransaction } from "../transactions/trade";
 
 export const Binder: React.FC = () => {
   const user = useUser();
@@ -32,6 +33,7 @@ export const Binder: React.FC = () => {
   const [shouldShowQuantities, setShouldShowQuantities] = useState(false);
 
   const binder = useDocumentWithId(bindersRef, userUid);
+  const myBinder = useDocumentWithId(bindersRef, user.uid);
   const profiles = useCollection(profilesRef);
 
   const [isDisenchantingAllExtras, disenchantAllExtras] = useTransaction(
@@ -39,6 +41,8 @@ export const Binder: React.FC = () => {
   );
 
   const [isDisenchanting, disenchant] = useTransaction(disenchantTransaction);
+
+  const [isSendingCard, sendCard] = useTransaction(sendCardTransaction);
 
   const cardsToDisplay = useMemo(() => {
     const cards = getCardsInSet(packCode);
@@ -91,6 +95,18 @@ export const Binder: React.FC = () => {
       return;
     }
     await disenchant(user, card.code);
+  };
+
+  const handleSendCard = async (card: CardMetadata, myQuantity: number) => {
+    const profile = profiles.docs.find((d) => d.id === userUid);
+    if (
+      !confirm(
+        `You have ${myQuantity}x "${card.name}". Are you sure you want to send a copy to ${profile?.data.displayName}?`,
+      )
+    ) {
+      return;
+    }
+    await sendCard(user, userUid, card.code);
   };
 
   if (binder.isLoading) {
@@ -205,8 +221,12 @@ export const Binder: React.FC = () => {
         {cardsToDisplay.length === 0 && <>No cards to display.</>}
         {cardsToDisplay.map((card) => {
           const quantity = binder.data?.[card.code] ?? 0;
+          const myQuantity = myBinder.data?.[card.code] ?? 0;
           return (
-            <div key={card.code}>
+            <div
+              key={card.code}
+              style={{ display: "flex", flexDirection: "column" }}
+            >
               <div
                 style={{
                   alignItems: "center",
@@ -261,14 +281,21 @@ export const Binder: React.FC = () => {
               {shouldShowQuantities && userUid === user.uid && (
                 <button
                   disabled={
-                    quantity <= DISENCHANT_MIN_COPIES ||
-                    userUid !== user.uid ||
-                    isDisenchanting
+                    quantity <= DISENCHANT_MIN_COPIES || isDisenchanting
                   }
                   onClick={() => handleDisenchant(card)}
-                  style={{ fontSize: "0.8rem", width: "100%" }}
+                  style={{ fontSize: "0.8rem" }}
                 >
                   Disenchant (¥{getDisenchantValue(card)})
+                </button>
+              )}
+              {userUid !== user.uid && (
+                <button
+                  disabled={myQuantity < 1 || isSendingCard}
+                  onClick={() => handleSendCard(card, myQuantity)}
+                  style={{ fontSize: "0.8rem" }}
+                >
+                  Send This Card
                 </button>
               )}
             </div>
