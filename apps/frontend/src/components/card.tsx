@@ -30,7 +30,7 @@ export const Card: React.FC<Props> = (props) => {
   };
 
   const handleTouchStart = () => {
-    previewTimeout.current = setTimeout(() => {
+    previewTimeout.current = window.setTimeout(() => {
       props.onPreviewStart?.();
     }, 100);
 
