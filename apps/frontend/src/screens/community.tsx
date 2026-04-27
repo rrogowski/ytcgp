@@ -65,10 +65,12 @@ export const Community: React.FC = () => {
       <h3>Collection Stats</h3>
       <table>
         <thead>
-          <th>Player</th>
-          <th># Cards</th>
-          <th>Binder Value</th>
-          <th>Achievements</th>
+          <tr>
+            <th>Player</th>
+            <th># Cards</th>
+            <th>Binder Value</th>
+            <th>Achievements</th>
+          </tr>
         </thead>
         <tbody>
           {profiles.docs.map((profile) => {
