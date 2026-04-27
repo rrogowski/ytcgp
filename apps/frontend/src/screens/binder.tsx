@@ -264,7 +264,7 @@ export const Binder: React.FC = () => {
                     quantity <= DISENCHANT_MIN_COPIES || isDisenchanting
                   }
                   onClick={() => handleDisenchant(card)}
-                  style={{ width: "100%" }}
+                  style={{ fontSize: "0.8rem", width: "100%" }}
                 >
                   Disenchant (¥{getDisenchantValue(card)})
                 </button>
