@@ -12,7 +12,11 @@ interface Props {
 export const Card: React.FC<Props> = (props) => {
   const previewTimeout = useRef<number | undefined>(undefined);
 
-  const handleMouseDown = () => {
+  const handleMouseDown = (event: React.MouseEvent) => {
+    if (event.button !== 0) {
+      return;
+    }
+
     props.onPreviewStart?.();
 
     const handleMouseUp = () => {
