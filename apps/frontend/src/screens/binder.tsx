@@ -261,7 +261,9 @@ export const Binder: React.FC = () => {
               {shouldShowQuantities && (
                 <button
                   disabled={
-                    quantity <= DISENCHANT_MIN_COPIES || isDisenchanting
+                    quantity <= DISENCHANT_MIN_COPIES ||
+                    userUid !== user.uid ||
+                    isDisenchanting
                   }
                   onClick={() => handleDisenchant(card)}
                   style={{ fontSize: "0.8rem", width: "100%" }}
