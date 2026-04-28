@@ -12,8 +12,9 @@ export const Search: React.FC = () => {
 
   const [name, setName] = useState("");
   const [cardType, setCardType] = useState("");
-  const [attribute, setAttribute] = useState("");
   const [subcategory, setSubcategory] = useState("");
+  const [attribute, setAttribute] = useState("");
+  const [type, setType] = useState("");
   const [atkFloor, setAtkFloor] = useState("");
   const [atkCeiling, setAtkCeiling] = useState("");
   const [defFloor, setDefFloor] = useState("");
@@ -29,8 +30,9 @@ export const Search: React.FC = () => {
 
   const handleSetCardType = (value: string) => {
     setCardType(value);
-    setAttribute("");
     setSubcategory("");
+    setAttribute("");
+    setType("");
     setAtkFloor("");
     setAtkCeiling("");
     setDefFloor("");
@@ -44,9 +46,6 @@ export const Search: React.FC = () => {
   })
     .filter((card) => {
       return cardType ? card.cardType === cardType : true;
-    })
-    .filter((card) => {
-      return attribute ? card.attribute === attribute : true;
     })
     .filter((card) => {
       if (!subcategory) {
@@ -67,6 +66,12 @@ export const Search: React.FC = () => {
         default:
           return false;
       }
+    })
+    .filter((card) => {
+      return attribute ? card.attribute === attribute : true;
+    })
+    .filter((card) => {
+      return type ? card.type === type : true;
     })
     .filter((card) => {
       return atkFloor ? (card.atk ?? 0) >= Number(atkFloor) : true;
@@ -96,6 +101,7 @@ export const Search: React.FC = () => {
         border: "dashed red 1px",
         display: "flex",
         flexDirection: "column",
+        fontSize: "0.8rem",
         gap: "0.25rem",
         height: "100%",
         position: "relative",
@@ -116,7 +122,7 @@ export const Search: React.FC = () => {
           value={name}
           onChange={(event) => setName(event.currentTarget.value)}
         ></input>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex" }}>
           <div style={{ display: "flex", gap: "0.25rem" }}>
             <select
               value={cardType}
@@ -126,19 +132,6 @@ export const Search: React.FC = () => {
               <option value="monster">Monster</option>
               <option value="spell">Spell</option>
               <option value="trap">Trap</option>
-            </select>
-            <select
-              disabled={cardType !== "monster"}
-              value={attribute}
-              onChange={(event) => setAttribute(event.currentTarget.value)}
-            >
-              <option value="">Attribute</option>
-              <option value="dark">Dark</option>
-              <option value="earth">Earth</option>
-              <option value="fire">Fire</option>
-              <option value="light">Light</option>
-              <option value="water">Water</option>
-              <option value="wind">Wind</option>
             </select>
             <select
               disabled={!cardType}
@@ -164,27 +157,52 @@ export const Search: React.FC = () => {
                 </>
               ) : null}
             </select>
-          </div>
-          <div style={{ display: "flex", gap: "0.25rem" }}>
-            <input
+            <select
               disabled={cardType !== "monster"}
-              type="number"
-              value={levelFloor}
-              style={{ width: "35px" }}
-              onChange={(event) => setLevelFloor(event.currentTarget.value)}
-            ></input>
-            <span style={{ textWrap: "nowrap" }}>≤ Level ≤</span>
-            <input
+              value={attribute}
+              onChange={(event) => setAttribute(event.currentTarget.value)}
+            >
+              <option value="">Attribute</option>
+              <option value="dark">Dark</option>
+              <option value="earth">Earth</option>
+              <option value="fire">Fire</option>
+              <option value="light">Light</option>
+              <option value="water">Water</option>
+              <option value="wind">Wind</option>
+            </select>
+            <select
               disabled={cardType !== "monster"}
-              type="number"
-              value={levelCeiling}
-              style={{ width: "35px" }}
-              onChange={(event) => setLevelCeiling(event.currentTarget.value)}
-            ></input>
+              value={type}
+              onChange={(event) => setType(event.currentTarget.value)}
+            >
+              <option value="">Type</option>
+              <option value="aqua">Aqua</option>
+              <option value="beast">Beast</option>
+              <option value="beastwarrior">Beast-Warrior</option>
+              <option value="dinosaur">Dinosaur</option>
+              <option value="dragon">Dragon</option>
+              <option value="fairy">Fairy</option>
+              <option value="fiend">Fiend</option>
+              <option value="fish">Fish</option>
+              <option value="insect">Insect</option>
+              <option value="machine">Machine</option>
+              <option value="plant">Plant</option>
+              <option value="pyro">Pyro</option>
+              <option value="reptile">Reptile</option>
+              <option value="rock">Rock</option>
+              <option value="seaserpent">Sea Serpent</option>
+              <option value="spellcaster">Spellcaster</option>
+              <option value="thunder">Thunder</option>
+              <option value="warrior">Warrior</option>
+              <option value="wingedbeast">Winged Beast</option>
+              <option value="zombie">Zombie</option>
+            </select>
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", gap: "0.25rem" }}>
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <div
+            style={{ alignItems: "center", display: "flex", gap: "0.25rem" }}
+          >
             <input
               disabled={cardType !== "monster"}
               type="number"
@@ -201,7 +219,9 @@ export const Search: React.FC = () => {
               onChange={(event) => setAtkCeiling(event.currentTarget.value)}
             ></input>
           </div>
-          <div style={{ display: "flex", gap: "0.25rem" }}>
+          <div
+            style={{ alignItems: "center", display: "flex", gap: "0.25rem" }}
+          >
             <input
               disabled={cardType !== "monster"}
               type="number"
@@ -218,6 +238,23 @@ export const Search: React.FC = () => {
               onChange={(event) => setDefCeiling(event.currentTarget.value)}
             ></input>
           </div>
+        </div>
+        <div style={{ alignItems: "center", display: "flex", gap: "0.25rem" }}>
+          <input
+            disabled={cardType !== "monster"}
+            type="number"
+            value={levelFloor}
+            style={{ width: "35px" }}
+            onChange={(event) => setLevelFloor(event.currentTarget.value)}
+          ></input>
+          <span style={{ textWrap: "nowrap" }}>≤ Level ≤</span>
+          <input
+            disabled={cardType !== "monster"}
+            type="number"
+            value={levelCeiling}
+            style={{ width: "35px" }}
+            onChange={(event) => setLevelCeiling(event.currentTarget.value)}
+          ></input>
         </div>
       </div>
       <div
