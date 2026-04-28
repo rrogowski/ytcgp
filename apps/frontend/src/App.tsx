@@ -10,6 +10,7 @@ import { Community } from "./screens/community";
 import { Craft } from "./screens/craft";
 import { Pack } from "./screens/pack";
 import { Packs } from "./screens/packs";
+import { Search } from "./screens/search";
 import { WonderPick } from "./screens/wonder-pick";
 import "./styles.css";
 import { claimAllowanceTransaction } from "./transactions/allowance";
@@ -173,6 +174,8 @@ const RouterView: React.FC = () => {
     case "/":
     case "/binder":
       return <Binder></Binder>;
+    case "/search":
+      return <Search></Search>;
     case "/packs":
       return <Packs></Packs>;
     case "/pack":

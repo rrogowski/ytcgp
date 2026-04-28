@@ -5,6 +5,7 @@ import { getCardsInSet, getDisenchantValue } from "../data/cards";
 import { ALL_PACKS } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection, useDocumentWithId } from "../lib/firestore";
+import { useRouter } from "../lib/router";
 import { useTransaction } from "../lib/transaction";
 import {
   bindersRef,
@@ -15,6 +16,7 @@ import { profilesRef } from "../models/profile";
 import { disenchantAllExtrasTransaction } from "../transactions/disenchant";
 
 export const Binder: React.FC = () => {
+  const router = useRouter();
   const user = useUser();
 
   const [userUid, setUserUid] = useState(user.uid);
@@ -91,7 +93,6 @@ export const Binder: React.FC = () => {
         }}
       >
         <div>
-          Player:{" "}
           <select
             value={userUid}
             onChange={(event) => setUserUid(event.currentTarget.value)}
@@ -110,7 +111,6 @@ export const Binder: React.FC = () => {
           </select>
         </div>
         <div>
-          Set:{" "}
           <select
             value={code}
             onChange={(event) => setCode(event.currentTarget.value)}
@@ -124,6 +124,7 @@ export const Binder: React.FC = () => {
             })}
           </select>
         </div>
+        <button onClick={() => router.navigate("/search")}>Search</button>
       </div>
       <div
         style={{
