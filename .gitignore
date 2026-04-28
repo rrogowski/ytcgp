@@ -1,1 +1,4 @@
 node_modules
+
+apps/scripts/data
+apps/scripts/*.json
