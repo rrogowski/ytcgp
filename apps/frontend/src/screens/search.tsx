@@ -98,7 +98,6 @@ export const Search: React.FC = () => {
   return (
     <div
       style={{
-        border: "dashed red 1px",
         display: "flex",
         flexDirection: "column",
         fontSize: "0.8rem",
@@ -110,7 +109,6 @@ export const Search: React.FC = () => {
       <CardPreview imageUrl={previewImageUrl}></CardPreview>
       <div
         style={{
-          border: "dashed orange 1px",
           display: "flex",
           flexDirection: "column",
           gap: "0.1rem",
@@ -260,7 +258,6 @@ export const Search: React.FC = () => {
       <div
         style={{
           alignItems: "center",
-          border: "dashed yellow 1px",
           display: "flex",
           flexShrink: 1,
           flexWrap: "wrap",
