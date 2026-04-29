@@ -1,4 +1,4 @@
-import type { Timestamp } from "firebase/firestore";
+import favicon from "./images/logo.png";
 import { useAuth, useUser } from "./lib/auth";
 import { useDocumentWithId } from "./lib/firestore";
 import { useRouter } from "./lib/router";
@@ -8,13 +8,15 @@ import { getClaimableAllowancesCount, useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
 import { Community } from "./screens/community";
 import { Craft } from "./screens/craft";
-import { Home } from "./screens/home";
 import { Pack } from "./screens/pack";
 import { Packs } from "./screens/packs";
 import { Search } from "./screens/search";
 import { WonderPick } from "./screens/wonder-pick";
-import "./styles.css";
 import { claimAllowanceTransaction } from "./transactions/allowance";
+
+import { useAllowance } from "./lib/allowance";
+import { useWonderPicks } from "./lib/wonder-picks";
+import "./styles.css";
 
 const App: React.FC = () => {
   const auth = useAuth();
@@ -48,12 +50,14 @@ const App: React.FC = () => {
       style={{
         display: "flex",
         flexDirection: "column",
+        gap: "0.5rem",
         height: "100dvh",
         margin: "0 auto",
         maxWidth: "40rem",
+        padding: "0.5rem",
       }}
     >
-      {/* <TopNavigationBar></TopNavigationBar> */}
+      <TopNavigationBar></TopNavigationBar>
       <div style={{ flexGrow: 1, overflow: "auto" }}>
         <RouterView></RouterView>
       </div>
@@ -66,6 +70,8 @@ const TopNavigationBar: React.FC = () => {
   const router = useRouter();
   const user = useUser();
   const profile = useProfile();
+  const allowance = useAllowance();
+  const wonderPicks = useWonderPicks();
 
   const pointsWallet = useDocumentWithId(pointsWalletsRef, user.uid);
 
@@ -86,35 +92,60 @@ const TopNavigationBar: React.FC = () => {
   }
 
   return (
-    <>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div
+      style={{
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
+      <img src={favicon} style={{ height: "3rem" }}></img>
+      <div style={{ alignItems: "center", display: "flex", gap: "0.25rem" }}>
+        <span>
+          ¥{profile.data?.money} | {profile.data?.wonderPoints} ₩
+          {router.path === "/craft" && ` | ${pointsWallet.data?.[code] ?? 0} ₱`}
+        </span>
         <button
-          disabled={
-            isClaimingAllowance || profile.isLoading || allowanceCount === 0
-          }
+          disabled={allowance.count === 0 || isClaimingAllowance}
           onClick={() => claimAllowance(user)}
         >
-          Claim Allowance (x{allowanceCount})
-        </button>{" "}
-        <span>
-          {router.path === "/craft" && `${pointsWallet.data?.[code] ?? 0} ₱ | `}
-          <a
-            href="#"
-            onClick={(event) => {
-              event.preventDefault();
-              router.navigate("/wonder-pick");
-            }}
-          >
-            {profile.data?.wonderPoints} ₩
-          </a>{" "}
-          | ¥{profile.data?.money ?? 0} | {user.displayName}
-        </span>
+          {allowanceCount === 0 ? (
+            <>
+              Claim in<br></br>
+              {formatMsRemaining(allowance.msRemaining)}
+            </>
+          ) : (
+            <>
+              Claim Daily<br></br>Allowance
+            </>
+          )}
+        </button>
+        <span></span>
+        <div style={{ display: "flex", position: "relative" }}>
+          <button onClick={() => router.navigate("/wonder-pick")}>
+            Wonder<br></br>Pick
+          </button>
+          {
+            wonderPicks.hasNewPicks && null
+            // <span
+            //   style={{
+            //     backgroundColor: "red",
+            //     borderRadius: "0.25rem",
+            //     color: "white",
+            //     fontSize: "0.6rem",
+            //     padding: "0.25rem",
+            //     pointerEvents: "none",
+            //     position: "absolute",
+            //     right: "-0.8rem",
+            //     top: "-0.8rem",
+            //   }}
+            // >
+            //   New
+            // </span>
+          }
+        </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        Next Allowance At:{" "}
-        {allowanceCount > 0 ? "NOW" : formatDate(profile.data?.nextAllowanceAt)}
-      </div>
-    </>
+    </div>
   );
 };
 
@@ -123,9 +154,9 @@ const BottomNavigationBar: React.FC = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <button style={{ flexGrow: 1 }} onClick={() => router.navigate("/")}>
+      {/* <button style={{ flexGrow: 1 }} onClick={() => router.navigate("/")}>
         Home
-      </button>
+      </button> */}
       <button
         style={{ flexGrow: 1 }}
         onClick={() => router.navigate("/binder")}
@@ -145,20 +176,14 @@ const BottomNavigationBar: React.FC = () => {
   );
 };
 
-const formatDate = (timestamp?: Timestamp) => {
-  if (!timestamp) {
-    return "-";
-  }
+const MS_PER_HOUR = 1000 * 3600;
+const MS_PER_MINUTE = 1000 * 60;
 
-  const formatter = new Intl.DateTimeFormat("en-us", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-  return formatter.format(timestamp.toDate());
+const formatMsRemaining = (ms: number) => {
+  const hours = Math.floor(ms / MS_PER_HOUR);
+  ms %= hours * MS_PER_HOUR;
+  const minutes = Math.floor(ms / MS_PER_MINUTE);
+  return `${hours.toString().padStart(2, "0")}h ${minutes.toString().padStart(2, "0")}m`;
 };
 
 const RouterView: React.FC = () => {
@@ -174,8 +199,9 @@ const RouterView: React.FC = () => {
   }
 
   switch (router.path) {
+    // case "/home":
+    //   return <Home></Home>;
     case "/":
-      return <Home></Home>;
     case "/binder":
       return <Binder></Binder>;
     case "/search":

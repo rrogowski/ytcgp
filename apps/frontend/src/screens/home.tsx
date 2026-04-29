@@ -85,23 +85,24 @@ export const Home: React.FC = () => {
             <button onClick={() => router.navigate("/wonder-pick")}>
               Wonder<br></br>Pick
             </button>
-            {wonderPicks.hasNewPicks && (
-              <span
-                style={{
-                  backgroundColor: "red",
-                  borderRadius: "0.25rem",
-                  color: "white",
-                  fontSize: "0.6rem",
-                  padding: "0.25rem",
-                  pointerEvents: "none",
-                  position: "absolute",
-                  right: "-0.8rem",
-                  top: "-0.8rem",
-                }}
-              >
-                New
-              </span>
-            )}
+            {wonderPicks.hasNewPicks &&
+              null
+              // <span
+              //   style={{
+              //     backgroundColor: "red",
+              //     borderRadius: "0.25rem",
+              //     color: "white",
+              //     fontSize: "0.6rem",
+              //     padding: "0.25rem",
+              //     pointerEvents: "none",
+              //     position: "absolute",
+              //     right: "-0.8rem",
+              //     top: "-0.8rem",
+              //   }}
+              // >
+              //   New
+              // </span>
+            }
           </div>
         </div>
       </div>
