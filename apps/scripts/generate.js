@@ -5,7 +5,8 @@ const RELEASED_SET_NAMES = [
   // "Legend of Blue Eyes White Dragon",
   // "Starter Deck: Yugi",
   // "Starter Deck: Kaiba",
-  "Yu-Gi-Oh! Dark Duel Stories",
+  // "Yu-Gi-Oh! Dark Duel Stories",
+  "McDonald's Promotional Cards",
 ];
 
 const sets = JSON.parse(

@@ -14,6 +14,30 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "MP1",
+    name: "McDonald's Promotional Cards",
+    cost: 200,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl: "https://ms.yugipedia.com//1/11/MP1-PromoEN-Checklist.png",
+  },
+  {
     code: "LOB",
     name: "Legend of Blue Eyes White Dragon",
     cost: 500,
