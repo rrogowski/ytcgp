@@ -10,7 +10,8 @@ export interface CardMetadata {
     | "Ultra Rare"
     | "Secret Rare"
     | "Short Print"
-    | "Super Short Print";
+    | "Super Short Print"
+    | "Prismatic Secret Rare";
   imageUrl: string;
   cardType: string;
   subcategory?: string;
@@ -2909,7 +2910,7 @@ export const ALL_CARDS: CardMetadata[] = [
   {
     code: "DDS-001",
     name: "Blue-Eyes White Dragon",
-    rarity: "Secret Rare",
+    rarity: "Prismatic Secret Rare",
     imageUrl:
       "https://ms.yugipedia.com//9/93/BlueEyesWhiteDragon-DDS-NA-PScR-UE.png",
     cardType: "monster",
@@ -2923,7 +2924,7 @@ export const ALL_CARDS: CardMetadata[] = [
   {
     code: "DDS-002",
     name: "Dark Magician",
-    rarity: "Secret Rare",
+    rarity: "Prismatic Secret Rare",
     imageUrl: "https://ms.yugipedia.com//d/d5/DarkMagician-DDS-NA-PScR-UE.png",
     cardType: "monster",
     attribute: "dark",
@@ -2936,7 +2937,7 @@ export const ALL_CARDS: CardMetadata[] = [
   {
     code: "DDS-003",
     name: "Exodia the Forbidden One",
-    rarity: "Secret Rare",
+    rarity: "Prismatic Secret Rare",
     imageUrl:
       "https://ms.yugipedia.com//b/bd/ExodiatheForbiddenOne-DDS-NA-PScR-UE.png",
     cardType: "monster",
@@ -2950,7 +2951,7 @@ export const ALL_CARDS: CardMetadata[] = [
   {
     code: "DDS-004",
     name: "Seiyaryu",
-    rarity: "Secret Rare",
+    rarity: "Prismatic Secret Rare",
     imageUrl: "https://ms.yugipedia.com//b/bc/Seiyaryu-DDS-NA-PScR-UE.png",
     cardType: "monster",
     attribute: "light",
@@ -2963,7 +2964,7 @@ export const ALL_CARDS: CardMetadata[] = [
   {
     code: "DDS-005",
     name: "Acid Trap Hole",
-    rarity: "Secret Rare",
+    rarity: "Prismatic Secret Rare",
     imageUrl: "https://ms.yugipedia.com//7/72/AcidTrapHole-DDS-NA-PScR-UE.png",
     cardType: "trap",
     subcategory: "normal",
@@ -2971,7 +2972,7 @@ export const ALL_CARDS: CardMetadata[] = [
   {
     code: "DDS-006",
     name: "Salamandra",
-    rarity: "Secret Rare",
+    rarity: "Prismatic Secret Rare",
     imageUrl: "https://ms.yugipedia.com//c/c7/Salamandra-DDS-NA-PScR-UE.png",
     cardType: "spell",
     subcategory: "normal",

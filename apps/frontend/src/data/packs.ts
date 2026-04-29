@@ -118,7 +118,7 @@ export const ALL_PACKS: Pack[] = [
   {
     code: "SDY",
     name: "Starter Deck: Yugi",
-    cost: 300,
+    cost: 350,
     rarityTable: [
       [{ rarity: "Common", odds: 1 / 1 }],
       [{ rarity: "Common", odds: 1 / 1 }],
@@ -142,7 +142,7 @@ export const ALL_PACKS: Pack[] = [
   {
     code: "SDK",
     name: "Starter Deck: Kaiba",
-    cost: 300,
+    cost: 350,
     rarityTable: [
       [{ rarity: "Common", odds: 1 / 1 }],
       [{ rarity: "Common", odds: 1 / 1 }],
@@ -167,9 +167,9 @@ export const ALL_PACKS: Pack[] = [
   {
     code: "DDS",
     name: "Yu-Gi-Oh! Dark Duel Stories",
-    cost: 800,
-    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
-    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    cost: 2400,
+    rarityTable: [[{ rarity: "Prismatic Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Prismatic Secret Rare", odds: 1 / 1 }]],
     imageUrl:
       "https://ms.yugipedia.com//thumb/6/69/DDS-VideoGame-NA.jpg/514px-DDS-VideoGame-NA.jpg",
   },
@@ -261,6 +261,8 @@ const getRarityWonderPickCost = (rarity: string) => {
       return 30;
     case "Super Short Print":
       return 60;
+    case "Prismatic Secret Rare":
+      return 5184;
     default:
       throw Error(`unknown rarity: ${rarity}`);
   }
