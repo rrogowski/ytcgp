@@ -3,8 +3,9 @@ const { join } = require("path");
 
 const RELEASED_SET_NAMES = [
   "Legend of Blue Eyes White Dragon",
-  // "Starter Deck: Yugi",
-  // "Starter Deck: Kaiba",
+  "Starter Deck: Yugi",
+  "Starter Deck: Kaiba",
+  "Yu-Gi-Oh! Dark Duel Stories",
 ];
 
 const sets = JSON.parse(
@@ -58,9 +59,6 @@ const main = () => {
         atk: card.atk,
         def: card.def,
       });
-      if (card.cardType !== "monster") {
-        console.log(card);
-      }
     });
   }
 
