@@ -2,11 +2,11 @@ import { useMemo, useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import {
-  getCardsInSet,
+  getCardsInExpansion,
   getDisenchantValue,
   type CardMetadata,
 } from "../data/cards";
-import { ALL_PACKS } from "../data/packs";
+import { ALL_EXPANSIONS } from "../data/expansions";
 import { useUser } from "../lib/auth";
 import { useCollection, useDocumentWithId } from "../lib/firestore";
 import { useRouter } from "../lib/router";
@@ -28,7 +28,7 @@ export const Binder: React.FC = () => {
   const user = useUser();
 
   const [userUid, setUserUid] = useState(user.uid);
-  const [packCode, setPackCode] = useState(ALL_PACKS[0].code);
+  const [expansionName, setExpansionName] = useState(ALL_EXPANSIONS[0].name);
   const [filter, setFilter] = useState("");
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [shouldShowQuantities, setShouldShowQuantities] = useState(false);
@@ -43,7 +43,7 @@ export const Binder: React.FC = () => {
   const [isDisenchanting, disenchant] = useTransaction(disenchantTransaction);
 
   const cardsToDisplay = useMemo(() => {
-    const cards = getCardsInSet(packCode);
+    const cards = getCardsInExpansion(expansionName);
     if (filter === "only-missing") {
       return cards.filter((card) => {
         return (binder.data?.[card.code] ?? 0) === 0;
@@ -58,7 +58,7 @@ export const Binder: React.FC = () => {
       });
     }
     return cards;
-  }, [binder.data, packCode, filter]);
+  }, [binder.data, expansionName, filter]);
 
   const extraCards = useMemo(() => {
     return getExtraCards(cardsToDisplay, binder.data);
@@ -80,7 +80,7 @@ export const Binder: React.FC = () => {
     ) {
       return;
     }
-    await disenchantAllExtras(user, packCode);
+    await disenchantAllExtras(user, expansionName);
   };
 
   const handleDisenchant = async (card: CardMetadata) => {
@@ -138,15 +138,11 @@ export const Binder: React.FC = () => {
         </div>
         <div>
           <select
-            value={packCode}
-            onChange={(event) => setPackCode(event.currentTarget.value)}
+            value={expansionName}
+            onChange={(event) => setExpansionName(event.currentTarget.value)}
           >
-            {ALL_PACKS.map((pack) => {
-              return (
-                <option key={pack.code} value={pack.code}>
-                  {pack.name}
-                </option>
-              );
+            {ALL_EXPANSIONS.map((expansion) => {
+              return <option key={expansion.name}>{expansion.name}</option>;
             })}
           </select>
         </div>

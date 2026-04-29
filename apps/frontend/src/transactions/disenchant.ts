@@ -2,7 +2,7 @@ import type { User } from "firebase/auth";
 import { doc } from "firebase/firestore";
 import {
   findCardByCode,
-  getCardsInSet,
+  getCardsInExpansion,
   getDisenchantValue,
 } from "../data/cards";
 import { executeTransaction } from "../lib/firestore";
@@ -17,7 +17,7 @@ export const DISENCHANT_MIN_COPIES = 3;
 
 export const disenchantAllExtrasTransaction = async (
   user: User,
-  packCode: string,
+  expansionName: string,
 ) => {
   return executeTransaction(async (t) => {
     const profileRef = doc(profilesRef, user.uid);
@@ -32,7 +32,7 @@ export const disenchantAllExtrasTransaction = async (
       throw Error(`binder does not exist`);
     }
 
-    const cards = getCardsInSet(packCode);
+    const cards = getCardsInExpansion(expansionName);
     const extraCards = getExtraCards(cards, binder);
     const totalValue = getDisenchantTotalValue(extraCards, binder);
     const binderUpdate = extraCards.reduce((accumulator, card) => {

@@ -3,22 +3,16 @@ import { findCardByCode, getCardsInSet, type CardMetadata } from "./cards";
 
 export const POINTS_PER_PACK = 5;
 
-// const PRECONSTRUCTED_DECK_RARITY_TABLE: {
-//   rarity: CardMetadata["rarity"];
-//   odds: number;
-// }[][] = [
-//   [{ rarity: "Common", odds: 1 / 1 }],
-//   [{ rarity: "Common", odds: 1 / 1 }],
-//   [{ rarity: "Common", odds: 1 / 1 }],
-//   [{ rarity: "Common", odds: 1 / 1 }],
-//   [
-//     { rarity: "Ultra Rare", odds: 1 / 12 },
-//     { rarity: "Super Rare", odds: 1 / 5 },
-//     { rarity: "Common", odds: 1 / 1 },
-//   ],
-// ];
+interface Pack {
+  code: string;
+  name: string;
+  cost: number;
+  rarityTable: { rarity: string; odds: number }[][];
+  godPackRarityTable: { rarity: string; odds: number }[][];
+  imageUrl: string;
+}
 
-export const ALL_PACKS = [
+export const ALL_PACKS: Pack[] = [
   {
     code: "LOB",
     name: "Legend of Blue Eyes White Dragon",
@@ -97,21 +91,64 @@ export const ALL_PACKS = [
     imageUrl:
       "https://ms.yugipedia.com//b/bb/LOB-BoosterEN-25thAnniversaryEdition.png",
   },
-  // {
-  //   code: "SDY",
-  //   name: "Starter Deck: Yugi",
-  //   cost: 300,
-  //   rarityTable: PRECONSTRUCTED_DECK_RARITY_TABLE,
-  //   imageUrl: "https://ms.yugipedia.com//4/4c/SDY-DeckEU.png",
-  // },
-  // {
-  //   code: "SDK",
-  //   name: "Starter Deck: Kaiba",
-  //   cost: 300,
-  //   rarityTable: PRECONSTRUCTED_DECK_RARITY_TABLE,
-  //   imageUrl:
-  //     "https://tcgplayer-cdn.tcgplayer.com/product/153329_in_1000x1000.jpg",
-  // },
+  {
+    code: "SDY",
+    name: "Starter Deck: Yugi",
+    cost: 300,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Ultra Rare", odds: 1 / 1 }],
+    ],
+    imageUrl: "https://ms.yugipedia.com//4/4c/SDY-DeckEU.png",
+  },
+  {
+    code: "SDK",
+    name: "Starter Deck: Kaiba",
+    cost: 300,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Ultra Rare", odds: 1 / 1 }],
+    ],
+    imageUrl:
+      "https://tcgplayer-cdn.tcgplayer.com/product/153329_in_1000x1000.jpg",
+  },
+  {
+    code: "DDS",
+    name: "Yu-Gi-Oh! Dark Duel Stories",
+    cost: 800,
+    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    imageUrl:
+      "https://ms.yugipedia.com//thumb/6/69/DDS-VideoGame-NA.jpg/514px-DDS-VideoGame-NA.jpg",
+  },
   // {
   //   code: "MRD",
   //   name: "Metal Raiders",
@@ -176,16 +213,31 @@ export const getWonderPickCost = (codes: string[], isGodPack: boolean) => {
       throw Error(`no rarity table entry found for card: ${card.name}`);
     }
     if (isGodPack) {
-      const cost =
-        1 +
-        (entry.rarity === "Common"
-          ? 0
-          : entry.rarity === "Super Rare"
-            ? 5
-            : 1 / (entry.odds / 2));
+      const cost = 1 + getRarityWonderPickCost(card.rarity);
       return cost > accumulator ? cost : accumulator;
     }
-    return accumulator + (entry.rarity === "Common" ? 0 : 1 / entry.odds);
+    return accumulator + getRarityWonderPickCost(card.rarity);
   }, 0);
   return Math.round(cost);
+};
+
+const getRarityWonderPickCost = (rarity: string) => {
+  switch (rarity) {
+    case "Common":
+      return 0;
+    case "Rare":
+      return 1;
+    case "Super Rare":
+      return 5;
+    case "Ultra Rare":
+      return 12;
+    case "Secret Rare":
+      return 24;
+    case "Short Print":
+      return 30;
+    case "Super Short Print":
+      return 60;
+    default:
+      throw Error(`unknown rarity: ${rarity}`);
+  }
 };

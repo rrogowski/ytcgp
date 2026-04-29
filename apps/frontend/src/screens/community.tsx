@@ -4,7 +4,8 @@ import { Fragment } from "react/jsx-runtime";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { findCardByCode, getCardsInSet } from "../data/cards";
-import { ALL_PACKS, findPackByCode } from "../data/packs";
+import { ALL_EXPANSIONS } from "../data/expansions";
+import { findPackByCode } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection } from "../lib/firestore";
 import {
@@ -50,6 +51,10 @@ export const Community: React.FC = () => {
     return userUid.length > 0 ? pack.data.userUid === userUid : true;
   });
 
+  const achievementPacks = ALL_EXPANSIONS.map((expansion) =>
+    expansion.codes.map(findPackByCode),
+  ).flat();
+
   return (
     <div
       style={{
@@ -91,7 +96,7 @@ export const Community: React.FC = () => {
                     height: "100%",
                   }}
                 >
-                  {ALL_PACKS.map((pack) => {
+                  {achievementPacks.map((pack) => {
                     return (
                       <img
                         key={pack.code}

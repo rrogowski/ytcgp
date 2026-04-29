@@ -2,9 +2,9 @@ const { readFileSync, writeFileSync } = require("node:fs");
 const { join } = require("path");
 
 const RELEASED_SET_NAMES = [
-  "Legend of Blue Eyes White Dragon",
-  "Starter Deck: Yugi",
-  "Starter Deck: Kaiba",
+  // "Legend of Blue Eyes White Dragon",
+  // "Starter Deck: Yugi",
+  // "Starter Deck: Kaiba",
   "Yu-Gi-Oh! Dark Duel Stories",
 ];
 
