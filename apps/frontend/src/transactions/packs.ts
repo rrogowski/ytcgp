@@ -102,3 +102,17 @@ export const wonderPickTransaction = async (
     return code;
   });
 };
+
+export const updateLastViewedWonderPickAtTransaction = async (
+  userUid: string,
+) => {
+  return executeTransaction(async (t) => {
+    const profileRef = doc(profilesRef, userUid);
+    const profile = (await t.get(profileRef)).data();
+    if (!profile) {
+      throw Error(`profile does not exist: ${userUid}`);
+    }
+
+    t.update(profileRef, { lastViewedWonderPicksAt: Timestamp.now() });
+  });
+};

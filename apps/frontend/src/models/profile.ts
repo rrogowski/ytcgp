@@ -4,6 +4,7 @@ import { createCollectionRef, useDocumentWithId } from "../lib/firestore";
 
 export interface ProfileModel {
   displayName: string;
+  lastViewedWonderPicksAt?: Timestamp;
   nextAllowanceAt: Timestamp;
   money: number;
   wonderPoints: number;
