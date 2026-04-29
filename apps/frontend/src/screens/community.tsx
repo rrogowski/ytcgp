@@ -10,6 +10,7 @@ import { useUser } from "../lib/auth";
 import { useCollection } from "../lib/firestore";
 import {
   bindersRef,
+  getGrandMasterSets,
   getMasterSets,
   getTotalBinderValue,
   getTotalCards,
@@ -81,6 +82,7 @@ export const Community: React.FC = () => {
           {profiles.docs.map((profile) => {
             const binder = binders.docs.find((d) => d.id === profile.id);
             const masterSets = getMasterSets(binder?.data ?? null);
+            const grandMasterSets = getGrandMasterSets(binder?.data ?? null);
             return (
               <tr key={profile.id}>
                 <td>{profile.data.displayName}</td>
@@ -91,24 +93,42 @@ export const Community: React.FC = () => {
                     alignItems: "center",
                     borderLeft: "none",
                     display: "flex",
-                    gap: "0.4rem",
-                    justifyContent: "center",
+                    gap: "0.75rem",
                     height: "100%",
+                    justifyContent: "center",
                   }}
                 >
                   {achievementPacks.map((pack) => {
                     return (
-                      <img
+                      <div
                         key={pack.code}
-                        src={pack.imageUrl}
                         style={{
-                          cursor: "pointer",
-                          height: "2rem",
-                          opacity: masterSets.includes(pack) ? 1 : 0.3,
-                          transform: "scale(1.3)",
+                          alignItems: "center",
+                          display: "flex",
+                          flexDirection: "column",
                         }}
-                        onClick={() => showPackProgress(pack.code)}
-                      ></img>
+                      >
+                        <img
+                          src={pack.imageUrl}
+                          style={{
+                            cursor: "pointer",
+                            height: "2rem",
+                            opacity: masterSets.includes(pack) ? 1 : 0.3,
+                            transform: "scale(1.3)",
+                          }}
+                          onClick={() => showPackProgress(pack.code)}
+                        ></img>
+                        <span
+                          style={{
+                            marginTop: "0.5rem",
+                            fontSize: "0.6rem",
+                            lineHeight: "6px",
+                            opacity: grandMasterSets.includes(pack) ? 1 : 0.3,
+                          }}
+                        >
+                          👑
+                        </span>
+                      </div>
                     );
                   })}
                 </td>
