@@ -4,7 +4,7 @@ import { useDocumentWithId } from "./lib/firestore";
 import { useRouter } from "./lib/router";
 import { useTransaction } from "./lib/transaction";
 import { pointsWalletsRef } from "./models/points-wallet";
-import { getClaimableAllowancesCount, useProfile } from "./models/profile";
+import { useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
 import { Community } from "./screens/community";
 import { Craft } from "./screens/craft";
@@ -81,12 +81,6 @@ const TopNavigationBar: React.FC = () => {
     claimAllowanceTransaction,
   );
 
-  const allowanceCount = profile.isLoading
-    ? 0
-    : profile.data
-      ? getClaimableAllowancesCount(profile.data)
-      : 1;
-
   if (profile.isLoading || pointsWallet.isLoading) {
     return null;
   }
@@ -109,7 +103,7 @@ const TopNavigationBar: React.FC = () => {
           disabled={allowance.count === 0 || isClaimingAllowance}
           onClick={() => claimAllowance(user)}
         >
-          {allowanceCount === 0 ? (
+          {allowance.count === 0 ? (
             <>
               Claim in<br></br>
               {formatMsRemaining(allowance.msRemaining)}
@@ -125,24 +119,23 @@ const TopNavigationBar: React.FC = () => {
           <button onClick={() => router.navigate("/wonder-pick")}>
             Wonder<br></br>Pick
           </button>
-          {
-            wonderPicks.hasNewPicks && null
-            // <span
-            //   style={{
-            //     backgroundColor: "red",
-            //     borderRadius: "0.25rem",
-            //     color: "white",
-            //     fontSize: "0.6rem",
-            //     padding: "0.25rem",
-            //     pointerEvents: "none",
-            //     position: "absolute",
-            //     right: "-0.8rem",
-            //     top: "-0.8rem",
-            //   }}
-            // >
-            //   New
-            // </span>
-          }
+          {wonderPicks.hasNewPicks && (
+            <span
+              style={{
+                backgroundColor: "red",
+                borderRadius: "0.25rem",
+                color: "white",
+                fontSize: "0.6rem",
+                padding: "0.25rem",
+                pointerEvents: "none",
+                position: "absolute",
+                right: "-0.8rem",
+                top: "-0.8rem",
+              }}
+            >
+              New
+            </span>
+          )}
         </div>
       </div>
     </div>
@@ -154,9 +147,6 @@ const BottomNavigationBar: React.FC = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      {/* <button style={{ flexGrow: 1 }} onClick={() => router.navigate("/")}>
-        Home
-      </button> */}
       <button
         style={{ flexGrow: 1 }}
         onClick={() => router.navigate("/binder")}
@@ -199,8 +189,6 @@ const RouterView: React.FC = () => {
   }
 
   switch (router.path) {
-    // case "/home":
-    //   return <Home></Home>;
     case "/":
     case "/binder":
       return <Binder></Binder>;
