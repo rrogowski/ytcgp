@@ -1,8 +1,11 @@
 import { limit, orderBy, Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Fragment } from "react/jsx-runtime";
+import { Card } from "../components/card";
+import { CardPreview } from "../components/card-preview";
 import { findCardByCode, getCardsInSet } from "../data/cards";
-import { ALL_PACKS, findPackByCode } from "../data/packs";
+import { ALL_EXPANSIONS } from "../data/expansions";
+import { findPackByCode } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection } from "../lib/firestore";
 import {
@@ -26,6 +29,8 @@ export const Community: React.FC = () => {
 
   const packs = useCollection(packsRef, RECENT_PACKS_CONSTRAINTS);
 
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
+
   if (binders.isLoading || packs.isLoading || profiles.isLoading) {
     return <>Loading...</>;
   }
@@ -47,6 +52,10 @@ export const Community: React.FC = () => {
     return userUid.length > 0 ? pack.data.userUid === userUid : true;
   });
 
+  const achievementPacks = ALL_EXPANSIONS.map((expansion) =>
+    expansion.codes.map(findPackByCode),
+  ).flat();
+
   return (
     <div
       style={{
@@ -55,15 +64,19 @@ export const Community: React.FC = () => {
         flexDirection: "column",
         height: "100%",
         gap: "0.75rem",
+        position: "relative",
       }}
     >
+      <CardPreview imageUrl={previewImageUrl}></CardPreview>
       <h3>Collection Stats</h3>
       <table>
         <thead>
-          <th>Player</th>
-          <th># Cards</th>
-          <th>Binder Value</th>
-          <th>Achievements</th>
+          <tr>
+            <th>Player</th>
+            <th># Cards</th>
+            <th>Binder Value</th>
+            <th>Achievements</th>
+          </tr>
         </thead>
         <tbody>
           {profiles.docs.map((profile) => {
@@ -85,7 +98,7 @@ export const Community: React.FC = () => {
                     justifyContent: "center",
                   }}
                 >
-                  {ALL_PACKS.map((pack) => {
+                  {achievementPacks.map((pack) => {
                     return (
                       <div
                         key={pack.code}
@@ -174,6 +187,8 @@ export const Community: React.FC = () => {
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
+                  gap: "0.25rem",
+                  rowGap: "1rem",
                   justifyContent: "center",
                 }}
               >
@@ -189,14 +204,12 @@ export const Community: React.FC = () => {
                         width: "110px",
                       }}
                     >
-                      <img
-                        src={card.imageUrl}
-                        style={{
-                          height: "9rem",
-                          width: "auto",
-                        }}
-                      ></img>
-                      <span>{card.code}</span>
+                      <Card
+                        imageUrl={card.imageUrl}
+                        height="9rem"
+                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
+                        onPreviewEnd={() => setPreviewImageUrl("")}
+                      ></Card>
                     </div>
                   );
                 })}

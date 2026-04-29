@@ -4,6 +4,7 @@ import { createCollectionRef } from "../lib/firestore";
 export interface PackModel {
   codes: string[];
   createdAt: Timestamp;
+  isGodPack?: boolean;
   userUid: string;
   wonderPicks?: Record<string, string>;
 }

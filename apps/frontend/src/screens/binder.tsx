@@ -1,12 +1,15 @@
 import { useMemo, useState } from "react";
+import { Card } from "../components/card";
+import { CardPreview } from "../components/card-preview";
 import {
-  type CardMetadata,
-  getCardsInSet,
+  getCardsInExpansion,
   getDisenchantValue,
+  type CardMetadata,
 } from "../data/cards";
-import { ALL_PACKS } from "../data/packs";
+import { ALL_EXPANSIONS } from "../data/expansions";
 import { useUser } from "../lib/auth";
 import { useCollection, useDocumentWithId } from "../lib/firestore";
+import { useRouter } from "../lib/router";
 import { useTransaction } from "../lib/transaction";
 import {
   bindersRef,
@@ -14,25 +17,33 @@ import {
   getExtraCards,
 } from "../models/binder";
 import { profilesRef } from "../models/profile";
-import { disenchantAllExtrasTransaction } from "../transactions/disenchant";
+import {
+  DISENCHANT_MIN_COPIES,
+  disenchantAllExtrasTransaction,
+  disenchantTransaction,
+} from "../transactions/disenchant";
 
 export const Binder: React.FC = () => {
+  const router = useRouter();
   const user = useUser();
 
   const [userUid, setUserUid] = useState(user.uid);
-  const [code, setCode] = useState(ALL_PACKS[0].code);
+  const [expansionName, setExpansionName] = useState(ALL_EXPANSIONS[0].name);
   const [filter, setFilter] = useState("");
-  const [previewCard, setPreviewCard] = useState<CardMetadata | null>(null);
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
+  const [shouldShowQuantities, setShouldShowQuantities] = useState(false);
 
   const binder = useDocumentWithId(bindersRef, userUid);
   const profiles = useCollection(profilesRef);
 
-  const [isDisenchanting, disenchantAllExtras] = useTransaction(
+  const [isDisenchantingAllExtras, disenchantAllExtras] = useTransaction(
     disenchantAllExtrasTransaction,
   );
 
+  const [isDisenchanting, disenchant] = useTransaction(disenchantTransaction);
+
   const cardsToDisplay = useMemo(() => {
-    const cards = getCardsInSet(code);
+    const cards = getCardsInExpansion(expansionName);
     if (filter === "only-missing") {
       return cards.filter((card) => {
         return (binder.data?.[card.code] ?? 0) === 0;
@@ -41,9 +52,13 @@ export const Binder: React.FC = () => {
       return cards.filter((card) => {
         return (binder.data?.[card.code] ?? 0) > 0;
       });
+    } else if (filter === "disenchantable") {
+      return cards.filter((card) => {
+        return (binder.data?.[card.code] ?? 0) > DISENCHANT_MIN_COPIES;
+      });
     }
     return cards;
-  }, [binder.data, code, filter]);
+  }, [binder.data, expansionName, filter]);
 
   const extraCards = useMemo(() => {
     return getExtraCards(cardsToDisplay, binder.data);
@@ -65,33 +80,19 @@ export const Binder: React.FC = () => {
     ) {
       return;
     }
-    await disenchantAllExtras(user, code);
+    await disenchantAllExtras(user, expansionName);
   };
 
-  const handleMouseDown = (card: CardMetadata) => {
-    setPreviewCard(card);
-
-    const handleMouseUp = () => {
-      setPreviewCard(null);
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("drag", handleMouseUp);
-    };
-
-    window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("drag", handleMouseUp);
-  };
-
-  const handleTouchStart = (card: CardMetadata) => {
-    setPreviewCard(card);
-
-    const handleTouchEnd = () => {
-      setPreviewCard(null);
-      window.removeEventListener("touchend", handleTouchEnd);
-      window.removeEventListener("drag", handleTouchEnd);
-    };
-
-    window.addEventListener("touchend", handleTouchEnd);
-    window.addEventListener("drag", handleTouchEnd);
+  const handleDisenchant = async (card: CardMetadata) => {
+    const value = getDisenchantValue(card);
+    if (
+      !confirm(
+        `Are you sure you want to disenchant ${card.name} for ¥${value}?`,
+      )
+    ) {
+      return;
+    }
+    await disenchant(user, card.code);
   };
 
   if (binder.isLoading) {
@@ -108,26 +109,7 @@ export const Binder: React.FC = () => {
         position: "relative",
       }}
     >
-      {previewCard && (
-        <div
-          style={{
-            alignItems: "center",
-            display: "flex",
-            height: "100%",
-            justifyContent: "center",
-            position: "absolute",
-            zIndex: 1000,
-          }}
-        >
-          <img
-            src={previewCard.imageUrl}
-            style={{
-              height: "100%",
-              width: "auto",
-            }}
-          ></img>
-        </div>
-      )}
+      <CardPreview imageUrl={previewImageUrl}></CardPreview>
       <div
         style={{
           display: "flex",
@@ -137,7 +119,6 @@ export const Binder: React.FC = () => {
         }}
       >
         <div>
-          Player:{" "}
           <select
             value={userUid}
             onChange={(event) => setUserUid(event.currentTarget.value)}
@@ -156,20 +137,16 @@ export const Binder: React.FC = () => {
           </select>
         </div>
         <div>
-          Set:{" "}
           <select
-            value={code}
-            onChange={(event) => setCode(event.currentTarget.value)}
+            value={expansionName}
+            onChange={(event) => setExpansionName(event.currentTarget.value)}
           >
-            {ALL_PACKS.map((pack) => {
-              return (
-                <option key={pack.code} value={pack.code}>
-                  {pack.name}
-                </option>
-              );
+            {ALL_EXPANSIONS.map((expansion) => {
+              return <option key={expansion.name}>{expansion.name}</option>;
             })}
           </select>
         </div>
+        <button onClick={() => router.navigate("/search")}>Search</button>
       </div>
       <div
         style={{
@@ -181,14 +158,15 @@ export const Binder: React.FC = () => {
       >
         <button
           disabled={
-            isDisenchanting || userUid !== user.uid || extraCards.length === 0
+            isDisenchantingAllExtras ||
+            userUid !== user.uid ||
+            extraCards.length === 0
           }
           onClick={handleDisenchantAllExtras}
         >
           Disenchant All Extras
         </button>
         <div>
-          Filter:{" "}
           <select
             value={filter}
             onChange={(event) => setFilter(event.currentTarget.value)}
@@ -196,7 +174,18 @@ export const Binder: React.FC = () => {
             <option value="">All Cards</option>
             <option value="only-missing">Only Missing</option>
             <option value="exclude-missing">Exclude Missing</option>
+            <option value="disenchantable">Disenchantable</option>
           </select>
+        </div>
+        <div>
+          <input
+            checked={shouldShowQuantities}
+            type="checkbox"
+            onChange={(event) =>
+              setShouldShowQuantities(event.currentTarget.checked)
+            }
+          ></input>{" "}
+          Quantities?
         </div>
       </div>
       <div
@@ -209,44 +198,76 @@ export const Binder: React.FC = () => {
           overflow: "auto",
         }}
       >
+        {cardsToDisplay.length === 0 && <>No cards to display.</>}
         {cardsToDisplay.map((card) => {
           const quantity = binder.data?.[card.code] ?? 0;
           return (
             <div
               key={card.code}
-              style={{
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-                height: "10rem",
-                position: "relative",
-                width: "130px",
-              }}
-              onMouseDown={() => handleMouseDown(card)}
-              onTouchStart={() => handleTouchStart(card)}
+              style={{ display: "flex", flexDirection: "column" }}
             >
-              {Array.from({ length: 3 }).map((_, i) => {
-                return (
-                  <div
-                    key={`${card.code}-${i}`}
+              <div
+                style={{
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "10rem",
+                  position: "relative",
+                  width: "130px",
+                }}
+              >
+                {shouldShowQuantities && (
+                  <span
                     style={{
-                      backgroundColor: "white",
-                      height: "100%",
-                      left: `${i * 10}px`,
+                      zIndex: 500,
+                      alignItems: "center",
+                      backgroundColor: "black",
+                      borderRadius: "0.25rem",
+                      bottom: 0,
+                      color: "white",
+                      display: "flex",
+                      height: "1.5rem",
+                      justifyContent: "center",
                       position: "absolute",
+                      right: 0,
+                      width: "1.5rem",
                     }}
                   >
-                    <img
-                      src={card.imageUrl}
+                    {quantity}
+                  </span>
+                )}
+                {Array.from({ length: 3 }).map((_, i) => {
+                  return (
+                    <div
+                      key={`${card.code}-${i}`}
                       style={{
-                        height: "10rem",
-                        opacity: quantity > 2 - i ? 1 : 0.3,
-                        width: "auto",
+                        backgroundColor: "white",
+                        height: "100%",
+                        left: `${i * 10}px`,
+                        position: "absolute",
                       }}
-                    ></img>
-                  </div>
-                );
-              })}
+                    >
+                      <Card
+                        imageUrl={card.imageUrl}
+                        opacity={quantity > 2 - i ? 1 : 0.3}
+                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
+                        onPreviewEnd={() => setPreviewImageUrl("")}
+                      ></Card>
+                    </div>
+                  );
+                })}
+              </div>
+              {shouldShowQuantities && userUid === user.uid && (
+                <button
+                  disabled={
+                    quantity <= DISENCHANT_MIN_COPIES || isDisenchanting
+                  }
+                  onClick={() => handleDisenchant(card)}
+                  style={{ fontSize: "0.8rem" }}
+                >
+                  Disenchant (¥{getDisenchantValue(card)})
+                </button>
+              )}
             </div>
           );
         })}

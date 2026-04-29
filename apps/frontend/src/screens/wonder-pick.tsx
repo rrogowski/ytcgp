@@ -1,5 +1,8 @@
 import { limit, orderBy, Timestamp } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { Fragment } from "react/jsx-runtime";
+import { Card } from "../components/card";
+import { CardPreview } from "../components/card-preview";
 import { findCardByCode } from "../data/cards";
 import { getWonderPickCost } from "../data/packs";
 import { useUser } from "../lib/auth";
@@ -12,7 +15,10 @@ import { useTransaction } from "../lib/transaction";
 import { bindersRef } from "../models/binder";
 import { packsRef } from "../models/pack";
 import { profilesRef } from "../models/profile";
-import { wonderPickTransaction } from "../transactions/packs";
+import {
+  updateLastViewedWonderPickAtTransaction,
+  wonderPickTransaction,
+} from "../transactions/packs";
 
 const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(20)];
 
@@ -23,6 +29,15 @@ export const WonderPick: React.FC = () => {
   const binder = useDocumentWithId(bindersRef, user.uid);
 
   const [isWonderPicking, wonderPick] = useTransaction(wonderPickTransaction);
+  const [, updateLastViewedWonderPickAt] = useTransaction(
+    updateLastViewedWonderPickAtTransaction,
+  );
+
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
+
+  useEffect(() => {
+    updateLastViewedWonderPickAt(user.uid);
+  }, [updateLastViewedWonderPickAt, user.uid]);
 
   if (binder.isLoading || packs.isLoading || profiles.isLoading) {
     return <>Loading...</>;
@@ -51,69 +66,85 @@ export const WonderPick: React.FC = () => {
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
-        flexGrow: 1,
-        gap: "1rem",
-        overflow: "auto",
-        width: "100%",
+        height: "100%",
+        position: "relative",
       }}
     >
-      {packs.docs.map((pack) => {
-        const profile = profiles.docs.find((d) => d.id === pack.data.userUid);
-        const cost = getWonderPickCost(pack.data.codes);
-        return (
-          <Fragment key={pack.id}>
-            <hr style={{ width: "100%" }}></hr>
-            <span>
-              {profile?.data.displayName} | {formatDate(pack.data.createdAt)}
-            </span>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              {pack.data.codes.map((code) => {
-                const card = findCardByCode(code);
-                const isWonderPick = pack.data.wonderPicks?.[user.uid] === code;
-                return (
-                  <div
-                    key={code}
-                    style={{
-                      alignItems: "center",
-                      display: "flex",
-                      flexDirection: "column",
-                      width: "110px",
-                    }}
-                  >
-                    <img
-                      src={card.imageUrl}
+      <CardPreview imageUrl={previewImageUrl}></CardPreview>
+      <div
+        style={{
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          flexGrow: 1,
+          overflow: "auto",
+        }}
+      >
+        {packs.docs.map((pack) => {
+          const profile = profiles.docs.find((d) => d.id === pack.data.userUid);
+          const cost = getWonderPickCost(
+            pack.data.codes,
+            pack.data.isGodPack ?? false,
+          );
+          return (
+            <Fragment key={pack.id}>
+              <hr style={{ width: "100%" }}></hr>
+              <span>
+                {profile?.data.displayName} | {formatDate(pack.data.createdAt)}
+              </span>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "0.25rem",
+                  rowGap: "1rem",
+                  justifyContent: "center",
+                }}
+              >
+                {pack.data.codes.map((code) => {
+                  const card = findCardByCode(code);
+                  const isWonderPick =
+                    pack.data.wonderPicks?.[user.uid] === code;
+                  return (
+                    <div
+                      key={code}
                       style={{
-                        border: `dashed ${isWonderPick ? "red" : "transparent"} 3px `,
-                        height: "9rem",
-                        opacity: (binder.data?.[code] ?? 0) > 0 ? 1 : 0.3,
-                        width: "auto",
+                        alignItems: "center",
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "110px",
                       }}
-                    ></img>
-                    <span>{card.code}</span>
-                  </div>
-                );
-              })}
-            </div>
-            <button
-              disabled={
-                isWonderPicking ||
-                packs.isRefreshing ||
-                pack.data.userUid === user.uid ||
-                !!pack.data.wonderPicks?.[user.uid]
-              }
-              onClick={() => confirmWonderPick(pack.id, pack.data.codes, cost)}
-            >
-              Wonder Pick ({cost} ₩)
-            </button>
-          </Fragment>
-        );
-      })}
+                    >
+                      <Card
+                        imageUrl={card.imageUrl}
+                        border={`dashed ${isWonderPick ? "red" : "transparent"} 3px`}
+                        height="9rem"
+                        opacity={(binder.data?.[code] ?? 0) > 0 ? 1 : 0.3}
+                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
+                        onPreviewEnd={() => setPreviewImageUrl("")}
+                      ></Card>
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                disabled={
+                  isWonderPicking ||
+                  packs.isRefreshing ||
+                  pack.data.userUid === user.uid ||
+                  !!pack.data.wonderPicks?.[user.uid]
+                }
+                onClick={() =>
+                  confirmWonderPick(pack.id, pack.data.codes, cost)
+                }
+              >
+                Wonder Pick ({cost} ₩)
+              </button>
+            </Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 };

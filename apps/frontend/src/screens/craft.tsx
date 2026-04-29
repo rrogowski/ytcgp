@@ -1,5 +1,7 @@
 import type { User } from "firebase/auth";
 import { useMemo, useState } from "react";
+import { Card } from "../components/card";
+import { CardPreview } from "../components/card-preview";
 import {
   getCardsInSet,
   getPackPointsCost,
@@ -24,6 +26,7 @@ export const Craft: React.FC = () => {
 
   const [filter, setFilter] = useState("");
   const [hideUncraftableCards, setHideUncraftableCards] = useState(false);
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
 
   const packCode = router.params["code"] ?? "";
 
@@ -71,8 +74,10 @@ export const Craft: React.FC = () => {
         flexDirection: "column",
         height: "100%",
         gap: "1rem",
+        position: "relative",
       }}
     >
+      <CardPreview imageUrl={previewImageUrl}></CardPreview>
       <div style={{ alignItems: "center", display: "flex", gap: "0.25rem" }}>
         Filter:{" "}
         <select
@@ -128,14 +133,12 @@ export const Craft: React.FC = () => {
                         position: "absolute",
                       }}
                     >
-                      <img
-                        src={card.imageUrl}
-                        style={{
-                          height: "10rem",
-                          opacity: quantity > 2 - i ? 1 : 0.3,
-                          width: "auto",
-                        }}
-                      ></img>
+                      <Card
+                        imageUrl={card.imageUrl}
+                        opacity={quantity > 2 - i ? 1 : 0.3}
+                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
+                        onPreviewEnd={() => setPreviewImageUrl("")}
+                      ></Card>
                     </div>
                   );
                 })}
