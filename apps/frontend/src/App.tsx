@@ -8,6 +8,7 @@ import { getClaimableAllowancesCount, useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
 import { Community } from "./screens/community";
 import { Craft } from "./screens/craft";
+import { Home } from "./screens/home";
 import { Pack } from "./screens/pack";
 import { Packs } from "./screens/packs";
 import { Search } from "./screens/search";
@@ -48,13 +49,12 @@ const App: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         height: "100dvh",
-        padding: "0.5rem",
         margin: "0 auto",
         maxWidth: "40rem",
       }}
     >
-      <TopNavigationBar></TopNavigationBar>
-      <div style={{ flexGrow: 1, overflow: "auto", margin: "0.5rem 0" }}>
+      {/* <TopNavigationBar></TopNavigationBar> */}
+      <div style={{ flexGrow: 1, overflow: "auto" }}>
         <RouterView></RouterView>
       </div>
       <BottomNavigationBar></BottomNavigationBar>
@@ -123,6 +123,9 @@ const BottomNavigationBar: React.FC = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
+      <button style={{ flexGrow: 1 }} onClick={() => router.navigate("/")}>
+        Home
+      </button>
       <button
         style={{ flexGrow: 1 }}
         onClick={() => router.navigate("/binder")}
@@ -172,6 +175,7 @@ const RouterView: React.FC = () => {
 
   switch (router.path) {
     case "/":
+      return <Home></Home>;
     case "/binder":
       return <Binder></Binder>;
     case "/search":

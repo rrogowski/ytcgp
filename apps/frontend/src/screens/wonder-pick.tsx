@@ -1,5 +1,5 @@
 import { limit, orderBy, Timestamp } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
@@ -15,7 +15,10 @@ import { useTransaction } from "../lib/transaction";
 import { bindersRef } from "../models/binder";
 import { packsRef } from "../models/pack";
 import { profilesRef } from "../models/profile";
-import { wonderPickTransaction } from "../transactions/packs";
+import {
+  updateLastViewedWonderPickAtTransaction,
+  wonderPickTransaction,
+} from "../transactions/packs";
 
 const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(20)];
 
@@ -26,8 +29,15 @@ export const WonderPick: React.FC = () => {
   const binder = useDocumentWithId(bindersRef, user.uid);
 
   const [isWonderPicking, wonderPick] = useTransaction(wonderPickTransaction);
+  const [, updateLastViewedWonderPickAt] = useTransaction(
+    updateLastViewedWonderPickAtTransaction,
+  );
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
+
+  useEffect(() => {
+    updateLastViewedWonderPickAt(user.uid);
+  }, [updateLastViewedWonderPickAt, user.uid]);
 
   if (binder.isLoading || packs.isLoading || profiles.isLoading) {
     return <>Loading...</>;
