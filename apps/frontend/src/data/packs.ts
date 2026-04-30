@@ -1,8 +1,6 @@
 import { shuffle } from "../lib/random";
 import { findCardByCode, getCardsInSet, type CardMetadata } from "./cards";
 
-export const POINTS_PER_PACK = 5;
-
 interface Pack {
   code: string;
   name: string;
@@ -13,6 +11,30 @@ interface Pack {
 }
 
 export const ALL_PACKS: Pack[] = [
+  {
+    code: "MP1",
+    name: "McDonald's Promotional Cards",
+    cost: 200,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl: "https://ms.yugipedia.com//1/11/MP1-PromoEN-Checklist.png",
+  },
   {
     code: "LOB",
     name: "Legend of Blue Eyes White Dragon",
@@ -143,7 +165,7 @@ export const ALL_PACKS: Pack[] = [
   {
     code: "DDS",
     name: "Yu-Gi-Oh! Dark Duel Stories",
-    cost: 800,
+    cost: 2400,
     rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
     godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
     imageUrl:

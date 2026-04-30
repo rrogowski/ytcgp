@@ -49,7 +49,6 @@ export const Packs: React.FC = () => {
         style={{
           alignItems: "center",
           display: "flex",
-          gap: "0.5rem",
           justifyContent: "center",
         }}
       >
@@ -61,12 +60,13 @@ export const Packs: React.FC = () => {
                 alignItems: "center",
                 display: "flex",
                 flexDirection: "column",
+                padding: "0.25rem",
                 width: "33.33%",
               }}
             >
               <img
                 src={pack.imageUrl}
-                style={{ height: "auto", width: "100%" }}
+                style={{ aspectRatio: 1 / 2, width: "100%" }}
               ></img>
               <div style={{ display: "flex", gap: "0.25rem", width: "100%" }}>
                 <button
@@ -76,14 +76,14 @@ export const Packs: React.FC = () => {
                   style={{ flexGrow: 1, width: "50%" }}
                   onClick={() => handleBuyPack(user, pack.code)}
                 >
-                  Buy (¥{pack.cost})
+                  Buy<br></br>(¥{pack.cost})
                 </button>
                 <button
                   disabled={isBuyingPack}
                   style={{ flexGrow: 1, width: "50%" }}
                   onClick={() => router.navigate(`/craft?code=${pack.code}`)}
                 >
-                  Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
+                  Craft<br></br>({pointsWallet.data?.[pack.code] ?? 0} ₱)
                 </button>
               </div>
             </div>

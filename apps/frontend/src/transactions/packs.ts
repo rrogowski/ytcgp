@@ -1,6 +1,6 @@
 import type { User } from "firebase/auth";
 import { doc, Timestamp } from "firebase/firestore";
-import { findPackByCode, generatePack, POINTS_PER_PACK } from "../data/packs";
+import { findPackByCode, generatePack } from "../data/packs";
 import { executeTransaction } from "../lib/firestore";
 import { shuffle } from "../lib/random";
 import { bindersRef } from "../models/binder";
@@ -41,8 +41,9 @@ export const buyPackTransaction = async (user: User, code: string) => {
       t.set(binderRef, binderUpdate);
     }
 
+    const packPoints = pack.cost / 100;
     const walletUpdate = {
-      [code]: (pointsWallet?.[code] ?? 0) + POINTS_PER_PACK,
+      [code]: (pointsWallet?.[code] ?? 0) + packPoints,
     };
     if (pointsWallet) {
       t.update(pointsWalletRef, walletUpdate);
