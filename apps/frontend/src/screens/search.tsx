@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
-import { ALL_CARDS } from "../data/cards";
+import { getCardsInExpansion } from "../data/cards";
+import { ALL_EXPANSIONS } from "../data/expansions";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
 import { bindersRef } from "../models/binder";
@@ -41,9 +42,13 @@ export const Search: React.FC = () => {
     setLevelCeiling("");
   };
 
-  const filteredCards = ALL_CARDS.filter((card) => {
-    return name ? card.name.toLowerCase().includes(name.toLowerCase()) : true;
-  })
+  const filteredCards = ALL_EXPANSIONS.map((expansion) =>
+    getCardsInExpansion(expansion.name),
+  )
+    .flat()
+    .filter((card) => {
+      return name ? card.name.toLowerCase().includes(name.toLowerCase()) : true;
+    })
     .filter((card) => {
       return cardType ? card.cardType === cardType : true;
     })
