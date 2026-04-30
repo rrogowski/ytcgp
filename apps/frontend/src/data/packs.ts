@@ -1,8 +1,6 @@
 import { shuffle } from "../lib/random";
 import { findCardByCode, getCardsInSet, type CardMetadata } from "./cards";
 
-export const POINTS_PER_PACK = 5;
-
 interface Pack {
   code: string;
   name: string;
@@ -118,7 +116,7 @@ export const ALL_PACKS: Pack[] = [
   {
     code: "SDY",
     name: "Starter Deck: Yugi",
-    cost: 350,
+    cost: 300,
     rarityTable: [
       [{ rarity: "Common", odds: 1 / 1 }],
       [{ rarity: "Common", odds: 1 / 1 }],
@@ -142,7 +140,7 @@ export const ALL_PACKS: Pack[] = [
   {
     code: "SDK",
     name: "Starter Deck: Kaiba",
-    cost: 350,
+    cost: 300,
     rarityTable: [
       [{ rarity: "Common", odds: 1 / 1 }],
       [{ rarity: "Common", odds: 1 / 1 }],
