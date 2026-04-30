@@ -14,7 +14,7 @@ import {
 import { useTransaction } from "../lib/transaction";
 import { bindersRef } from "../models/binder";
 import { packsRef } from "../models/pack";
-import { profilesRef } from "../models/profile";
+import { profilesRef, useProfile } from "../models/profile";
 import {
   updateLastViewedWonderPickAtTransaction,
   wonderPickTransaction,
@@ -24,6 +24,7 @@ const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(20)];
 
 export const WonderPick: React.FC = () => {
   const user = useUser();
+  const myProfile = useProfile();
   const profiles = useCollection(profilesRef);
   const packs = useCollectionOnce(packsRef, RECENT_PACKS_CONSTRAINTS);
   const binder = useDocumentWithId(bindersRef, user.uid);
@@ -132,6 +133,7 @@ export const WonderPick: React.FC = () => {
                 disabled={
                   isWonderPicking ||
                   packs.isRefreshing ||
+                  (myProfile.data?.wonderPoints ?? 0) < cost ||
                   pack.data.userUid === user.uid ||
                   !!pack.data.wonderPicks?.[user.uid]
                 }
