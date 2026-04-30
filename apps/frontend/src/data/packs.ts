@@ -240,7 +240,7 @@ export const getWonderPickCost = (codes: string[], isGodPack: boolean) => {
     }
     return accumulator + getRarityWonderPickCost(card.rarity);
   }, 0);
-  return Math.round(cost);
+  return Math.round(cost) || 1;
 };
 
 const getRarityWonderPickCost = (rarity: string) => {
