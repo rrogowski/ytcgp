@@ -4736,19 +4736,19 @@ export const getPackPointsCost = (code: string) => {
   const card = findCardByCode(code);
   switch (card.rarity) {
     case "Common":
-      return 35;
+      return 15 * 1;
     case "Rare":
-      return 75;
+      return 15 * 2;
     case "Super Rare":
-      return 250;
+      return 15 * 5;
     case "Ultra Rare":
-      return 600;
+      return 15 * 12;
     case "Secret Rare":
-      return 1200;
+      return 15 * 24;
     case "Short Print":
-      return 1500;
+      return 15 * 30;
     case "Super Short Print":
-      return 3000;
+      return 15 * 60;
     default:
       return Infinity;
   }
