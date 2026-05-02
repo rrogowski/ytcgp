@@ -171,7 +171,9 @@ const MS_PER_MINUTE = 1000 * 60;
 
 const formatMsRemaining = (ms: number) => {
   const hours = Math.floor(ms / MS_PER_HOUR);
-  ms %= hours * MS_PER_HOUR;
+  if (hours > 0) {
+    ms %= hours * MS_PER_HOUR;
+  }
   const minutes = Math.floor(ms / MS_PER_MINUTE);
   return `${hours.toString().padStart(2, "0")}h ${minutes.toString().padStart(2, "0")}m`;
 };
