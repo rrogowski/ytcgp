@@ -108,6 +108,16 @@ export const Community: React.FC = () => {
                           flexDirection: "column",
                         }}
                       >
+                        <span
+                          style={{
+                            marginBottom: "0.5rem",
+                            fontSize: "0.6rem",
+                            lineHeight: "6px",
+                            opacity: grandMasterSets.includes(pack) ? 1 : 0.3,
+                          }}
+                        >
+                          👑
+                        </span>
                         <img
                           src={pack.imageUrl}
                           style={{
@@ -118,16 +128,6 @@ export const Community: React.FC = () => {
                           }}
                           onClick={() => showPackProgress(pack.code)}
                         ></img>
-                        <span
-                          style={{
-                            marginTop: "0.5rem",
-                            fontSize: "0.6rem",
-                            lineHeight: "6px",
-                            opacity: grandMasterSets.includes(pack) ? 1 : 0.3,
-                          }}
-                        >
-                          👑
-                        </span>
                       </div>
                     );
                   })}
