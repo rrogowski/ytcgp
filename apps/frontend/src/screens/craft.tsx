@@ -69,7 +69,8 @@ export const Craft: React.FC = () => {
   const costOfRemainingCards = useMemo(() => {
     return cardsToDisplay.reduce((accumulator, card) => {
       const quantity = binder.data?.[card.code] ?? 0;
-      return accumulator + getPackPointsCost(card.code) * (3 - quantity);
+      const quantityMissing = quantity > 3 ? 0 : 3 - quantity;
+      return accumulator + getPackPointsCost(card.code) * quantityMissing;
     }, 0);
   }, [binder.data, cardsToDisplay]);
 
