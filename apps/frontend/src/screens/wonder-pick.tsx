@@ -36,9 +36,22 @@ export const WonderPick: React.FC = () => {
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
+  const [shouldShowOnlyNewCards, setShouldShowOnlyNewCards] = useState(true);
+
   const wonderPacks = useMemo(() => {
-    return packs.docs.filter((p) => p.data.userUid !== user.uid);
-  }, [packs.docs, user.uid]);
+    return packs.docs.filter((p) => {
+      if (p.data.userUid === user.uid) {
+        return false;
+      }
+      if (
+        shouldShowOnlyNewCards &&
+        p.data.codes.every((code) => (binder.data?.[code] ?? 0) >= 3)
+      ) {
+        return false;
+      }
+      return true;
+    });
+  }, [binder.data, packs.docs, user.uid, shouldShowOnlyNewCards]);
 
   useEffect(() => {
     updateLastViewedWonderPickAt(user.uid);
@@ -85,6 +98,16 @@ export const WonderPick: React.FC = () => {
       <button disabled={packs.isReloading} onClick={handleReload}>
         Reload
       </button>
+      <div style={{ display: "flex" }}>
+        <input
+          type="checkbox"
+          checked={shouldShowOnlyNewCards}
+          onChange={(event) =>
+            setShouldShowOnlyNewCards(event.currentTarget.checked)
+          }
+        ></input>
+        Only Show New Cards?
+      </div>
       <div
         style={{
           alignItems: "center",
