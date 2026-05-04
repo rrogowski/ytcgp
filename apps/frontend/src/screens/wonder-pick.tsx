@@ -118,6 +118,7 @@ export const WonderPick: React.FC = () => {
               >
                 {pack.data.codes.map((code) => {
                   const card = findCardByCode(code);
+                  const quantity = binder.data?.[code] ?? 0;
                   const isWonderPick =
                     pack.data.wonderPicks?.[user.uid] === code;
                   return (
@@ -127,9 +128,33 @@ export const WonderPick: React.FC = () => {
                         alignItems: "center",
                         display: "flex",
                         flexDirection: "column",
+                        position: "relative",
                         width: "110px",
                       }}
                     >
+                      <span
+                        style={{
+                          zIndex: 500,
+                          alignItems: "center",
+                          backgroundColor:
+                            quantity === 0
+                              ? "red"
+                              : quantity < 3
+                                ? "orange"
+                                : "black",
+                          borderRadius: "0.25rem",
+                          bottom: 0,
+                          color: "white",
+                          display: "flex",
+                          height: "1.5rem",
+                          justifyContent: "center",
+                          position: "absolute",
+                          right: 0,
+                          width: "1.5rem",
+                        }}
+                      >
+                        {quantity}
+                      </span>
                       <Card
                         imageUrl={card.imageUrl}
                         border={`dashed ${isWonderPick ? "red" : "transparent"} 3px`}
