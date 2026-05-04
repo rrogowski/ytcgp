@@ -1,5 +1,5 @@
 import { limit, orderBy, Timestamp } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
@@ -36,6 +36,10 @@ export const WonderPick: React.FC = () => {
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
+  const wonderPacks = useMemo(() => {
+    return packs.docs.filter((p) => p.data.userUid !== user.uid);
+  }, [packs.docs, user.uid]);
+
   useEffect(() => {
     updateLastViewedWonderPickAt(user.uid);
   }, [updateLastViewedWonderPickAt, user.uid]);
@@ -61,17 +65,26 @@ export const WonderPick: React.FC = () => {
     await packs.refresh();
   };
 
+  const handleReload = async () => {
+    await updateLastViewedWonderPickAt(user.uid);
+    await packs.reload();
+  };
+
   return (
     <div
       style={{
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
+        gap: "0.25rem",
         height: "100%",
         position: "relative",
       }}
     >
       <CardPreview imageUrl={previewImageUrl}></CardPreview>
+      <button disabled={packs.isReloading} onClick={handleReload}>
+        Reload
+      </button>
       <div
         style={{
           alignItems: "center",
@@ -82,7 +95,7 @@ export const WonderPick: React.FC = () => {
           overflow: "auto",
         }}
       >
-        {packs.docs.map((pack) => {
+        {wonderPacks.map((pack) => {
           const profile = profiles.docs.find((d) => d.id === pack.data.userUid);
           const cost = getWonderPickCost(
             pack.data.codes,
@@ -133,6 +146,7 @@ export const WonderPick: React.FC = () => {
                 disabled={
                   isWonderPicking ||
                   packs.isRefreshing ||
+                  packs.isReloading ||
                   (myProfile.data?.wonderPoints ?? 0) < cost ||
                   pack.data.userUid === user.uid ||
                   !!pack.data.wonderPicks?.[user.uid]

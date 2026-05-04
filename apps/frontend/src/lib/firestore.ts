@@ -92,6 +92,7 @@ export const useCollectionOnce = <T>(
 ) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isReloading, setIsReloading] = useState(false);
   const [docs, setDocs] = useState<{ id: string; data: T }[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
@@ -110,22 +111,33 @@ export const useCollectionOnce = <T>(
     }
   }, [docs, ref]);
 
+  const loadData = useCallback(async () => {
+    try {
+      const snapshot = await getDocs(query(ref, ...(constraints ?? [])));
+      setError(null);
+      setDocs(snapshot.docs.map((d) => ({ id: d.id, data: d.data() })));
+      setIsLoading(false);
+    } catch (error) {
+      setError(error as Error);
+      setDocs([]);
+      setIsLoading(false);
+    }
+  }, [constraints, ref]);
+
+  const reload = useCallback(async () => {
+    setIsReloading(true);
+    try {
+      await loadData();
+      setIsReloading(false);
+    } catch (error) {
+      setError(error as Error);
+      setIsReloading(false);
+    }
+  }, [loadData]);
+
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const snapshot = await getDocs(query(ref, ...(constraints ?? [])));
-        setError(null);
-        setDocs(snapshot.docs.map((d) => ({ id: d.id, data: d.data() })));
-        setIsLoading(false);
-      } catch (error) {
-        setError(error as Error);
-        setDocs([]);
-        setIsLoading(false);
-      }
-    };
-
     loadData();
-  }, [ref, constraints]);
+  }, [loadData]);
 
-  return { isLoading, isRefreshing, error, docs, refresh };
+  return { isLoading, isRefreshing, isReloading, error, docs, refresh, reload };
 };

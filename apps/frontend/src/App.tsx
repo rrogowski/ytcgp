@@ -119,7 +119,7 @@ const TopNavigationBar: React.FC = () => {
           <button onClick={() => router.navigate("/wonder-pick")}>
             Wonder<br></br>Pick
           </button>
-          {wonderPicks.hasNewPicks && router.path !== "/wonder-pick" && (
+          {wonderPicks.hasNewPicks && (
             <span
               style={{
                 backgroundColor: "red",
