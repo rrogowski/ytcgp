@@ -36,23 +36,23 @@ export const WonderPick: React.FC = () => {
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
-  const [shouldShowOnlyMissingPlaysets, setShouldShowOnlyMissingPlaysets] =
-    useState(true);
+  // const [shouldShowOnlyMissingPlaysets, setShouldShowOnlyMissingPlaysets] =
+  //   useState(true);
 
   const wonderPacks = useMemo(() => {
     return packs.docs.filter((p) => {
       if (p.data.userUid === user.uid) {
         return false;
       }
-      if (
-        shouldShowOnlyMissingPlaysets &&
-        p.data.codes.every((code) => (binder.data?.[code] ?? 0) >= 3)
-      ) {
-        return false;
-      }
+      // if (
+      //   shouldShowOnlyMissingPlaysets &&
+      //   p.data.codes.every((code) => (binder.data?.[code] ?? 0) >= 3)
+      // ) {
+      //   return false;
+      // }
       return true;
     });
-  }, [binder.data, packs.docs, user.uid, shouldShowOnlyMissingPlaysets]);
+  }, [binder.data, packs.docs, user.uid]);
 
   useEffect(() => {
     updateLastViewedWonderPickAt(user.uid);
@@ -99,7 +99,7 @@ export const WonderPick: React.FC = () => {
       <button disabled={packs.isReloading} onClick={handleReload}>
         Reload
       </button>
-      <div style={{ display: "flex" }}>
+      {/* <div style={{ display: "flex" }}>
         <input
           type="checkbox"
           checked={shouldShowOnlyMissingPlaysets}
@@ -108,7 +108,7 @@ export const WonderPick: React.FC = () => {
           }
         ></input>
         Only Show Missing Playsets?
-      </div>
+      </div> */}
       <div
         style={{
           alignItems: "center",
