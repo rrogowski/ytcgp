@@ -20,7 +20,7 @@ import {
   wonderPickTransaction,
 } from "../transactions/packs";
 
-const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(20)];
+const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(50)];
 
 export const WonderPick: React.FC = () => {
   const user = useUser();
