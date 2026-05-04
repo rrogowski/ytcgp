@@ -21,9 +21,10 @@ export const Packs: React.FC = () => {
   const [expansionName, setExpansionName] = useState(ALL_EXPANSIONS[0].name);
 
   const handleBuyPack = async (user: User, code: string) => {
-    const cards = await buyPack(user, code);
+    const [cards, newCards] = await buyPack(user, code);
     const codes = cards.map((card) => card.code).join(",");
-    router.navigate(`/pack?codes=${codes}`);
+    const newCodes = newCards.map((card) => card.code).join(",");
+    router.navigate(`/pack?codes=${codes}&newCodes=${newCodes}`);
   };
 
   return (

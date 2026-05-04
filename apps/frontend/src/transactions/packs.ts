@@ -30,9 +30,12 @@ export const buyPackTransaction = async (user: User, code: string) => {
 
     const binderRef = doc(bindersRef, user.uid);
     const binder = (await t.get(binderRef)).data();
-    const binderUpdate = cards.reduce((accumulator, card) => {
-      return { ...accumulator, [card.code]: (binder?.[card.code] ?? 0) + 1 };
-    }, {});
+    const binderUpdate = cards.reduce(
+      (accumulator, card) => {
+        return { ...accumulator, [card.code]: (binder?.[card.code] ?? 0) + 1 };
+      },
+      {} as Record<string, number>,
+    );
 
     t.update(profileRef, { money: profile.money - pack.cost });
     if (binder) {
@@ -58,7 +61,8 @@ export const buyPackTransaction = async (user: User, code: string) => {
       userUid: user.uid,
     });
 
-    return cards;
+    const newCards = cards.filter((c) => binderUpdate[c.code] === 1);
+    return [cards, newCards] as const;
   });
 };
 
