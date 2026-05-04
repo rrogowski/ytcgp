@@ -66,6 +66,13 @@ export const Craft: React.FC = () => {
     return filteredCards;
   }, [filteredCards, hideUncraftableCards, pointsWallet.data, packCode]);
 
+  const costOfRemainingCards = useMemo(() => {
+    return cardsToDisplay.reduce((accumulator, card) => {
+      const quantity = binder.data?.[card.code] ?? 0;
+      return accumulator + getPackPointsCost(card.code) * (3 - quantity);
+    }, 0);
+  }, [binder.data, cardsToDisplay]);
+
   return (
     <div
       style={{
@@ -97,6 +104,7 @@ export const Craft: React.FC = () => {
         ></input>
         Hide Uncraftable?
       </div>
+      <span>Cost of Remaining Cards: {costOfRemainingCards} ₱</span>
       <div
         style={{
           display: "flex",
