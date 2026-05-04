@@ -31,7 +31,6 @@ export const useDocumentWithId = <T>(
   collectionRef: CollectionReference<T>,
   id: string,
 ) => {
-  const [isFromCache, setIsFromCache] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
@@ -41,7 +40,6 @@ export const useDocumentWithId = <T>(
     const unsubscribe = onSnapshot(
       ref,
       (snapshot) => {
-        setIsFromCache(snapshot.metadata.fromCache);
         setError(null);
         setData(snapshot.data() ?? null);
         setIsLoading(false);
@@ -56,7 +54,7 @@ export const useDocumentWithId = <T>(
     return unsubscribe;
   }, [collectionRef, id]);
 
-  return { isFromCache, isLoading, error, data };
+  return { isLoading, error, data };
 };
 
 export const useCollection = <T>(
