@@ -36,7 +36,8 @@ export const WonderPick: React.FC = () => {
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
-  const [shouldShowOnlyNewCards, setShouldShowOnlyNewCards] = useState(true);
+  const [shouldShowOnlyMissingPlaysets, setShouldShowOnlyMissingPlaysets] =
+    useState(true);
 
   const wonderPacks = useMemo(() => {
     return packs.docs.filter((p) => {
@@ -44,14 +45,14 @@ export const WonderPick: React.FC = () => {
         return false;
       }
       if (
-        shouldShowOnlyNewCards &&
+        shouldShowOnlyMissingPlaysets &&
         p.data.codes.every((code) => (binder.data?.[code] ?? 0) >= 3)
       ) {
         return false;
       }
       return true;
     });
-  }, [binder.data, packs.docs, user.uid, shouldShowOnlyNewCards]);
+  }, [binder.data, packs.docs, user.uid, shouldShowOnlyMissingPlaysets]);
 
   useEffect(() => {
     updateLastViewedWonderPickAt(user.uid);
@@ -101,12 +102,12 @@ export const WonderPick: React.FC = () => {
       <div style={{ display: "flex" }}>
         <input
           type="checkbox"
-          checked={shouldShowOnlyNewCards}
+          checked={shouldShowOnlyMissingPlaysets}
           onChange={(event) =>
-            setShouldShowOnlyNewCards(event.currentTarget.checked)
+            setShouldShowOnlyMissingPlaysets(event.currentTarget.checked)
           }
         ></input>
-        Only Show New Cards?
+        Only Show Missing Playsets?
       </div>
       <div
         style={{
