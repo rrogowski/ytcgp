@@ -12,7 +12,7 @@ import {
   useDocumentWithId,
 } from "../lib/firestore";
 import { useTransaction } from "../lib/transaction";
-import { bindersRef } from "../models/binder";
+import { type BinderModel, bindersRef } from "../models/binder";
 import { packsRef } from "../models/pack";
 import { profilesRef, useProfile } from "../models/profile";
 import {
@@ -28,6 +28,9 @@ export const WonderPick: React.FC = () => {
   const profiles = useCollection(profilesRef);
   const packs = useCollectionOnce(packsRef, RECENT_PACKS_CONSTRAINTS);
   const binder = useDocumentWithId(bindersRef, user.uid);
+  const [binderSnapshot, setBinderSnapshot] = useState<BinderModel | null>(
+    null,
+  );
 
   const [isWonderPicking, wonderPick] = useTransaction(wonderPickTransaction);
   const [, updateLastViewedWonderPickAt] = useTransaction(
@@ -36,27 +39,33 @@ export const WonderPick: React.FC = () => {
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
-  // const [shouldShowOnlyMissingPlaysets, setShouldShowOnlyMissingPlaysets] =
-  //   useState(true);
+  const [shouldShowOnlyMissingPlaysets, setShouldShowOnlyMissingPlaysets] =
+    useState(true);
 
   const wonderPacks = useMemo(() => {
     return packs.docs.filter((p) => {
       if (p.data.userUid === user.uid) {
         return false;
       }
-      // if (
-      //   shouldShowOnlyMissingPlaysets &&
-      //   p.data.codes.every((code) => (binder.data?.[code] ?? 0) >= 3)
-      // ) {
-      //   return false;
-      // }
+      if (
+        shouldShowOnlyMissingPlaysets &&
+        !p.data.codes.some((code) => (binderSnapshot?.[code] ?? 0) < 3)
+      ) {
+        return false;
+      }
       return true;
     });
-  }, [binder.data, packs.docs, user.uid]);
+  }, [binderSnapshot, packs.docs, user.uid, shouldShowOnlyMissingPlaysets]);
 
   useEffect(() => {
     updateLastViewedWonderPickAt(user.uid);
   }, [updateLastViewedWonderPickAt, user.uid]);
+
+  useEffect(() => {
+    if (binderSnapshot === null) {
+      setBinderSnapshot(binder.data);
+    }
+  }, [binder.data, binderSnapshot]);
 
   if (binder.isLoading || packs.isLoading || profiles.isLoading) {
     return <>Loading...</>;
@@ -82,6 +91,14 @@ export const WonderPick: React.FC = () => {
   const handleReload = async () => {
     await updateLastViewedWonderPickAt(user.uid);
     await packs.reload();
+    setBinderSnapshot(binder.data);
+  };
+
+  const handleOnlyShowMissingPlaysetsChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setShouldShowOnlyMissingPlaysets(event.currentTarget.checked);
+    setBinderSnapshot(binder.data);
   };
 
   return (
@@ -99,16 +116,14 @@ export const WonderPick: React.FC = () => {
       <button disabled={packs.isReloading} onClick={handleReload}>
         Reload
       </button>
-      {/* <div style={{ display: "flex" }}>
+      <div style={{ display: "flex" }}>
         <input
           type="checkbox"
           checked={shouldShowOnlyMissingPlaysets}
-          onChange={(event) =>
-            setShouldShowOnlyMissingPlaysets(event.currentTarget.checked)
-          }
+          onChange={handleOnlyShowMissingPlaysetsChange}
         ></input>
         Only Show Missing Playsets?
-      </div> */}
+      </div>
       <div
         style={{
           alignItems: "center",
