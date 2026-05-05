@@ -134,6 +134,7 @@ export const WonderPick: React.FC = () => {
           overflow: "auto",
         }}
       >
+        {wonderPacks.length === 0 && <>No wonder picks available.</>}
         {wonderPacks.map((pack) => {
           const profile = profiles.docs.find((d) => d.id === pack.data.userUid);
           const cost = getWonderPickCost(
