@@ -1,8 +1,10 @@
 import favicon from "./images/logo.png";
+import { useAllowance } from "./lib/allowance";
 import { useAuth, useUser } from "./lib/auth";
 import { useDocumentWithId } from "./lib/firestore";
 import { useRouter } from "./lib/router";
 import { useTransaction } from "./lib/transaction";
+import { useWonderPicks } from "./lib/wonder-picks";
 import { pointsWalletsRef } from "./models/points-wallet";
 import { useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
@@ -14,8 +16,6 @@ import { Search } from "./screens/search";
 import { WonderPick } from "./screens/wonder-pick";
 import { claimAllowanceTransaction } from "./transactions/allowance";
 
-import { useAllowance } from "./lib/allowance";
-import { useWonderPicks } from "./lib/wonder-picks";
 import "./styles.css";
 
 const App: React.FC = () => {
