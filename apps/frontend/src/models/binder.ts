@@ -22,6 +22,24 @@ export const getTotalCards = (binder: BinderModel | null) => {
   }, 0);
 };
 
+export const getTotalUniques = (binder: BinderModel | null) => {
+  if (!binder) {
+    return 0;
+  }
+  return Object.entries(binder).reduce((accumulator, [, quantity]) => {
+    return accumulator + (quantity > 0 ? 1 : 0);
+  }, 0);
+};
+
+export const getTotalPlaysets = (binder: BinderModel | null) => {
+  if (!binder) {
+    return 0;
+  }
+  return Object.entries(binder).reduce((accumulator, [, quantity]) => {
+    return accumulator + (quantity >= 3 ? 1 : 0);
+  }, 0);
+};
+
 export const getTotalBinderValue = (binder: BinderModel | null) => {
   if (!binder) {
     return 0;

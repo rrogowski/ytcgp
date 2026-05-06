@@ -1,6 +1,5 @@
 import { limit, orderBy, Timestamp } from "firebase/firestore";
-import { useState } from "react";
-import { Fragment } from "react/jsx-runtime";
+import { Fragment, useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { findCardByCode, getCardsInSet } from "../data/cards";
@@ -14,6 +13,8 @@ import {
   getMasterSets,
   getTotalBinderValue,
   getTotalCards,
+  getTotalPlaysets,
+  getTotalUniques,
 } from "../models/binder";
 import { packsRef } from "../models/pack";
 import { profilesRef } from "../models/profile";
@@ -59,84 +60,96 @@ export const Community: React.FC = () => {
   return (
     <div
       style={{
-        alignItems: "center",
         display: "flex",
         flexDirection: "column",
         height: "100%",
         gap: "0.75rem",
         position: "relative",
+        width: "100%",
       }}
     >
       <CardPreview imageUrl={previewImageUrl}></CardPreview>
       <h3>Collection Stats</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th># Cards</th>
-            <th>Binder Value</th>
-            <th>Achievements</th>
-          </tr>
-        </thead>
-        <tbody>
-          {profiles.docs.map((profile) => {
-            const binder = binders.docs.find((d) => d.id === profile.id);
-            const masterSets = getMasterSets(binder?.data ?? null);
-            const grandMasterSets = getGrandMasterSets(binder?.data ?? null);
-            return (
-              <tr key={profile.id}>
-                <td>{profile.data.displayName}</td>
-                <td>{getTotalCards(binder?.data ?? null)}</td>
-                <td>¥{getTotalBinderValue(binder?.data ?? null)}</td>
-                <td
-                  style={{
-                    alignItems: "center",
-                    borderLeft: "none",
-                    display: "flex",
-                    gap: "0.75rem",
-                    height: "100%",
-                    justifyContent: "center",
-                  }}
-                >
-                  {achievementPacks.map((pack) => {
-                    return (
-                      <div
-                        key={pack.code}
-                        style={{
-                          alignItems: "center",
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <span
+      <div>
+        <table
+          style={{
+            margin: "0 auto",
+            width: "100%",
+            textWrap: "nowrap",
+          }}
+        >
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th># Cards</th>
+              <th># Uniques</th>
+              <th># Playsets</th>
+              <th>Binder Value</th>
+              <th>Achievements</th>
+            </tr>
+          </thead>
+          <tbody>
+            {profiles.docs.map((profile) => {
+              const binder = binders.docs.find((d) => d.id === profile.id);
+              const masterSets = getMasterSets(binder?.data ?? null);
+              const grandMasterSets = getGrandMasterSets(binder?.data ?? null);
+              return (
+                <tr key={profile.id}>
+                  <td>{profile.data.displayName}</td>
+                  <td>{getTotalCards(binder?.data ?? null)}</td>
+                  <td>{getTotalUniques(binder?.data ?? null)}</td>
+                  <td>{getTotalPlaysets(binder?.data ?? null)}</td>
+                  <td>¥{getTotalBinderValue(binder?.data ?? null)}</td>
+                  <td
+                    style={{
+                      alignItems: "center",
+                      borderLeft: "none",
+                      display: "flex",
+                      gap: "0.75rem",
+                      height: "100%",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {achievementPacks.map((pack) => {
+                      return (
+                        <div
+                          key={pack.code}
                           style={{
-                            marginBottom: "0.5rem",
-                            fontSize: "0.6rem",
-                            lineHeight: "6px",
-                            opacity: grandMasterSets.includes(pack) ? 1 : 0.3,
+                            alignItems: "center",
+                            display: "flex",
+                            flexDirection: "column",
                           }}
                         >
-                          👑
-                        </span>
-                        <img
-                          src={pack.imageUrl}
-                          style={{
-                            cursor: "pointer",
-                            height: "2rem",
-                            opacity: masterSets.includes(pack) ? 1 : 0.3,
-                            transform: "scale(1.3)",
-                          }}
-                          onClick={() => showPackProgress(pack.code)}
-                        ></img>
-                      </div>
-                    );
-                  })}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                          <span
+                            style={{
+                              marginBottom: "0.5rem",
+                              fontSize: "0.6rem",
+                              lineHeight: "6px",
+                              opacity: grandMasterSets.includes(pack) ? 1 : 0.3,
+                            }}
+                          >
+                            👑
+                          </span>
+                          <img
+                            src={pack.imageUrl}
+                            style={{
+                              cursor: "pointer",
+                              height: "2rem",
+                              opacity: masterSets.includes(pack) ? 1 : 0.3,
+                              transform: "scale(1.3)",
+                            }}
+                            onClick={() => showPackProgress(pack.code)}
+                          ></img>
+                        </div>
+                      );
+                    })}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <h3>Recent Packs</h3>
       <div>
         <span>Player: </span>
