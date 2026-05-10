@@ -6,7 +6,10 @@ const RELEASED_SET_NAMES = [
   // "Starter Deck: Yugi",
   // "Starter Deck: Kaiba",
   // "Yu-Gi-Oh! Dark Duel Stories",
-  "McDonald's Promotional Cards",
+  // "McDonald's Promotional Cards",
+  // "Metal Raiders",
+  // "Spell Ruler",
+  "Tournament Pack: 1st Season",
 ];
 
 const sets = JSON.parse(

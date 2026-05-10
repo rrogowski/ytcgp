@@ -12,6 +12,137 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "TP1",
+    name: "Tournament Pack: 1st Season",
+    cost: 300,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl: "https://ms.yugipedia.com//f/f5/TP1-BoosterNA.png",
+  },
+  {
+    code: "MRD",
+    name: "Metal Raiders",
+    cost: 500,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl:
+      "https://ms.yugipedia.com//5/5d/MRD-BoosterEN-25thAnniversaryEdition.png",
+  },
+  {
+    code: "SRL",
+    name: "Spell Ruler",
+    cost: 500,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl:
+      "https://ms.yugipedia.com//f/f2/SRL-BoosterEN-25thAnniversaryEdition.png",
+  },
+  {
     code: "MP1",
     name: "McDonald's Promotional Cards",
     cost: 200,
@@ -63,51 +194,51 @@ export const ALL_PACKS: Pack[] = [
       [
         { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
+        { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
         { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
+        { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
         { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
+        { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
         { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
+        { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
         { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
+        { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
         { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
+        { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
         { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
-      ],
-      [
-        { rarity: "Super Short Print", odds: 2 / 60 },
-        { rarity: "Short Print", odds: 2 / 30 },
-        { rarity: "Secret Rare", odds: 2 / 24 },
-        { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
+        { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
         { rarity: "Super Short Print", odds: 2 / 60 },
         { rarity: "Short Print", odds: 2 / 30 },
         { rarity: "Secret Rare", odds: 2 / 24 },
         { rarity: "Ultra Rare", odds: 2 / 12 },
-        { rarity: "Super Rare", odds: 1 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
       ],
     ],
     imageUrl:
@@ -171,22 +302,6 @@ export const ALL_PACKS: Pack[] = [
     imageUrl:
       "https://ms.yugipedia.com//thumb/6/69/DDS-VideoGame-NA.jpg/514px-DDS-VideoGame-NA.jpg",
   },
-  // {
-  //   code: "MRD",
-  //   name: "Metal Raiders",
-  //   cost: 500,
-  //   rarityTable: STANDARD_PACK_RARITY_TABLE,
-  //   imageUrl:
-  //     "https://ms.yugipedia.com//5/5d/MRD-BoosterEN-25thAnniversaryEdition.png",
-  // },
-  // {
-  //   code: "SRL",
-  //   name: "Spell Ruler",
-  //   cost: 500,
-  //   rarityTable: STANDARD_PACK_RARITY_TABLE,
-  //   imageUrl:
-  //     "https://ms.yugipedia.com//f/f2/SRL-BoosterEN-25thAnniversaryEdition.png",
-  // },
 ];
 
 export const findPackByCode = (code: string) => {

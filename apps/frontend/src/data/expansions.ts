@@ -1,6 +1,7 @@
 import { findPackByCode } from "./packs";
 
 export const ALL_EXPANSIONS = [
+  // { name: "Mechanical Dominion", codes: ["MRD", "TP1", "SRL"] },
   { name: "Rivals Clash", codes: ["SDY", "SDK", "DDS"] },
   { name: "Genesis", codes: ["LOB", "MP1"] },
 ];
