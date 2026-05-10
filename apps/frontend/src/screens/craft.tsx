@@ -24,7 +24,7 @@ export const Craft: React.FC = () => {
 
   const [isCrafting, craft] = useTransaction(craftTransaction);
 
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState("incomplete");
   const [hideUncraftableCards, setHideUncraftableCards] = useState(false);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
