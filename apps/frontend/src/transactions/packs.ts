@@ -9,6 +9,7 @@ import { pointsWalletsRef } from "../models/points-wallet";
 import { profilesRef } from "../models/profile";
 
 const GOD_PACK_CHANCE = 1 / 2555;
+export const YEN_PER_PACK_POINT = 25;
 
 export const buyPackTransaction = async (user: User, code: string) => {
   const isGodPack = Math.random() < GOD_PACK_CHANCE;
@@ -119,5 +120,30 @@ export const updateLastViewedWonderPickAtTransaction = async (
     }
 
     t.update(profileRef, { lastViewedWonderPicksAt: Timestamp.now() });
+  });
+};
+
+export const convertPackPointsTransaction = async (
+  userUid: string,
+  code: string,
+) => {
+  return executeTransaction(async (t) => {
+    const profileRef = doc(profilesRef, userUid);
+    const profile = (await t.get(profileRef)).data();
+    if (!profile) {
+      throw Error(`profile does not exist: ${userUid}`);
+    }
+
+    const pointsWalletRef = doc(pointsWalletsRef, userUid);
+    const pointsWallet = (await t.get(pointsWalletRef)).data();
+    if (!pointsWallet) {
+      throw Error(`points wallet does not exist: ${userUid}`);
+    }
+
+    const packPoints = pointsWallet[code] ?? 0;
+    const yen = YEN_PER_PACK_POINT * packPoints;
+
+    t.update(profileRef, { money: profile.money + yen });
+    t.update(pointsWalletRef, { [code]: 0 });
   });
 };

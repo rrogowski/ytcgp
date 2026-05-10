@@ -8,7 +8,11 @@ import { useTransaction } from "../lib/transaction";
 import { bindersRef, getGrandMasterSets } from "../models/binder";
 import { pointsWalletsRef } from "../models/points-wallet";
 import { useProfile } from "../models/profile";
-import { buyPackTransaction } from "../transactions/packs";
+import {
+  buyPackTransaction,
+  convertPackPointsTransaction,
+  YEN_PER_PACK_POINT,
+} from "../transactions/packs";
 
 export const Packs: React.FC = () => {
   const router = useRouter();
@@ -19,6 +23,9 @@ export const Packs: React.FC = () => {
   const pointsWallet = useDocumentWithId(pointsWalletsRef, user.uid);
 
   const [isBuyingPack, buyPack] = useTransaction(buyPackTransaction);
+  const [isConvertingPackPoints, convertPackPoints] = useTransaction(
+    convertPackPointsTransaction,
+  );
 
   const [expansionName, setExpansionName] = useState(ALL_EXPANSIONS[0].name);
 
@@ -27,6 +34,15 @@ export const Packs: React.FC = () => {
     const codes = cards.map((card) => card.code).join(",");
     const newCodes = newCards.map((card) => card.code).join(",");
     router.navigate(`/pack?codes=${codes}&newCodes=${newCodes}`);
+  };
+
+  const handleConvertPackPoints = async (code: string) => {
+    const packPoints = pointsWallet.data?.[code] ?? 0;
+    const yen = packPoints * YEN_PER_PACK_POINT;
+    if (!confirm(`Convert ${packPoints} ₱ (${code}) into ¥${yen}?`)) {
+      return;
+    }
+    await convertPackPoints(user.uid, code);
   };
 
   const grandMasterSets = getGrandMasterSets(binder.data);
@@ -91,19 +107,26 @@ export const Packs: React.FC = () => {
                     </>
                   )}
                 </button>
-                <button
-                  disabled={isBuyingPack || grandMasterSets.includes(pack)}
-                  style={{ flexGrow: 1, width: "50%" }}
-                  onClick={() => router.navigate(`/craft?code=${pack.code}`)}
-                >
-                  {grandMasterSets.includes(pack) ? (
-                    <span style={{ lineHeight: "2rem" }}>👑</span>
-                  ) : (
-                    <>
-                      Craft<br></br>({pointsWallet.data?.[pack.code] ?? 0} ₱)
-                    </>
-                  )}
-                </button>
+                {grandMasterSets.includes(pack) ? (
+                  <button
+                    disabled={
+                      (pointsWallet.data?.[pack.code] ?? 0) === 0 ||
+                      isConvertingPackPoints
+                    }
+                    style={{ flexGrow: 1, lineHeight: "2rem", width: "50%" }}
+                    onClick={() => handleConvertPackPoints(pack.code)}
+                  >
+                    👑
+                  </button>
+                ) : (
+                  <button
+                    disabled={isBuyingPack}
+                    style={{ flexGrow: 1, width: "50%" }}
+                    onClick={() => router.navigate(`/craft?code=${pack.code}`)}
+                  >
+                    Craft<br></br>({pointsWallet.data?.[pack.code] ?? 0} ₱)
+                  </button>
+                )}
               </div>
             </div>
           );
