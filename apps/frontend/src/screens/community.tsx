@@ -145,17 +145,20 @@ export const Community: React.FC = () => {
                               marginBottom: "0.5rem",
                               fontSize: "0.6rem",
                               lineHeight: "6px",
-                              opacity: grandMasterSets.includes(pack) ? 1 : 0.3,
                             }}
                           >
-                            👑
+                            {grandMasterSets.includes(pack) ? (
+                              <>👑</>
+                            ) : (
+                              <>&nbsp;</>
+                            )}
                           </span>
                           <img
                             src={pack.imageUrl}
                             style={{
                               cursor: "pointer",
                               height: "2rem",
-                              opacity: masterSets.includes(pack) ? 1 : 0.3,
+                              opacity: masterSets.includes(pack) ? 1 : 0.2,
                               transform: "scale(1.3)",
                             }}
                             onClick={() => showPackProgress(pack.code)}
