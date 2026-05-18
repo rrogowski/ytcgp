@@ -28,7 +28,10 @@ export const Pack: React.FC = () => {
         position: "relative",
       }}
     >
-      <CardPreview imageUrl={previewImageUrl}></CardPreview>
+      <CardPreview
+        imageUrl={previewImageUrl}
+        onClick={() => setPreviewImageUrl("")}
+      ></CardPreview>
       {codes.map((code) => {
         const card = findCardByCode(code);
         const isNew = newCodes.includes(code);
@@ -58,10 +61,9 @@ export const Pack: React.FC = () => {
               </span>
             )}
             <Card
-              imageUrl={card.imageUrl}
+              imageUrl={card.thumbnailUrl}
               height="9rem"
-              onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
-              onPreviewEnd={() => setPreviewImageUrl("")}
+              onClick={() => setPreviewImageUrl(card.imageUrl)}
             ></Card>
           </div>
         );

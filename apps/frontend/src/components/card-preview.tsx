@@ -2,6 +2,7 @@ import { Card } from "./card";
 
 interface Props {
   imageUrl: string;
+  onClick?: () => void;
 }
 
 export const CardPreview: React.FC<Props> = (props) => {
@@ -19,6 +20,7 @@ export const CardPreview: React.FC<Props> = (props) => {
         position: "absolute",
         zIndex: 1000,
       }}
+      onClick={props.onClick}
     >
       <Card imageUrl={props.imageUrl} height="100%"></Card>
     </div>

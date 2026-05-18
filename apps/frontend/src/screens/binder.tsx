@@ -109,7 +109,10 @@ export const Binder: React.FC = () => {
         position: "relative",
       }}
     >
-      <CardPreview imageUrl={previewImageUrl}></CardPreview>
+      <CardPreview
+        imageUrl={previewImageUrl}
+        onClick={() => setPreviewImageUrl("")}
+      ></CardPreview>
       <div
         style={{
           display: "flex",
@@ -196,6 +199,7 @@ export const Binder: React.FC = () => {
           gap: "0.3rem",
           justifyContent: "center",
           overflow: "auto",
+          width: "100%",
         }}
       >
         {cardsToDisplay.length === 0 && <>No cards to display.</>}
@@ -204,16 +208,19 @@ export const Binder: React.FC = () => {
           return (
             <div
               key={card.code}
-              style={{ display: "flex", flexDirection: "column" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "110px",
+              }}
             >
               <div
                 style={{
                   alignItems: "center",
                   display: "flex",
                   flexDirection: "column",
-                  height: "10rem",
+                  height: "8rem",
                   position: "relative",
-                  width: "130px",
                 }}
               >
                 {shouldShowQuantities && (
@@ -248,10 +255,10 @@ export const Binder: React.FC = () => {
                       }}
                     >
                       <Card
-                        imageUrl={card.imageUrl}
+                        height="8rem"
+                        imageUrl={card.thumbnailUrl}
                         opacity={quantity > 2 - i ? 1 : 0.3}
-                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
-                        onPreviewEnd={() => setPreviewImageUrl("")}
+                        onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
                     </div>
                   );

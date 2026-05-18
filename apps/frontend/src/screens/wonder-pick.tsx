@@ -112,7 +112,10 @@ export const WonderPick: React.FC = () => {
         position: "relative",
       }}
     >
-      <CardPreview imageUrl={previewImageUrl}></CardPreview>
+      <CardPreview
+        imageUrl={previewImageUrl}
+        onClick={() => setPreviewImageUrl("")}
+      ></CardPreview>
       <button disabled={packs.isReloading} onClick={handleReload}>
         Reload
       </button>
@@ -196,12 +199,11 @@ export const WonderPick: React.FC = () => {
                         {quantity}
                       </span>
                       <Card
-                        imageUrl={card.imageUrl}
+                        imageUrl={card.thumbnailUrl}
                         border={`dashed ${isWonderPick ? "red" : "transparent"} 3px`}
                         height="9rem"
                         opacity={(binder.data?.[code] ?? 0) > 0 ? 1 : 0.3}
-                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
-                        onPreviewEnd={() => setPreviewImageUrl("")}
+                        onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
                     </div>
                   );

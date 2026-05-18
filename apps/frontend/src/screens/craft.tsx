@@ -85,7 +85,10 @@ export const Craft: React.FC = () => {
         position: "relative",
       }}
     >
-      <CardPreview imageUrl={previewImageUrl}></CardPreview>
+      <CardPreview
+        imageUrl={previewImageUrl}
+        onClick={() => setPreviewImageUrl("")}
+      ></CardPreview>
       <div style={{ alignItems: "center", display: "flex", gap: "0.25rem" }}>
         Filter:{" "}
         <select
@@ -143,10 +146,9 @@ export const Craft: React.FC = () => {
                       }}
                     >
                       <Card
-                        imageUrl={card.imageUrl}
+                        imageUrl={card.thumbnailUrl}
                         opacity={quantity > 2 - i ? 1 : 0.3}
-                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
-                        onPreviewEnd={() => setPreviewImageUrl("")}
+                        onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
                     </div>
                   );

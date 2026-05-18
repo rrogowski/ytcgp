@@ -111,7 +111,10 @@ export const Search: React.FC = () => {
         position: "relative",
       }}
     >
-      <CardPreview imageUrl={previewImageUrl}></CardPreview>
+      <CardPreview
+        imageUrl={previewImageUrl}
+        onClick={() => setPreviewImageUrl("")}
+      ></CardPreview>
       <div
         style={{
           display: "flex",
@@ -316,11 +319,10 @@ export const Search: React.FC = () => {
                     }}
                   >
                     <Card
-                      imageUrl={card.imageUrl}
+                      imageUrl={card.thumbnailUrl}
                       height="8.5rem"
                       opacity={quantity > 2 - i ? 1 : 0.3}
-                      onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
-                      onPreviewEnd={() => setPreviewImageUrl("")}
+                      onClick={() => setPreviewImageUrl(card.imageUrl)}
                     ></Card>
                   </div>
                 );

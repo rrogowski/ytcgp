@@ -7,6 +7,7 @@ import { ALL_EXPANSIONS } from "../data/expansions";
 import { findPackByCode } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection } from "../lib/firestore";
+import { useTransaction } from "../lib/transaction";
 import {
   bindersRef,
   getGrandMasterSets,
@@ -18,6 +19,7 @@ import {
 } from "../models/binder";
 import { packsRef } from "../models/pack";
 import { profilesRef } from "../models/profile";
+import { giveStimulusTransaction } from "../transactions/stimulus";
 
 const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(20)];
 
@@ -31,6 +33,8 @@ export const Community: React.FC = () => {
   const packs = useCollection(packsRef, RECENT_PACKS_CONSTRAINTS);
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
+
+  const [, giveStimulus] = useTransaction(giveStimulusTransaction);
 
   if (binders.isLoading || packs.isLoading || profiles.isLoading) {
     return <>Loading...</>;
@@ -68,8 +72,24 @@ export const Community: React.FC = () => {
         width: "100%",
       }}
     >
-      <CardPreview imageUrl={previewImageUrl}></CardPreview>
+      <CardPreview
+        imageUrl={previewImageUrl}
+        onClick={() => setPreviewImageUrl("")}
+      ></CardPreview>
       <h3>Collection Stats</h3>
+      {user.displayName === "Roman Rogowski" && (
+        <button
+          onClick={() =>
+            giveStimulus(
+              profiles.docs.map((d) => d.id),
+              0,
+              0,
+            )
+          }
+        >
+          Give Stimulus
+        </button>
+      )}
       <div>
         <table
           style={{
@@ -218,10 +238,9 @@ export const Community: React.FC = () => {
                       }}
                     >
                       <Card
-                        imageUrl={card.imageUrl}
+                        imageUrl={card.thumbnailUrl}
                         height="9rem"
-                        onPreviewStart={() => setPreviewImageUrl(card.imageUrl)}
-                        onPreviewEnd={() => setPreviewImageUrl("")}
+                        onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
                     </div>
                   );
