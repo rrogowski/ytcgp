@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
+import { CardRarity } from "../components/card-rarity";
 import { findCardByCode } from "../data/cards";
 import { getWonderPickCost } from "../data/packs";
 import { useUser } from "../lib/auth";
@@ -200,11 +201,14 @@ export const WonderPick: React.FC = () => {
                       </span>
                       <Card
                         imageUrl={card.thumbnailUrl}
-                        border={`dashed ${isWonderPick ? "red" : "transparent"} 3px`}
+                        border={isWonderPick ? "dashed red 3px" : ""}
                         height="9rem"
                         opacity={(binder.data?.[code] ?? 0) > 0 ? 1 : 0.3}
                         onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
+                      <span style={{ position: "absolute", bottom: "-.75rem" }}>
+                        <CardRarity rarity={card.rarity}></CardRarity>
+                      </span>
                     </div>
                   );
                 })}

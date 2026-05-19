@@ -2,6 +2,7 @@ import { limit, orderBy, Timestamp } from "firebase/firestore";
 import { Fragment, useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
+import { CardRarity } from "../components/card-rarity";
 import { findCardByCode, getCardsInSet } from "../data/cards";
 import { ALL_EXPANSIONS } from "../data/expansions";
 import { findPackByCode } from "../data/packs";
@@ -237,6 +238,7 @@ export const Community: React.FC = () => {
                         alignItems: "center",
                         display: "flex",
                         flexDirection: "column",
+                        position: "relative",
                         width: "110px",
                       }}
                     >
@@ -245,6 +247,9 @@ export const Community: React.FC = () => {
                         height="9rem"
                         onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
+                      <span style={{ position: "absolute", bottom: "-.75rem" }}>
+                        <CardRarity rarity={card.rarity}></CardRarity>
+                      </span>
                     </div>
                   );
                 })}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
+import { CardRarity } from "../components/card-rarity";
 import { findCardByCode } from "../data/cards";
 import { useRouter } from "../lib/router";
 
@@ -65,6 +66,9 @@ export const Pack: React.FC = () => {
               height="9rem"
               onClick={() => setPreviewImageUrl(card.imageUrl)}
             ></Card>
+            <span style={{ position: "absolute", bottom: "-.75rem" }}>
+              <CardRarity rarity={card.rarity}></CardRarity>
+            </span>
           </div>
         );
       })}

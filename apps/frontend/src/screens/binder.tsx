@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
+import { CardRarity } from "../components/card-rarity";
 import {
   getCardsInExpansion,
   getDisenchantValue,
@@ -197,6 +198,7 @@ export const Binder: React.FC = () => {
           flexGrow: 1,
           flexWrap: "wrap",
           gap: "0.3rem",
+          rowGap: "0.8rem",
           justifyContent: "center",
           overflow: "auto",
           width: "100%",
@@ -263,6 +265,9 @@ export const Binder: React.FC = () => {
                     </div>
                   );
                 })}
+                <span style={{ position: "absolute", bottom: "-.75rem" }}>
+                  <CardRarity rarity={card.rarity}></CardRarity>
+                </span>
               </div>
               {shouldShowQuantities && userUid === user.uid && (
                 <button

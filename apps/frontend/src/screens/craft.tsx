@@ -2,6 +2,7 @@ import type { User } from "firebase/auth";
 import { useMemo, useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
+import { CardRarity } from "../components/card-rarity";
 import {
   getCardsInSet,
   getPackPointsCost,
@@ -130,6 +131,7 @@ export const Craft: React.FC = () => {
                   display: "flex",
                   flexDirection: "column",
                   height: "10rem",
+                  marginBottom: "1rem",
                   position: "relative",
                   width: "130px",
                 }}
@@ -153,13 +155,16 @@ export const Craft: React.FC = () => {
                     </div>
                   );
                 })}
+                <span style={{ position: "absolute", bottom: "-.75rem" }}>
+                  <CardRarity rarity={card.rarity}></CardRarity>
+                </span>
               </div>
               <button
                 disabled={
                   isCrafting ||
                   (pointsWallet.data?.[packCode] ?? 0) < pointsCost
                 }
-                style={{ width: "100%" }}
+                style={{ marginBottom: "1rem", width: "100%" }}
                 onClick={() => handleCraft(user, card)}
               >
                 Craft ({pointsCost} ₱)
