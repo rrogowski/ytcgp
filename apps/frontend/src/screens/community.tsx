@@ -49,9 +49,12 @@ export const Community: React.FC = () => {
       const ownedCards = cards.filter((card) => {
         return (binder?.data[card.code] ?? 0) > 0;
       });
-      return `${profile.data.displayName}: ${ownedCards.length} / ${cards.length}`;
+      const ownedPlaysets = cards.filter((card) => {
+        return (binder?.data[card.code] ?? 0) >= 3;
+      });
+      return `${profile.data.displayName}: ${ownedCards.length} uniques | ${ownedPlaysets.length} playsets`;
     });
-    alert([`${pack.name}\n`, ...lines].join("\n"));
+    alert([`${pack.name} (${cards.length} total)\n`, ...lines].join("\n"));
   };
 
   const filteredPacks = packs.docs.filter((pack) => {
