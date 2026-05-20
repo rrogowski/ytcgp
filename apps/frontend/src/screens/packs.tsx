@@ -1,5 +1,6 @@
 import type { User } from "firebase/auth";
 import { useState } from "react";
+import { ui } from "../components/ui";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
@@ -48,15 +49,14 @@ export const Packs: React.FC = () => {
   const grandMasterSets = getGrandMasterSets(binder.data);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        justifyContent: "center",
-      }}
+    <ui.div
+      display="flex"
+      flexDirection="column"
+      height="100%"
+      justifyContent="center"
+      width="100%"
     >
-      <div style={{ display: "flex", justifyContent: "end" }}>
+      <ui.div display="flex" justifyContent="end">
         <select
           value={expansionName}
           onChange={(event) => setExpansionName(event.currentTarget.value)}
@@ -65,73 +65,76 @@ export const Packs: React.FC = () => {
             return <option key={expansion.name}>{expansion.name}</option>;
           })}
         </select>
-      </div>
-      <div
-        style={{
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-        }}
+      </ui.div>
+      <ui.div
+        alignItems="center"
+        display="flex"
+        justifyContent="center"
+        width="100%"
       >
         {getExpansionPacks(expansionName).map((pack) => {
           return (
-            <div
+            <ui.div
               key={pack.code}
-              style={{
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-                padding: "0.25rem",
-                width: "33.33%",
-              }}
+              alignItems="center"
+              display="flex"
+              flexDirection="column"
+              padding="0.25rem"
+              width="33.33%"
             >
               <img
                 src={pack.imageUrl}
                 style={{ aspectRatio: 1 / 2, width: "100%" }}
               ></img>
-              <div style={{ display: "flex", gap: "0.25rem", width: "100%" }}>
-                <button
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.25rem",
+                  marginTop: "0.5rem",
+                  width: "100%",
+                }}
+              >
+                <ui.button
                   disabled={
                     isBuyingPack ||
                     (profile.data?.money ?? 0) < pack.cost ||
                     grandMasterSets.includes(pack)
                   }
-                  style={{ flexGrow: 1, width: "50%" }}
+                  lineHeight="2rem"
                   onClick={() => handleBuyPack(user, pack.code)}
                 >
                   {grandMasterSets.includes(pack) ? (
-                    <span style={{ lineHeight: "2rem" }}>👑</span>
+                    <ui.span>👑</ui.span>
                   ) : (
-                    <>
-                      Buy<br></br>(¥{pack.cost})
-                    </>
+                    <ui.span>Buy (¥{pack.cost})</ui.span>
                   )}
-                </button>
+                </ui.button>
                 {grandMasterSets.includes(pack) ? (
-                  <button
+                  <ui.button
                     disabled={
                       (pointsWallet.data?.[pack.code] ?? 0) === 0 ||
                       isConvertingPackPoints
                     }
-                    style={{ flexGrow: 1, lineHeight: "2rem", width: "50%" }}
+                    lineHeight="2rem"
                     onClick={() => handleConvertPackPoints(pack.code)}
                   >
                     👑
-                  </button>
+                  </ui.button>
                 ) : (
-                  <button
+                  <ui.button
                     disabled={isBuyingPack}
-                    style={{ flexGrow: 1, width: "50%" }}
+                    lineHeight="2rem"
                     onClick={() => router.navigate(`/craft?code=${pack.code}`)}
                   >
-                    Craft<br></br>({pointsWallet.data?.[pack.code] ?? 0} ₱)
-                  </button>
+                    Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
+                  </ui.button>
                 )}
               </div>
-            </div>
+            </ui.div>
           );
         })}
-      </div>
-    </div>
+      </ui.div>
+    </ui.div>
   );
 };
