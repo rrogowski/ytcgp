@@ -93,12 +93,7 @@ const App: React.FC = () => {
       </ui.div>
       <ui.div display="flex" flexGrow={1} overflow="auto">
         <Navbar type="desktop"></Navbar>
-        <ui.div
-          backgroundColor="#efecea"
-          border="dashed green 1px"
-          padding="0.5rem"
-          flexGrow={1}
-        >
+        <ui.div backgroundColor="#efecea" padding="0.5rem" flexGrow={1}>
           <View></View>
         </ui.div>
       </ui.div>
