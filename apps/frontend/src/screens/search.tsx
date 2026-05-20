@@ -23,6 +23,7 @@ export const Search: React.FC = () => {
   const [defCeiling, setDefCeiling] = useState("");
   const [levelFloor, setLevelFloor] = useState("");
   const [levelCeiling, setLevelCeiling] = useState("");
+  const [rarity, setRarity] = useState("");
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
@@ -96,6 +97,9 @@ export const Search: React.FC = () => {
     })
     .filter((card) => {
       return levelCeiling ? (card.level ?? 0) <= Number(levelCeiling) : true;
+    })
+    .filter((card) => {
+      return rarity ? card.rarity === rarity : true;
     })
     .sort((a, b) => {
       return a.name.localeCompare(b.name);
@@ -262,6 +266,19 @@ export const Search: React.FC = () => {
             style={{ width: "35px" }}
             onChange={(event) => setLevelCeiling(event.currentTarget.value)}
           ></input>
+          <select
+            value={rarity}
+            onChange={(event) => setRarity(event.currentTarget.value)}
+          >
+            <option value="">Rarity</option>
+            <option value="Common">⬥</option>
+            <option value="Rare">⬥⬥</option>
+            <option value="Short Print">⬥⬥⬥</option>
+            <option value="Super Short Print">⬥⬥⬥⬥</option>
+            <option value="Super Rare">★</option>
+            <option value="Ultra Rare">★★</option>
+            <option value="Secret Rare">★★★</option>
+          </select>
         </div>
       </div>
       <div
