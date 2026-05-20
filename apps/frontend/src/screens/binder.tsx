@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { CardRarity } from "../components/card-rarity";
+import { FullPageText } from "../components/full-page-text";
 import {
   getCardsInExpansion,
   getDisenchantValue,
@@ -97,7 +98,7 @@ export const Binder: React.FC = () => {
   };
 
   if (binder.isLoading) {
-    return <>Loading...</>;
+    return <FullPageText>Loading...</FullPageText>;
   }
 
   return (

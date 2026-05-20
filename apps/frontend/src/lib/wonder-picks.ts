@@ -3,20 +3,20 @@ import { useMemo } from "react";
 import { bindersRef } from "../models/binder";
 import { packsRef } from "../models/pack";
 import { useProfile } from "../models/profile";
-import { useUser } from "./auth";
-import { useCollection, useDocumentWithId } from "./firestore";
+import { useAuth } from "./auth";
+import { PENDING_ID, useCollection, useDocumentWithId } from "./firestore";
 
 const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(20)];
 
 export const useWonderPicks = () => {
-  const user = useUser();
+  const auth = useAuth();
   const profile = useProfile();
-  const binder = useDocumentWithId(bindersRef, user.uid);
+  const binder = useDocumentWithId(bindersRef, auth.user?.uid ?? PENDING_ID);
   const packs = useCollection(packsRef, RECENT_PACKS_CONSTRAINTS);
 
   const wonderPacks = useMemo(() => {
-    return packs.docs.filter((p) => p.data.userUid !== user.uid);
-  }, [packs.docs, user.uid]);
+    return packs.docs.filter((p) => p.data.userUid !== auth.user?.uid);
+  }, [packs.docs, auth.user]);
 
   const hasNewPicks = useMemo(() => {
     if (!profile.data || wonderPacks.length === 0) {

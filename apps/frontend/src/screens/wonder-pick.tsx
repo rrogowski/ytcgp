@@ -4,6 +4,7 @@ import { Fragment } from "react/jsx-runtime";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { CardRarity } from "../components/card-rarity";
+import { FullPageText } from "../components/full-page-text";
 import { findCardByCode } from "../data/cards";
 import { getWonderPickCost } from "../data/packs";
 import { useUser } from "../lib/auth";
@@ -69,7 +70,7 @@ export const WonderPick: React.FC = () => {
   }, [binder.data, binderSnapshot]);
 
   if (binder.isLoading || packs.isLoading || profiles.isLoading) {
-    return <>Loading...</>;
+    return <FullPageText>Loading...</FullPageText>;
   }
 
   const confirmWonderPick = async (

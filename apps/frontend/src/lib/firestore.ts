@@ -17,6 +17,8 @@ import { firebase } from "./firebase";
 
 const firestore = getFirestore(firebase);
 
+export const PENDING_ID = "pending-id";
+
 export const executeTransaction = <T>(
   updateFunction: (t: Transaction) => Promise<T>,
 ) => {
@@ -36,6 +38,9 @@ export const useDocumentWithId = <T>(
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    if (id === PENDING_ID) {
+      return;
+    }
     const ref = doc(collectionRef, id);
     const unsubscribe = onSnapshot(
       ref,

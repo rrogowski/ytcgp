@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
+import { FullPageText } from "../components/full-page-text";
 import { getCardsInExpansion } from "../data/cards";
 import { ALL_EXPANSIONS } from "../data/expansions";
 import { useUser } from "../lib/auth";
@@ -26,7 +27,7 @@ export const Search: React.FC = () => {
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
   if (binder.isLoading) {
-    return <>Loading...</>;
+    return <FullPageText>Loading...</FullPageText>;
   }
 
   const handleSetCardType = (value: string) => {

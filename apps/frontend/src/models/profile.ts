@@ -1,6 +1,10 @@
 import type { Timestamp } from "firebase/firestore";
-import { useUser } from "../lib/auth";
-import { createCollectionRef, useDocumentWithId } from "../lib/firestore";
+import { useAuth } from "../lib/auth";
+import {
+  createCollectionRef,
+  PENDING_ID,
+  useDocumentWithId,
+} from "../lib/firestore";
 
 export interface ProfileModel {
   displayName: string;
@@ -13,6 +17,6 @@ export interface ProfileModel {
 export const profilesRef = createCollectionRef<ProfileModel>("profiles");
 
 export const useProfile = () => {
-  const user = useUser();
-  return useDocumentWithId(profilesRef, user.uid);
+  const auth = useAuth();
+  return useDocumentWithId(profilesRef, auth.user?.uid ?? PENDING_ID);
 };

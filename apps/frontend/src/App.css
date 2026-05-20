@@ -1,0 +1,23 @@
+.Navbar.desktop {
+  display: none !important;
+}
+
+.Navbar {
+  button {
+    border: solid transparent 1px;
+  }
+
+  button:hover:not(:disabled) {
+    border: solid white 1px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .Navbar.desktop {
+    display: flex !important;
+  }
+
+  .Navbar.mobile {
+    display: none !important;
+  }
+}
