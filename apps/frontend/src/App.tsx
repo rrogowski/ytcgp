@@ -163,8 +163,6 @@ const View: React.FC = () => {
   const router = useRouter();
   const profile = useProfile();
 
-  console.log("auth", auth);
-
   if (auth.isAuthenticating || (auth.user !== null && profile.isLoading)) {
     return <FullPageText>Loading...</FullPageText>;
   }
