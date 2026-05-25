@@ -87,8 +87,8 @@ export const Community: React.FC = () => {
           onClick={() =>
             giveStimulus(
               profiles.docs.map((d) => d.id),
-              0,
-              0,
+              12000,
+              200,
             )
           }
         >

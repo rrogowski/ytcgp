@@ -1,9 +1,9 @@
 import type { User } from "firebase/auth";
-import { useState } from "react";
 import { ui } from "../components/ui";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
+import { useLocalStorageState } from "../lib/local-storage";
 import { useRouter } from "../lib/router";
 import { useTransaction } from "../lib/transaction";
 import { bindersRef, getGrandMasterSets } from "../models/binder";
@@ -28,7 +28,10 @@ export const Packs: React.FC = () => {
     convertPackPointsTransaction,
   );
 
-  const [expansionName, setExpansionName] = useState(ALL_EXPANSIONS[0].name);
+  const [expansionName, setExpansionName] = useLocalStorageState(
+    "packs.expansionName",
+    ALL_EXPANSIONS[0].name,
+  );
 
   const handleBuyPack = async (user: User, code: string) => {
     const [cards, newCards] = await buyPack(user, code);
@@ -54,6 +57,8 @@ export const Packs: React.FC = () => {
       flexDirection="column"
       height="100%"
       justifyContent="center"
+      margin="0 auto"
+      maxWidth="40rem"
       width="100%"
     >
       <ui.div display="flex" justifyContent="end">
