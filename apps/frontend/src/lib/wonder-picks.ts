@@ -22,18 +22,18 @@ export const useWonderPicks = () => {
     if (!profile.data || wonderPacks.length === 0) {
       return false;
     }
-    if (
-      profile.data.lastViewedWonderPicksAt &&
-      wonderPacks[0].data.createdAt.toMillis() <=
-        profile.data.lastViewedWonderPicksAt.toMillis()
-    ) {
-      return false;
-    }
-    return wonderPacks.some((pack) => {
-      return pack.data.codes.some((code) => {
-        return (binder.data?.[code] ?? 0) < 3;
+
+    return wonderPacks
+      .filter(
+        (p) =>
+          p.data.createdAt.toMillis() >
+          (profile.data?.lastViewedWonderPicksAt?.toMillis() ?? 0),
+      )
+      .some((pack) => {
+        return pack.data.codes.some((code) => {
+          return (binder.data?.[code] ?? 0) < 3;
+        });
       });
-    });
   }, [profile.data, wonderPacks, binder]);
 
   return { hasNewPicks, wonderPacks };
