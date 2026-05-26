@@ -6,6 +6,7 @@ import { FullPageText } from "../components/full-page-text";
 import {
   getCardsInExpansion,
   getDisenchantValue,
+  getThumbnailUrl,
   type CardMetadata,
 } from "../data/cards";
 import { ALL_EXPANSIONS } from "../data/expansions";
@@ -259,7 +260,7 @@ export const Binder: React.FC = () => {
                     >
                       <Card
                         height="8rem"
-                        imageUrl={card.thumbnailUrl}
+                        imageUrl={getThumbnailUrl(card)}
                         opacity={quantity > 2 - i ? 1 : 0.3}
                         onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>

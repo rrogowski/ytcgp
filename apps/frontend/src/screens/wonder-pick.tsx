@@ -5,7 +5,7 @@ import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { CardRarity } from "../components/card-rarity";
 import { FullPageText } from "../components/full-page-text";
-import { findCardByCode } from "../data/cards";
+import { findCardByCode, getThumbnailUrl } from "../data/cards";
 import { getWonderPickCost } from "../data/packs";
 import { useUser } from "../lib/auth";
 import {
@@ -201,7 +201,7 @@ export const WonderPick: React.FC = () => {
                         {quantity}
                       </span>
                       <Card
-                        imageUrl={card.thumbnailUrl}
+                        imageUrl={getThumbnailUrl(card)}
                         border={isWonderPick ? "dashed red 3px" : ""}
                         height="9rem"
                         opacity={(binder.data?.[code] ?? 0) > 0 ? 1 : 0.3}

@@ -12,7 +12,8 @@ const RELEASED_SET_NAMES = [
   // "Tournament Pack: 1st Season",
   // "Tournament Pack: 2nd Season",
   // "Pharaoh's Servant",
-  "Booster Pack Collectors Tins 2002",
+  // "Booster Pack Collectors Tins 2002",
+  "Labyrinth of Nightmare",
 ];
 
 const sets = JSON.parse(

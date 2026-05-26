@@ -6,6 +6,7 @@ import { CardRarity } from "../components/card-rarity";
 import {
   getCardsInSet,
   getPackPointsCost,
+  getThumbnailUrl,
   type CardMetadata,
 } from "../data/cards";
 import { useUser } from "../lib/auth";
@@ -148,7 +149,7 @@ export const Craft: React.FC = () => {
                       }}
                     >
                       <Card
-                        imageUrl={card.thumbnailUrl}
+                        imageUrl={getThumbnailUrl(card)}
                         opacity={quantity > 2 - i ? 1 : 0.3}
                         onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
