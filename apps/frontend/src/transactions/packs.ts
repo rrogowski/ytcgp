@@ -1,6 +1,9 @@
 import type { User } from "firebase/auth";
 import { doc, Timestamp } from "firebase/firestore";
-import { findPackByCode, generatePack } from "../data/packs";
+import {
+  generatePack,
+  getPackCostIncludingAdditionalPacks,
+} from "../data/packs";
 import { executeTransaction } from "../lib/firestore";
 import { shuffle } from "../lib/random";
 import { bindersRef } from "../models/binder";
@@ -13,7 +16,7 @@ export const YEN_PER_PACK_POINT = 25;
 
 export const buyPackTransaction = async (user: User, code: string) => {
   const isGodPack = Math.random() < GOD_PACK_CHANCE;
-  const cards = generatePack(code, isGodPack);
+  const packs = generatePack(code, isGodPack);
   return executeTransaction(async (t) => {
     const profileRef = doc(profilesRef, user.uid);
     const profile = (await t.get(profileRef)).data();
@@ -21,8 +24,8 @@ export const buyPackTransaction = async (user: User, code: string) => {
       throw Error(`profile does not exist: ${user.uid}`);
     }
 
-    const pack = findPackByCode(code);
-    if (profile.money < pack.cost) {
+    const cost = getPackCostIncludingAdditionalPacks(code);
+    if (profile.money < cost) {
       throw Error("Not enough money");
     }
 
@@ -31,21 +34,26 @@ export const buyPackTransaction = async (user: User, code: string) => {
 
     const binderRef = doc(bindersRef, user.uid);
     const binder = (await t.get(binderRef)).data();
-    const binderUpdate = cards.reduce(
+
+    const allCards = packs.flat();
+    const binderUpdate = allCards.reduce(
       (accumulator, card) => {
-        return { ...accumulator, [card.code]: (binder?.[card.code] ?? 0) + 1 };
+        return {
+          ...accumulator,
+          [card.code]: (accumulator[card.code] ?? binder?.[card.code] ?? 0) + 1,
+        };
       },
       {} as Record<string, number>,
     );
 
-    t.update(profileRef, { money: profile.money - pack.cost });
+    t.update(profileRef, { money: profile.money - cost });
     if (binder) {
       t.update(binderRef, binderUpdate);
     } else {
       t.set(binderRef, binderUpdate);
     }
 
-    const packPoints = pack.cost / 100;
+    const packPoints = cost / 100;
     const walletUpdate = {
       [code]: (pointsWallet?.[code] ?? 0) + packPoints,
     };
@@ -55,15 +63,17 @@ export const buyPackTransaction = async (user: User, code: string) => {
       t.set(pointsWalletRef, walletUpdate);
     }
 
-    t.set(doc(packsRef), {
-      codes: cards.map((card) => card.code),
-      createdAt: Timestamp.now(),
-      isGodPack,
-      userUid: user.uid,
+    packs.forEach((cardsInPack) => {
+      t.set(doc(packsRef), {
+        codes: cardsInPack.map((card) => card.code),
+        createdAt: Timestamp.now(),
+        isGodPack,
+        userUid: user.uid,
+      });
     });
 
-    const newCards = cards.filter((c) => binderUpdate[c.code] === 1);
-    return [cards, newCards] as const;
+    const newCards = allCards.filter((c) => (binder?.[c.code] ?? 0) === 0);
+    return [packs, newCards] as const;
   });
 };
 

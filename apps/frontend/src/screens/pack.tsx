@@ -10,7 +10,7 @@ export const Pack: React.FC = () => {
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
-  const codes = router.params["codes"] ? router.params["codes"].split(",") : [];
+  const codes = router.params["codes"] ? router.params["codes"].split("|") : [];
   const newCodes = router.params["newCodes"]
     ? router.params["newCodes"].split(",")
     : [];
@@ -18,57 +18,71 @@ export const Pack: React.FC = () => {
   return (
     <div
       style={{
-        alignContent: "center",
         display: "flex",
-        flexWrap: "wrap",
-        gap: "0.25rem",
+        flexDirection: "column",
         rowGap: "1rem",
         height: "100%",
-        justifyContent: "center",
+        justifyContent: codes.length === 1 ? "center" : "",
         overflow: "auto",
-        position: "relative",
       }}
     >
       <CardPreview
         imageUrl={previewImageUrl}
         onClick={() => setPreviewImageUrl("")}
       ></CardPreview>
-      {codes.map((code) => {
-        const card = findCardByCode(code);
-        const isNew = newCodes.includes(code);
+      {codes.map((packContents, i) => {
         return (
           <div
-            key={card.code}
+            key={`pack-${i}`}
             style={{
               alignItems: "center",
               display: "flex",
-              flexDirection: "column",
+              flexWrap: "wrap",
+              gap: "0.25rem",
+              justifyContent: "center",
               position: "relative",
-              width: "110px",
             }}
           >
-            {isNew && (
-              <span
-                style={{
-                  backgroundColor: "gold",
-                  borderRadius: "0.25rem",
-                  padding: "0.25rem 0.4rem",
-                  right: "0.1rem",
-                  top: "-0.25rem",
-                  position: "absolute",
-                }}
-              >
-                New
-              </span>
-            )}
-            <Card
-              imageUrl={card.thumbnailUrl}
-              height="9rem"
-              onClick={() => setPreviewImageUrl(card.imageUrl)}
-            ></Card>
-            <span style={{ position: "absolute", bottom: "-.75rem" }}>
-              <CardRarity rarity={card.rarity}></CardRarity>
-            </span>
+            {i > 0 && <hr style={{ width: "100%" }}></hr>}
+            {packContents.split(",").map((code) => {
+              const card = findCardByCode(code);
+              const isNew = newCodes.includes(code);
+              return (
+                <div
+                  key={card.code}
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                    position: "relative",
+                    width: "110px",
+                  }}
+                >
+                  {isNew && (
+                    <span
+                      style={{
+                        backgroundColor: "gold",
+                        borderRadius: "0.25rem",
+                        padding: "0.25rem 0.4rem",
+                        right: "0.1rem",
+                        top: "-0.25rem",
+                        position: "absolute",
+                      }}
+                    >
+                      New
+                    </span>
+                  )}
+                  <Card
+                    imageUrl={card.thumbnailUrl}
+                    height="9rem"
+                    onClick={() => setPreviewImageUrl(card.imageUrl)}
+                  ></Card>
+                  <span style={{ position: "absolute", bottom: "-.75rem" }}>
+                    <CardRarity rarity={card.rarity}></CardRarity>
+                  </span>
+                </div>
+              );
+            })}
           </div>
         );
       })}

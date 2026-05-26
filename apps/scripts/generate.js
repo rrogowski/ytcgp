@@ -9,7 +9,10 @@ const RELEASED_SET_NAMES = [
   // "McDonald's Promotional Cards",
   // "Metal Raiders",
   // "Spell Ruler",
-  "Tournament Pack: 1st Season",
+  // "Tournament Pack: 1st Season",
+  // "Tournament Pack: 2nd Season",
+  // "Pharaoh's Servant",
+  "Booster Pack Collectors Tins 2002",
 ];
 
 const sets = JSON.parse(
@@ -51,7 +54,7 @@ const main = () => {
       cardsMetadata.push({
         code: `${locale.prefix}${instance.suffix}`,
         name: card.text.en.name,
-        imageUrl: locale.cardImages.unlimited[instance.id] ?? null,
+        imageUrl: locale.cardImages.unlimited?.[instance.id] ?? null,
 
         cardType: card.cardType,
         subcategory: card.subcategory,

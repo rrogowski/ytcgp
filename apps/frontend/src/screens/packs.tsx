@@ -1,6 +1,7 @@
 import type { User } from "firebase/auth";
 import { ui } from "../components/ui";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
+import { getPackCostIncludingAdditionalPacks } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
 import { useLocalStorageState } from "../lib/local-storage";
@@ -35,7 +36,9 @@ export const Packs: React.FC = () => {
 
   const handleBuyPack = async (user: User, code: string) => {
     const [cards, newCards] = await buyPack(user, code);
-    const codes = cards.map((card) => card.code).join(",");
+    const codes = cards
+      .map((pack) => pack.map((card) => card.code).join(","))
+      .join("|");
     const newCodes = newCards.map((card) => card.code).join(",");
     router.navigate(`/pack?codes=${codes}&newCodes=${newCodes}`);
   };
@@ -78,6 +81,7 @@ export const Packs: React.FC = () => {
         width="100%"
       >
         {getExpansionPacks(expansionName).map((pack) => {
+          const cost = getPackCostIncludingAdditionalPacks(pack.code);
           return (
             <ui.div
               key={pack.code}
@@ -103,7 +107,7 @@ export const Packs: React.FC = () => {
                 <ui.button
                   disabled={
                     isBuyingPack ||
-                    (profile.data?.money ?? 0) < pack.cost ||
+                    (profile.data?.money ?? 0) < cost ||
                     grandMasterSets.includes(pack)
                   }
                   lineHeight="2rem"
@@ -112,7 +116,7 @@ export const Packs: React.FC = () => {
                   {grandMasterSets.includes(pack) ? (
                     <ui.span>👑</ui.span>
                   ) : (
-                    <ui.span>Buy (¥{pack.cost})</ui.span>
+                    <ui.span>Buy (¥{cost})</ui.span>
                   )}
                 </ui.button>
                 {grandMasterSets.includes(pack) ? (

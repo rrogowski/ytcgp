@@ -8,9 +8,88 @@ interface Pack {
   rarityTable: { rarity: string; odds: number }[][];
   godPackRarityTable: { rarity: string; odds: number }[][];
   imageUrl: string;
+  additionalPacksCodes?: string[];
 }
 
 export const ALL_PACKS: Pack[] = [
+  {
+    code: "BPTV1",
+    name: "2002 Collectible Tin",
+    cost: 1100,
+    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    imageUrl:
+      "https://static.wikia.nocookie.net/yugioh/images/e/e4/BPT-PromoEN-2002.png",
+    additionalPacksCodes: ["LOB", "LOB", "MRD", "MRD", "SRL"],
+  },
+  {
+    code: "PSV",
+    name: "Pharaoh's Servant",
+    cost: 500,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl:
+      "https://ms.yugipedia.com//e/ed/PSV-BoosterEN-25thAnniversaryEdition.png",
+  },
+  {
+    code: "TP2",
+    name: "Tournament Pack: 2nd Season",
+    cost: 300,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl: "https://ms.yugipedia.com//9/99/TP2-BoosterNA.png",
+  },
   {
     code: "TP1",
     name: "Tournament Pack: 1st Season",
@@ -312,7 +391,10 @@ export const findPackByCode = (code: string) => {
   return pack;
 };
 
-export const generatePack = (code: string, isGodPack: boolean) => {
+export const generatePack = (
+  code: string,
+  isGodPack: boolean,
+): CardMetadata[][] => {
   const pack = findPackByCode(code);
   let cards = shuffle(getCardsInSet(code));
   const rarityTable = isGodPack ? pack.godPackRarityTable : pack.rarityTable;
@@ -336,7 +418,11 @@ export const generatePack = (code: string, isGodPack: boolean) => {
     cards = cards.filter((c) => c !== card);
   }
 
-  return result;
+  const additionalPacks = (pack.additionalPacksCodes ?? [])
+    .map((c) => generatePack(c, isGodPack))
+    .flat();
+
+  return [result, ...additionalPacks];
 };
 
 export const getWonderPickCost = (codes: string[], isGodPack: boolean) => {
@@ -349,7 +435,7 @@ export const getWonderPickCost = (codes: string[], isGodPack: boolean) => {
     if (!entry) {
       throw Error(`no rarity table entry found for card: ${card.name}`);
     }
-    if (isGodPack) {
+    if (isGodPack || pack.additionalPacksCodes) {
       const cost = 1 + getRarityWonderPickCost(card.rarity);
       return cost > accumulator ? cost : accumulator;
     }
@@ -377,4 +463,15 @@ const getRarityWonderPickCost = (rarity: string) => {
     default:
       throw Error(`unknown rarity: ${rarity}`);
   }
+};
+
+export const getPackCostIncludingAdditionalPacks = (code: string) => {
+  const pack = findPackByCode(code);
+
+  return (
+    pack.cost +
+    (pack.additionalPacksCodes ?? []).reduce((accumulator, c) => {
+      return accumulator + findPackByCode(c).cost;
+    }, 0)
+  );
 };
