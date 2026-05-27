@@ -87,8 +87,8 @@ export const Community: React.FC = () => {
           onClick={() =>
             giveStimulus(
               profiles.docs.map((d) => d.id),
-              12000,
-              200,
+              3000,
+              50,
             )
           }
         >
@@ -249,6 +249,7 @@ export const Community: React.FC = () => {
                       <Card
                         imageUrl={card.thumbnailUrl}
                         height="9rem"
+                        isPartOfGodPack={pack.data.isGodPack}
                         onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
                       <span style={{ position: "absolute", bottom: "-.75rem" }}>
