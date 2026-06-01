@@ -83,17 +83,30 @@ export const Community: React.FC = () => {
       ></CardPreview>
       <h3>Collection Stats</h3>
       {user.displayName === "Roman Rogowski" && (
-        <button
-          onClick={() =>
-            giveStimulus(
-              profiles.docs.map((d) => d.id),
-              12000,
-              200,
-            )
-          }
-        >
-          Give Stimulus
-        </button>
+        <>
+          <button
+            onClick={() =>
+              giveStimulus(
+                profiles.docs.map((d) => d.id),
+                3000,
+                25,
+              )
+            }
+          >
+            Give Duel Reward
+          </button>
+          <button
+            onClick={() =>
+              giveStimulus(
+                profiles.docs.map((d) => d.id),
+                12000,
+                100,
+              )
+            }
+          >
+            Give Stimulus
+          </button>
+        </>
       )}
       <div>
         <table
