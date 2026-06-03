@@ -24,7 +24,7 @@ export interface CardMetadata {
   def?: number;
 }
 
-export const ALL_CARDS: CardMetadata[] = [
+const ALL_CARDS: CardMetadata[] = [
   {
     code: "BPTV1-001",
     name: "Dark Magician",

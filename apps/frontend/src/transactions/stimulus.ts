@@ -2,8 +2,6 @@ import { doc } from "firebase/firestore";
 import { executeTransaction } from "../lib/firestore";
 import { profilesRef } from "../models/profile";
 
-export const DISENCHANT_MIN_COPIES = 3;
-
 export const giveStimulusTransaction = async (
   profileIds: string[],
   yen: number,

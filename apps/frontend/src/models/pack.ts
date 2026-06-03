@@ -1,7 +1,7 @@
 import type { Timestamp } from "firebase/firestore";
 import { createCollectionRef } from "../lib/firestore";
 
-export interface PackModel {
+interface PackModel {
   codes: string[];
   createdAt: Timestamp;
   isGodPack?: boolean;
