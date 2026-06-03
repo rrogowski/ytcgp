@@ -1,4 +1,4 @@
-import { limit, orderBy, Timestamp } from "firebase/firestore";
+import { limit, orderBy, Timestamp, where } from "firebase/firestore";
 import { Fragment, useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
@@ -24,6 +24,11 @@ import { profilesRef } from "../models/profile";
 import { giveStimulusTransaction } from "../transactions/stimulus";
 
 const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(20)];
+const RECENT_GOD_PACKS_CONSTRAINTS = [
+  where("isGodPack", "==", true),
+  orderBy("createdAt", "desc"),
+  limit(20),
+];
 
 export const Community: React.FC = () => {
   const user = useUser();
@@ -31,6 +36,7 @@ export const Community: React.FC = () => {
   const profiles = useCollection(profilesRef);
 
   const packs = useCollection(packsRef, RECENT_PACKS_CONSTRAINTS);
+  const godPacks = useCollection(packsRef, RECENT_GOD_PACKS_CONSTRAINTS);
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
@@ -187,64 +193,158 @@ export const Community: React.FC = () => {
           </tbody>
         </table>
       </div>
-      <h3>Recent Packs</h3>
       <div
         style={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          gap: "1rem",
-          overflow: "auto",
-          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          overflow: "hidden",
+          textAlign: "center",
         }}
       >
-        {packs.docs.map((pack) => {
-          const profile = profiles.docs.find((d) => d.id === pack.data.userUid);
-          return (
-            <Fragment key={pack.id}>
-              <hr style={{ width: "100%" }}></hr>
-              <span>
-                {profile?.data.displayName} | {formatDate(pack.data.createdAt)}
-              </span>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "0.25rem",
-                  rowGap: "1rem",
-                  justifyContent: "center",
-                }}
-              >
-                {pack.data.codes.map((code) => {
-                  const card = findCardByCode(code);
-                  return (
-                    <div
-                      key={code}
-                      style={{
-                        alignItems: "center",
-                        display: "flex",
-                        flexDirection: "column",
-                        position: "relative",
-                        width: "110px",
-                      }}
-                    >
-                      <Card
-                        imageUrl={card.thumbnailUrl}
-                        height="9rem"
-                        isPartOfGodPack={pack.data.isGodPack}
-                        onClick={() => setPreviewImageUrl(card.imageUrl)}
-                      ></Card>
-                      <span style={{ position: "absolute", bottom: "-.75rem" }}>
-                        <CardRarity rarity={card.rarity}></CardRarity>
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </Fragment>
-          );
-        })}
+        <h3>Recent Packs</h3>
+        <h3>
+          Recent{" "}
+          <span
+            style={{
+              background:
+                "linear-gradient(to right, #ef5350, #f57c00, #fbc02d, #388e3c, #1976d2, #7b1fa2)",
+              backgroundClip: "text",
+              color: "transparent",
+              fontWeight: "bold",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            God
+          </span>{" "}
+          Packs
+        </h3>
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+            gap: "1rem",
+            overflow: "auto",
+            width: "100%",
+          }}
+        >
+          {packs.docs.map((pack) => {
+            const profile = profiles.docs.find(
+              (d) => d.id === pack.data.userUid,
+            );
+            return (
+              <Fragment key={pack.id}>
+                <hr style={{ width: "100%" }}></hr>
+                <span>
+                  {profile?.data.displayName} |{" "}
+                  {formatDate(pack.data.createdAt)}
+                </span>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "0.25rem",
+                    rowGap: "1rem",
+                    justifyContent: "center",
+                  }}
+                >
+                  {pack.data.codes.map((code) => {
+                    const card = findCardByCode(code);
+                    return (
+                      <div
+                        key={code}
+                        style={{
+                          alignItems: "center",
+                          display: "flex",
+                          flexDirection: "column",
+                          position: "relative",
+                          width: "110px",
+                        }}
+                      >
+                        <Card
+                          imageUrl={card.thumbnailUrl}
+                          height="9rem"
+                          isPartOfGodPack={pack.data.isGodPack}
+                          onClick={() => setPreviewImageUrl(card.imageUrl)}
+                        ></Card>
+                        <span
+                          style={{ position: "absolute", bottom: "-.75rem" }}
+                        >
+                          <CardRarity rarity={card.rarity}></CardRarity>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Fragment>
+            );
+          })}
+        </div>
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+            gap: "1rem",
+            overflow: "auto",
+            width: "100%",
+          }}
+        >
+          {godPacks.docs.map((pack) => {
+            const profile = profiles.docs.find(
+              (d) => d.id === pack.data.userUid,
+            );
+            return (
+              <Fragment key={pack.id}>
+                <hr style={{ width: "100%" }}></hr>
+                <span>
+                  {profile?.data.displayName} |{" "}
+                  {formatDate(pack.data.createdAt)}
+                </span>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "0.25rem",
+                    rowGap: "1rem",
+                    justifyContent: "center",
+                  }}
+                >
+                  {pack.data.codes.map((code) => {
+                    const card = findCardByCode(code);
+                    return (
+                      <div
+                        key={code}
+                        style={{
+                          alignItems: "center",
+                          display: "flex",
+                          flexDirection: "column",
+                          position: "relative",
+                          width: "110px",
+                        }}
+                      >
+                        <Card
+                          imageUrl={card.thumbnailUrl}
+                          height="9rem"
+                          isPartOfGodPack={pack.data.isGodPack}
+                          onClick={() => setPreviewImageUrl(card.imageUrl)}
+                        ></Card>
+                        <span
+                          style={{ position: "absolute", bottom: "-.75rem" }}
+                        >
+                          <CardRarity rarity={card.rarity}></CardRarity>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Fragment>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
