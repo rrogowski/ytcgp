@@ -136,7 +136,7 @@ const Navbar: React.FC<{ type: "desktop" | "mobile" }> = (props) => {
             onClick={() => router.navigate(path)}
           >
             <Icon>{icon}</Icon>
-            {path === "/wonder-pick" && wonderPicks.hasNewPicks && (
+            {wonderPicks.hasNewPicks && (
               <ui.span
                 backgroundColor="red"
                 borderRadius="0.25rem"
