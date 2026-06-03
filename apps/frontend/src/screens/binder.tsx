@@ -71,17 +71,10 @@ export const Binder: React.FC = () => {
   }, [cardsToDisplay, binder.data]);
 
   const handleDisenchantAllExtras = async () => {
-    const extraCardsText = extraCards
-      .map((card) => {
-        const quantity = (binder.data?.[card.code] ?? 0) - 3;
-        const value = getDisenchantValue(card);
-        return `${card.name} x${quantity} (¥${value} each)`;
-      })
-      .join("\n");
     const totalValue = getDisenchantTotalValue(extraCards, binder.data);
     if (
       !confirm(
-        `Are you sure you want to disenchant the following cards for ¥${totalValue}?\n${extraCardsText}`,
+        `Are you sure you want to disenchant all extras for ¥${totalValue}?`,
       )
     ) {
       return;
