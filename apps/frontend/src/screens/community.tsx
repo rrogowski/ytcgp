@@ -30,8 +30,6 @@ export const Community: React.FC = () => {
   const binders = useCollection(bindersRef);
   const profiles = useCollection(profilesRef);
 
-  const [userUid, setUserUid] = useState("");
-
   const packs = useCollection(packsRef, RECENT_PACKS_CONSTRAINTS);
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
@@ -57,10 +55,6 @@ export const Community: React.FC = () => {
     });
     alert([`${pack.name} (${cards.length} total)\n`, ...lines].join("\n"));
   };
-
-  const filteredPacks = packs.docs.filter((pack) => {
-    return userUid.length > 0 ? pack.data.userUid === userUid : true;
-  });
 
   const achievementPacks = ALL_EXPANSIONS.map((expansion) =>
     expansion.codes.map(findPackByCode),
@@ -160,7 +154,7 @@ export const Community: React.FC = () => {
                         >
                           <span
                             style={{
-                              marginBottom: "0.5rem",
+                              marginBottom: "0.4rem",
                               fontSize: "0.6rem",
                               lineHeight: "6px",
                             }}
@@ -175,7 +169,7 @@ export const Community: React.FC = () => {
                             src={pack.imageUrl}
                             style={{
                               cursor: "pointer",
-                              height: "2rem",
+                              height: "1.5rem",
                               opacity: masterSets.includes(pack) ? 1 : 0.2,
                               transform: "scale(1.3)",
                             }}
@@ -192,26 +186,6 @@ export const Community: React.FC = () => {
         </table>
       </div>
       <h3>Recent Packs</h3>
-      <div>
-        <span>Player: </span>
-        <select
-          value={userUid}
-          onChange={(event) => setUserUid(event.currentTarget.value)}
-        >
-          <option value="">All Players</option>
-          <option value={user.uid}>{user.displayName}</option>
-          {profiles.docs.map((profile) => {
-            if (profile.id === user.uid) {
-              return null;
-            }
-            return (
-              <option key={profile.id} value={profile.id}>
-                {profile.data.displayName}
-              </option>
-            );
-          })}
-        </select>
-      </div>
       <div
         style={{
           alignItems: "center",
@@ -223,13 +197,7 @@ export const Community: React.FC = () => {
           width: "100%",
         }}
       >
-        {filteredPacks.length === 0 && (
-          <>
-            <hr style={{ width: "100%" }}></hr>
-            <b>No recent packs to display.</b>
-          </>
-        )}
-        {filteredPacks.map((pack) => {
+        {packs.docs.map((pack) => {
           const profile = profiles.docs.find((d) => d.id === pack.data.userUid);
           return (
             <Fragment key={pack.id}>
