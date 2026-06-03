@@ -117,6 +117,7 @@ export const Community: React.FC = () => {
               <th># Uniques</th>
               <th># Playsets</th>
               <th>Binder Value</th>
+              <th># God Packs</th>
               <th>Achievements</th>
             </tr>
           </thead>
@@ -132,6 +133,7 @@ export const Community: React.FC = () => {
                   <td>{getTotalUniques(binder?.data ?? null)}</td>
                   <td>{getTotalPlaysets(binder?.data ?? null)}</td>
                   <td>¥{getTotalBinderValue(binder?.data ?? null)}</td>
+                  <td>{profile.data.numberOfGodPacksOpened}</td>
                   <td
                     style={{
                       alignItems: "center",
