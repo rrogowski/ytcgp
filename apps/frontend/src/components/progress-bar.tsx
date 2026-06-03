@@ -12,7 +12,7 @@ export const ProgressBar: React.FC<Props> = (props) => {
   return (
     <ui.div
       backgroundColor="gray"
-      border="solid black 1px"
+      border="solid gray 1px"
       borderRadius="0.5rem"
       overflow="hidden"
       position="relative"
@@ -30,6 +30,7 @@ export const ProgressBar: React.FC<Props> = (props) => {
       <ui.div
         alignItems="center"
         display="flex"
+        fontSize="0.875rem"
         justifyContent="center"
         position="absolute"
         height="100%"

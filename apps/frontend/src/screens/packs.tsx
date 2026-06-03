@@ -147,7 +147,7 @@ export const Packs: React.FC = () => {
                   </ui.button>
                 )}
                 <ProgressBar
-                  backgroundColor="#f9ac3b"
+                  backgroundColor="#ba964a"
                   color="white"
                   currentValue={uniques.length}
                   height="1.5rem"
@@ -163,7 +163,7 @@ export const Packs: React.FC = () => {
                   {uniques.length} / {cards.length} Uniques
                 </ui.span>
                 <ProgressBar
-                  backgroundColor="#2b94d7"
+                  backgroundColor="#7d5646"
                   color="white"
                   currentValue={playsets.length}
                   height="1.5rem"
