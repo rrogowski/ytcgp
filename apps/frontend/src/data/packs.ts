@@ -13,6 +13,24 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "JMPV1",
+    name: "Shonen Jump Volumes 1 - 4",
+    cost: 800,
+    rarityTable: [
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl: "https://ms.yugipedia.com//7/73/SJ_1.1_-_back.png",
+  },
+  {
     code: "BPTV2",
     name: "2003 Collectible Tin",
     cost: 1100,
