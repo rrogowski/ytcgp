@@ -1,5 +1,7 @@
 import type { User } from "firebase/auth";
+import { ProgressBar } from "../components/progress-bar";
 import { ui } from "../components/ui";
+import { getCardsInSet } from "../data/cards";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
 import { getPackCostIncludingAdditionalPacks } from "../data/packs";
 import { useUser } from "../lib/auth";
@@ -82,6 +84,11 @@ export const Packs: React.FC = () => {
       >
         {getExpansionPacks(expansionName).map((pack) => {
           const cost = getPackCostIncludingAdditionalPacks(pack.code);
+          const cards = getCardsInSet(pack.code);
+          const uniques = cards.filter((c) => (binder.data?.[c.code] ?? 0) > 0);
+          const playsets = cards.filter(
+            (c) => (binder.data?.[c.code] ?? 0) >= 3,
+          );
           return (
             <ui.div
               key={pack.code}
@@ -139,6 +146,33 @@ export const Packs: React.FC = () => {
                     Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
                   </ui.button>
                 )}
+                <ProgressBar
+                  backgroundColor="#f9ac3b"
+                  color="white"
+                  currentValue={uniques.length}
+                  height="1.5rem"
+                  maxValue={cards.length}
+                  marginTop="0.25rem"
+                  width="100%"
+                ></ProgressBar>
+                <ui.span
+                  fontSize="0.75rem"
+                  marginBottom="0.25rem"
+                  textAlign="center"
+                >
+                  {uniques.length} / {cards.length} Uniques
+                </ui.span>
+                <ProgressBar
+                  backgroundColor="#2b94d7"
+                  color="white"
+                  currentValue={playsets.length}
+                  height="1.5rem"
+                  maxValue={cards.length}
+                  width="100%"
+                ></ProgressBar>
+                <ui.span fontSize="0.75rem" textAlign="center">
+                  {playsets.length} / {cards.length} Playsets
+                </ui.span>
               </div>
             </ui.div>
           );
