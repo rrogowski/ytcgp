@@ -37,12 +37,14 @@ export const Packs: React.FC = () => {
   );
 
   const handleBuyPack = async (user: User, code: string) => {
-    const [cards, newCards] = await buyPack(user, code);
+    const [cards, newCards, isGodPack] = await buyPack(user, code);
     const codes = cards
       .map((pack) => pack.map((card) => card.code).join(","))
       .join("|");
     const newCodes = newCards.map((card) => card.code).join(",");
-    router.navigate(`/pack?codes=${codes}&newCodes=${newCodes}`);
+    router.navigate(
+      `/pack?codes=${codes}&newCodes=${newCodes}&isGodPack=${isGodPack}`,
+    );
   };
 
   const handleConvertPackPoints = async (code: string) => {
@@ -115,12 +117,12 @@ export const Packs: React.FC = () => {
                   disabled={
                     isBuyingPack ||
                     (profile.data?.money ?? 0) < cost ||
-                    grandMasterSets.includes(pack)
+                    (grandMasterSets.includes(pack) && pack.code != "BPTV1")
                   }
                   lineHeight="2rem"
                   onClick={() => handleBuyPack(user, pack.code)}
                 >
-                  {grandMasterSets.includes(pack) ? (
+                  {grandMasterSets.includes(pack) && pack.code != "BPTV1" ? (
                     <ui.span>👑</ui.span>
                   ) : (
                     <ui.span>Buy (¥{cost})</ui.span>

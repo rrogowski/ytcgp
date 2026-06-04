@@ -1,6 +1,6 @@
 import { createCollectionRef } from "../lib/firestore";
 
-export interface PointsWalletModel {
+interface PointsWalletModel {
   [code: string]: number;
 }
 

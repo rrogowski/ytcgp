@@ -22,6 +22,7 @@ export const claimAllowanceTransaction = (user: User) => {
       t.set(profileRef, {
         displayName: user.displayName ?? "",
         nextAllowanceAt: Timestamp.fromDate(nextAllowanceAt),
+        numberOfGodPacksOpened: 0,
         money: ALLOWANCE_AMOUNT,
         wonderPoints: WONDER_POINTS_AMOUNT,
       });

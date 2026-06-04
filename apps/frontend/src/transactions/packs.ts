@@ -46,7 +46,11 @@ export const buyPackTransaction = async (user: User, code: string) => {
       {} as Record<string, number>,
     );
 
-    t.update(profileRef, { money: profile.money - cost });
+    t.update(profileRef, {
+      money: profile.money - cost,
+      numberOfGodPacksOpened:
+        profile.numberOfGodPacksOpened + (isGodPack ? 1 : 0),
+    });
     if (binder) {
       t.update(binderRef, binderUpdate);
     } else {
@@ -73,7 +77,7 @@ export const buyPackTransaction = async (user: User, code: string) => {
     });
 
     const newCards = allCards.filter((c) => (binder?.[c.code] ?? 0) === 0);
-    return [packs, newCards] as const;
+    return [packs, newCards, isGodPack] as const;
   });
 };
 

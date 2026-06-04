@@ -10,6 +10,7 @@ export const Pack: React.FC = () => {
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
+  const isGodPack = router.params["isGodPack"] === "true";
   const codes = router.params["codes"] ? router.params["codes"].split("|") : [];
   const newCodes = router.params["newCodes"]
     ? router.params["newCodes"].split(",")
@@ -75,6 +76,7 @@ export const Pack: React.FC = () => {
                   <Card
                     imageUrl={getThumbnailUrl(card)}
                     height="9rem"
+                    isPartOfGodPack={isGodPack}
                     onClick={() => setPreviewImageUrl(card.imageUrl)}
                   ></Card>
                   <span style={{ position: "absolute", bottom: "-.75rem" }}>

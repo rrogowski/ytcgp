@@ -1,4 +1,4 @@
-import { limit, orderBy, Timestamp } from "firebase/firestore";
+import { limit, orderBy, Timestamp, where } from "firebase/firestore";
 import { Fragment, useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
@@ -24,15 +24,19 @@ import { profilesRef } from "../models/profile";
 import { giveStimulusTransaction } from "../transactions/stimulus";
 
 const RECENT_PACKS_CONSTRAINTS = [orderBy("createdAt", "desc"), limit(20)];
+const RECENT_GOD_PACKS_CONSTRAINTS = [
+  where("isGodPack", "==", true),
+  orderBy("createdAt", "desc"),
+  limit(20),
+];
 
 export const Community: React.FC = () => {
   const user = useUser();
   const binders = useCollection(bindersRef);
   const profiles = useCollection(profilesRef);
 
-  const [userUid, setUserUid] = useState("");
-
   const packs = useCollection(packsRef, RECENT_PACKS_CONSTRAINTS);
+  const godPacks = useCollection(packsRef, RECENT_GOD_PACKS_CONSTRAINTS);
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
 
@@ -58,10 +62,6 @@ export const Community: React.FC = () => {
     alert([`${pack.name} (${cards.length} total)\n`, ...lines].join("\n"));
   };
 
-  const filteredPacks = packs.docs.filter((pack) => {
-    return userUid.length > 0 ? pack.data.userUid === userUid : true;
-  });
-
   const achievementPacks = ALL_EXPANSIONS.map((expansion) =>
     expansion.codes.map(findPackByCode),
   ).flat();
@@ -83,17 +83,30 @@ export const Community: React.FC = () => {
       ></CardPreview>
       <h3>Collection Stats</h3>
       {user.displayName === "Roman Rogowski" && (
-        <button
-          onClick={() =>
-            giveStimulus(
-              profiles.docs.map((d) => d.id),
-              12000,
-              200,
-            )
-          }
-        >
-          Give Stimulus
-        </button>
+        <>
+          <button
+            onClick={() =>
+              giveStimulus(
+                profiles.docs.map((d) => d.id),
+                3000,
+                25,
+              )
+            }
+          >
+            Give Duel Reward
+          </button>
+          <button
+            onClick={() =>
+              giveStimulus(
+                profiles.docs.map((d) => d.id),
+                12000,
+                100,
+              )
+            }
+          >
+            Give Stimulus
+          </button>
+        </>
       )}
       <div>
         <table
@@ -110,6 +123,7 @@ export const Community: React.FC = () => {
               <th># Uniques</th>
               <th># Playsets</th>
               <th>Binder Value</th>
+              <th># God Packs</th>
               <th>Achievements</th>
             </tr>
           </thead>
@@ -125,6 +139,7 @@ export const Community: React.FC = () => {
                   <td>{getTotalUniques(binder?.data ?? null)}</td>
                   <td>{getTotalPlaysets(binder?.data ?? null)}</td>
                   <td>¥{getTotalBinderValue(binder?.data ?? null)}</td>
+                  <td>{profile.data.numberOfGodPacksOpened}</td>
                   <td
                     style={{
                       alignItems: "center",
@@ -147,7 +162,7 @@ export const Community: React.FC = () => {
                         >
                           <span
                             style={{
-                              marginBottom: "0.5rem",
+                              marginBottom: "0.4rem",
                               fontSize: "0.6rem",
                               lineHeight: "6px",
                             }}
@@ -162,7 +177,7 @@ export const Community: React.FC = () => {
                             src={pack.imageUrl}
                             style={{
                               cursor: "pointer",
-                              height: "2rem",
+                              height: "1.5rem",
                               opacity: masterSets.includes(pack) ? 1 : 0.2,
                               transform: "scale(1.3)",
                             }}
@@ -178,89 +193,158 @@ export const Community: React.FC = () => {
           </tbody>
         </table>
       </div>
-      <h3>Recent Packs</h3>
-      <div>
-        <span>Player: </span>
-        <select
-          value={userUid}
-          onChange={(event) => setUserUid(event.currentTarget.value)}
-        >
-          <option value="">All Players</option>
-          <option value={user.uid}>{user.displayName}</option>
-          {profiles.docs.map((profile) => {
-            if (profile.id === user.uid) {
-              return null;
-            }
-            return (
-              <option key={profile.id} value={profile.id}>
-                {profile.data.displayName}
-              </option>
-            );
-          })}
-        </select>
-      </div>
       <div
         style={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          gap: "1rem",
-          overflow: "auto",
-          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          overflow: "hidden",
+          textAlign: "center",
         }}
       >
-        {filteredPacks.length === 0 && (
-          <>
-            <hr style={{ width: "100%" }}></hr>
-            <b>No recent packs to display.</b>
-          </>
-        )}
-        {filteredPacks.map((pack) => {
-          const profile = profiles.docs.find((d) => d.id === pack.data.userUid);
-          return (
-            <Fragment key={pack.id}>
-              <hr style={{ width: "100%" }}></hr>
-              <span>
-                {profile?.data.displayName} | {formatDate(pack.data.createdAt)}
-              </span>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "0.25rem",
-                  rowGap: "1rem",
-                  justifyContent: "center",
-                }}
-              >
-                {pack.data.codes.map((code) => {
-                  const card = findCardByCode(code);
-                  return (
-                    <div
-                      key={code}
-                      style={{
-                        alignItems: "center",
-                        display: "flex",
-                        flexDirection: "column",
-                        position: "relative",
-                        width: "110px",
-                      }}
-                    >
-                      <Card
-                        imageUrl={getThumbnailUrl(card)}
-                        height="9rem"
-                        onClick={() => setPreviewImageUrl(card.imageUrl)}
-                      ></Card>
-                      <span style={{ position: "absolute", bottom: "-.75rem" }}>
-                        <CardRarity rarity={card.rarity}></CardRarity>
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </Fragment>
-          );
-        })}
+        <h3>Recent Packs</h3>
+        <h3>
+          Recent{" "}
+          <span
+            style={{
+              background:
+                "linear-gradient(to right, #ef5350, #f57c00, #fbc02d, #388e3c, #1976d2, #7b1fa2)",
+              backgroundClip: "text",
+              color: "transparent",
+              fontWeight: "bold",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            God
+          </span>{" "}
+          Packs
+        </h3>
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+            gap: "1rem",
+            overflow: "auto",
+            width: "100%",
+          }}
+        >
+          {packs.docs.map((pack) => {
+            const profile = profiles.docs.find(
+              (d) => d.id === pack.data.userUid,
+            );
+            return (
+              <Fragment key={pack.id}>
+                <hr style={{ width: "100%" }}></hr>
+                <span>
+                  {profile?.data.displayName} |{" "}
+                  {formatDate(pack.data.createdAt)}
+                </span>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "0.25rem",
+                    rowGap: "1rem",
+                    justifyContent: "center",
+                  }}
+                >
+                  {pack.data.codes.map((code) => {
+                    const card = findCardByCode(code);
+                    return (
+                      <div
+                        key={code}
+                        style={{
+                          alignItems: "center",
+                          display: "flex",
+                          flexDirection: "column",
+                          position: "relative",
+                          width: "110px",
+                        }}
+                      >
+                        <Card
+                          imageUrl={getThumbnailUrl(card)}
+                          height="9rem"
+                          isPartOfGodPack={pack.data.isGodPack}
+                          onClick={() => setPreviewImageUrl(card.imageUrl)}
+                        ></Card>
+                        <span
+                          style={{ position: "absolute", bottom: "-.75rem" }}
+                        >
+                          <CardRarity rarity={card.rarity}></CardRarity>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Fragment>
+            );
+          })}
+        </div>
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+            gap: "1rem",
+            overflow: "auto",
+            width: "100%",
+          }}
+        >
+          {godPacks.docs.map((pack) => {
+            const profile = profiles.docs.find(
+              (d) => d.id === pack.data.userUid,
+            );
+            return (
+              <Fragment key={pack.id}>
+                <hr style={{ width: "100%" }}></hr>
+                <span>
+                  {profile?.data.displayName} |{" "}
+                  {formatDate(pack.data.createdAt)}
+                </span>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "0.25rem",
+                    rowGap: "1rem",
+                    justifyContent: "center",
+                  }}
+                >
+                  {pack.data.codes.map((code) => {
+                    const card = findCardByCode(code);
+                    return (
+                      <div
+                        key={code}
+                        style={{
+                          alignItems: "center",
+                          display: "flex",
+                          flexDirection: "column",
+                          position: "relative",
+                          width: "110px",
+                        }}
+                      >
+                        <Card
+                          imageUrl={getThumbnailUrl(card)}
+                          height="9rem"
+                          isPartOfGodPack={pack.data.isGodPack}
+                          onClick={() => setPreviewImageUrl(card.imageUrl)}
+                        ></Card>
+                        <span
+                          style={{ position: "absolute", bottom: "-.75rem" }}
+                        >
+                          <CardRarity rarity={card.rarity}></CardRarity>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Fragment>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

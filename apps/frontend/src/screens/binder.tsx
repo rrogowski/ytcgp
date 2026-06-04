@@ -12,6 +12,7 @@ import {
 import { ALL_EXPANSIONS } from "../data/expansions";
 import { useUser } from "../lib/auth";
 import { useCollection, useDocumentWithId } from "../lib/firestore";
+import { useLocalStorageState } from "../lib/local-storage";
 import { useRouter } from "../lib/router";
 import { useTransaction } from "../lib/transaction";
 import {
@@ -31,7 +32,10 @@ export const Binder: React.FC = () => {
   const user = useUser();
 
   const [userUid, setUserUid] = useState(user.uid);
-  const [expansionName, setExpansionName] = useState(ALL_EXPANSIONS[0].name);
+  const [expansionName, setExpansionName] = useLocalStorageState(
+    "packs.expansionName",
+    ALL_EXPANSIONS[0].name,
+  );
   const [filter, setFilter] = useState("");
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [shouldShowQuantities, setShouldShowQuantities] = useState(false);
@@ -68,17 +72,10 @@ export const Binder: React.FC = () => {
   }, [cardsToDisplay, binder.data]);
 
   const handleDisenchantAllExtras = async () => {
-    const extraCardsText = extraCards
-      .map((card) => {
-        const quantity = (binder.data?.[card.code] ?? 0) - 3;
-        const value = getDisenchantValue(card);
-        return `${card.name} x${quantity} (¥${value} each)`;
-      })
-      .join("\n");
     const totalValue = getDisenchantTotalValue(extraCards, binder.data);
     if (
       !confirm(
-        `Are you sure you want to disenchant the following cards for ¥${totalValue}?\n${extraCardsText}`,
+        `Are you sure you want to disenchant all extras for ¥${totalValue}?`,
       )
     ) {
       return;

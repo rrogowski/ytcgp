@@ -204,6 +204,7 @@ export const WonderPick: React.FC = () => {
                         imageUrl={getThumbnailUrl(card)}
                         border={isWonderPick ? "dashed red 3px" : ""}
                         height="9rem"
+                        isPartOfGodPack={pack.data.isGodPack}
                         opacity={(binder.data?.[code] ?? 0) > 0 ? 1 : 0.3}
                         onClick={() => setPreviewImageUrl(card.imageUrl)}
                       ></Card>
