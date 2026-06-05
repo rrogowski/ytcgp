@@ -89,7 +89,7 @@ export const Community: React.FC = () => {
               giveStimulus(
                 profiles.docs.map((d) => d.id),
                 3000,
-                25,
+                10,
               )
             }
           >
@@ -100,7 +100,7 @@ export const Community: React.FC = () => {
               giveStimulus(
                 profiles.docs.map((d) => d.id),
                 12000,
-                100,
+                40,
               )
             }
           >
