@@ -77,7 +77,9 @@ export const buyPackTransaction = async (user: User, code: string) => {
     });
 
     const newCards = allCards.filter((c) => (binder?.[c.code] ?? 0) === 0);
-    return [packs, newCards, isGodPack] as const;
+    const twoCards = allCards.filter((c) => (binder?.[c.code] ?? 0) === 1);
+    const threeCards = allCards.filter((c) => (binder?.[c.code] ?? 0) === 2);
+    return [packs, newCards, twoCards, threeCards, isGodPack] as const;
   });
 };
 

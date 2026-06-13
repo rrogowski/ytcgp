@@ -37,13 +37,18 @@ export const Packs: React.FC = () => {
   );
 
   const handleBuyPack = async (user: User, code: string) => {
-    const [cards, newCards, isGodPack] = await buyPack(user, code);
+    const [cards, newCards, twoCards, threeCards, isGodPack] = await buyPack(
+      user,
+      code,
+    );
     const codes = cards
       .map((pack) => pack.map((card) => card.code).join(","))
       .join("|");
     const newCodes = newCards.map((card) => card.code).join(",");
+    const twoCodes = twoCards.map((card) => card.code).join(",");
+    const threeCodes = threeCards.map((card) => card.code).join(",");
     router.navigate(
-      `/pack?codes=${codes}&newCodes=${newCodes}&isGodPack=${isGodPack}`,
+      `/pack?codes=${codes}&newCodes=${newCodes}&twoCodes=${twoCodes}&threeCodes=${threeCodes}&isGodPack=${isGodPack}`,
     );
   };
 

@@ -15,6 +15,12 @@ export const Pack: React.FC = () => {
   const newCodes = router.params["newCodes"]
     ? router.params["newCodes"].split(",")
     : [];
+  const twoCodes = router.params["twoCodes"]
+    ? router.params["twoCodes"].split(",")
+    : [];
+  const threeCodes = router.params["threeCodes"]
+    ? router.params["threeCodes"].split(",")
+    : [];
 
   return (
     <div
@@ -49,6 +55,8 @@ export const Pack: React.FC = () => {
             {packContents.split(",").map((code) => {
               const card = findCardByCode(code);
               const isNew = newCodes.includes(code);
+              const isTwo = twoCodes.includes(code);
+              const isThree = threeCodes.includes(code);
               return (
                 <div
                   key={card.code}
@@ -72,6 +80,36 @@ export const Pack: React.FC = () => {
                       }}
                     >
                       New
+                    </span>
+                  )}
+                  {isTwo && (
+                    <span
+                      style={{
+                        backgroundColor: "#7d5646",
+                        borderRadius: "0.25rem",
+                        color: "white",
+                        padding: "0.25rem 0.4rem",
+                        right: "0.1rem",
+                        top: "-0.25rem",
+                        position: "absolute",
+                      }}
+                    >
+                      2
+                    </span>
+                  )}
+                  {isThree && (
+                    <span
+                      style={{
+                        backgroundColor: "#7d5646",
+                        borderRadius: "0.25rem",
+                        color: "white",
+                        padding: "0.25rem 0.4rem",
+                        right: "0.1rem",
+                        top: "-0.25rem",
+                        position: "absolute",
+                      }}
+                    >
+                      3
                     </span>
                   )}
                   <Card
