@@ -71,8 +71,9 @@ export const Pack: React.FC = () => {
                   {isNew && (
                     <span
                       style={{
-                        backgroundColor: "gold",
+                        backgroundColor: "#ba964a",
                         borderRadius: "0.25rem",
+                        color: "white",
                         padding: "0.25rem 0.4rem",
                         right: "0.1rem",
                         top: "-0.25rem",
