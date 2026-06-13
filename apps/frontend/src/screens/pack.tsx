@@ -19,6 +19,7 @@ export const Pack: React.FC = () => {
   return (
     <div
       style={{
+        alignItems: "center",
         display: "flex",
         flexDirection: "column",
         rowGap: "1rem",
