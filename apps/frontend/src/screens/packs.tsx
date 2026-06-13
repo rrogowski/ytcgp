@@ -91,6 +91,10 @@ export const Packs: React.FC = () => {
           const playsets = cards.filter(
             (c) => (binder.data?.[c.code] ?? 0) >= 3,
           );
+          const totalCardsAtOrBelow3Copies = cards.reduce((accumulator, c) => {
+            const quantity = binder.data?.[c.code] ?? 0;
+            return accumulator + (quantity > 3 ? 3 : quantity);
+          }, 0);
           return (
             <ui.div
               key={pack.code}
@@ -171,9 +175,9 @@ export const Packs: React.FC = () => {
                 <ProgressBar
                   backgroundColor="#7d5646"
                   color="white"
-                  currentValue={playsets.length}
+                  currentValue={totalCardsAtOrBelow3Copies}
                   height="1.5rem"
-                  maxValue={cards.length}
+                  maxValue={cards.length * 3}
                   width="100%"
                 ></ProgressBar>
                 <ui.span fontSize="0.75rem" textAlign="center">
