@@ -1,3 +1,4 @@
+import type { BinderModel } from "../models/binder";
 import { getExpansionPacks } from "./expansions";
 
 export interface CardMetadata {
@@ -9810,4 +9811,15 @@ export const getThumbnailUrl = (card: CardMetadata) => {
   }
   const url = new URL(card.imageUrl);
   return url.href;
+};
+
+export const getCostOfRemainingCards = (
+  cards: CardMetadata[],
+  binder: BinderModel | null,
+) => {
+  return cards.reduce((accumulator, card) => {
+    const quantity = binder?.[card.code] ?? 0;
+    const quantityMissing = quantity > 3 ? 0 : 3 - quantity;
+    return accumulator + getPackPointsCost(card.code) * quantityMissing;
+  }, 0);
 };

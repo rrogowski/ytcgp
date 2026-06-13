@@ -7,7 +7,7 @@ interface Props extends ComponentProps<"div"> {
 
 export const ProgressBar: React.FC<Props> = (props) => {
   const { backgroundColor, currentValue, maxValue, ...divProps } = props;
-  const percentage = (100 * currentValue) / maxValue;
+  const percentage = maxValue === 0 ? 100 : (100 * currentValue) / maxValue;
 
   return (
     <ui.div

@@ -1,7 +1,7 @@
 import type { User } from "firebase/auth";
 import { ProgressBar } from "../components/progress-bar";
 import { ui } from "../components/ui";
-import { getCardsInSet } from "../data/cards";
+import { getCardsInSet, getCostOfRemainingCards } from "../data/cards";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
 import { getPackCostIncludingAdditionalPacks } from "../data/packs";
 import { useUser } from "../lib/auth";
@@ -100,6 +100,11 @@ export const Packs: React.FC = () => {
             const quantity = binder.data?.[c.code] ?? 0;
             return accumulator + (quantity > 3 ? 3 : quantity);
           }, 0);
+          const packPoints = pointsWallet.data?.[pack.code] ?? 0;
+          const costOfRemainingCards = getCostOfRemainingCards(
+            cards,
+            binder.data,
+          );
           return (
             <ui.div
               key={pack.code}
@@ -185,8 +190,23 @@ export const Packs: React.FC = () => {
                   maxValue={cards.length * 3}
                   width="100%"
                 ></ProgressBar>
-                <ui.span fontSize="0.75rem" textAlign="center">
+                <ui.span
+                  fontSize="0.75rem"
+                  marginBottom="0.25rem"
+                  textAlign="center"
+                >
                   {playsets.length} / {cards.length} Playsets
+                </ui.span>
+                <ProgressBar
+                  backgroundColor="#1780b8"
+                  color="white"
+                  currentValue={packPoints}
+                  height="1.5rem"
+                  maxValue={costOfRemainingCards}
+                  width="100%"
+                ></ProgressBar>
+                <ui.span fontSize="0.75rem" textAlign="center">
+                  {packPoints} / {costOfRemainingCards} ₱
                 </ui.span>
               </div>
             </ui.div>
