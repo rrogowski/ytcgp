@@ -13,6 +13,34 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "JMPV1",
+    name: "Shonen Jump Volumes 1 - 4",
+    cost: 800,
+    rarityTable: [
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl: "https://ms.yugipedia.com//7/73/SJ_1.1_-_back.png",
+  },
+  {
+    code: "BPTV2",
+    name: "2003 Collectible Tin",
+    cost: 1100,
+    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    imageUrl:
+      "https://static.wikia.nocookie.net/yugioh/images/3/3a/BPT-PromoEN-2003.png",
+    additionalPacksCodes: ["LOB", "MRD", "SRL", "PSV", "LON"],
+  },
+  {
     code: "BPTV1",
     name: "2002 Collectible Tin",
     cost: 1100,
@@ -23,16 +51,73 @@ export const ALL_PACKS: Pack[] = [
     additionalPacksCodes: ["LOB", "LOB", "MRD", "MRD", "SRL"],
   },
   {
+    code: "LON",
+    name: "Labyrinth of Nightmare",
+    cost: 500,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl: "https://ms.yugipedia.com//8/8e/LON-BoosterEN.jpg",
+  },
+  {
     code: "PSV",
     name: "Pharaoh's Servant",
     cost: 500,
     rarityTable: [
       [{ rarity: "Common", odds: 1 / 1 }],
       [{ rarity: "Common", odds: 1 / 1 }],
-      [{ rarity: "Common", odds: 1 / 1 }],
-      [{ rarity: "Rare", odds: 1 / 1 }],
       [
         { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
         { rarity: "Secret Rare", odds: 1 / 24 },
         { rarity: "Ultra Rare", odds: 1 / 12 },
         { rarity: "Super Rare", odds: 1 / 5 },

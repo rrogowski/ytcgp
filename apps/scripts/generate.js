@@ -12,7 +12,11 @@ const RELEASED_SET_NAMES = [
   // "Tournament Pack: 1st Season",
   // "Tournament Pack: 2nd Season",
   // "Pharaoh's Servant",
-  "Booster Pack Collectors Tins 2002",
+  // "Booster Pack Collectors Tins 2002",
+  // "Labyrinth of Nightmare",
+  "Shonen Jump Vol. 1 #1",
+  "Shonen Jump Vol. 2, Issue 1",
+  "Weekly Sh\u014dnen Jump 2003, Issue 3\u20134",
 ];
 
 const sets = JSON.parse(

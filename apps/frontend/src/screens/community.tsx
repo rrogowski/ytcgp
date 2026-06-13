@@ -4,7 +4,7 @@ import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { CardRarity } from "../components/card-rarity";
 import { FullPageText } from "../components/full-page-text";
-import { findCardByCode, getCardsInSet } from "../data/cards";
+import { findCardByCode, getCardsInSet, getThumbnailUrl } from "../data/cards";
 import { ALL_EXPANSIONS } from "../data/expansions";
 import { findPackByCode } from "../data/packs";
 import { useUser } from "../lib/auth";
@@ -69,6 +69,7 @@ export const Community: React.FC = () => {
   return (
     <div
       style={{
+        alignItems: "center",
         display: "flex",
         flexDirection: "column",
         height: "100%",
@@ -264,7 +265,7 @@ export const Community: React.FC = () => {
                         }}
                       >
                         <Card
-                          imageUrl={card.thumbnailUrl}
+                          imageUrl={getThumbnailUrl(card)}
                           height="9rem"
                           isPartOfGodPack={pack.data.isGodPack}
                           onClick={() => setPreviewImageUrl(card.imageUrl)}
@@ -327,7 +328,7 @@ export const Community: React.FC = () => {
                         }}
                       >
                         <Card
-                          imageUrl={card.thumbnailUrl}
+                          imageUrl={getThumbnailUrl(card)}
                           height="9rem"
                           isPartOfGodPack={pack.data.isGodPack}
                           onClick={() => setPreviewImageUrl(card.imageUrl)}

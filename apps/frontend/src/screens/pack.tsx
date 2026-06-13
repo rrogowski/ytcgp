@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { CardRarity } from "../components/card-rarity";
-import { findCardByCode } from "../data/cards";
+import { findCardByCode, getThumbnailUrl } from "../data/cards";
 import { useRouter } from "../lib/router";
 
 export const Pack: React.FC = () => {
@@ -19,6 +19,7 @@ export const Pack: React.FC = () => {
   return (
     <div
       style={{
+        alignItems: "center",
         display: "flex",
         flexDirection: "column",
         rowGap: "1rem",
@@ -74,7 +75,7 @@ export const Pack: React.FC = () => {
                     </span>
                   )}
                   <Card
-                    imageUrl={card.thumbnailUrl}
+                    imageUrl={getThumbnailUrl(card)}
                     height="9rem"
                     isPartOfGodPack={isGodPack}
                     onClick={() => setPreviewImageUrl(card.imageUrl)}

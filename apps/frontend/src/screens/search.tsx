@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { FullPageText } from "../components/full-page-text";
-import { getCardsInExpansion } from "../data/cards";
+import { getCardsInExpansion, getThumbnailUrl } from "../data/cards";
 import { ALL_EXPANSIONS } from "../data/expansions";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
@@ -337,7 +337,7 @@ export const Search: React.FC = () => {
                     }}
                   >
                     <Card
-                      imageUrl={card.thumbnailUrl}
+                      imageUrl={getThumbnailUrl(card)}
                       height="8.5rem"
                       opacity={quantity > 2 - i ? 1 : 0.3}
                       onClick={() => setPreviewImageUrl(card.imageUrl)}

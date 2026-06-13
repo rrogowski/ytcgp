@@ -1,4 +1,4 @@
-type ComponentProps<T extends keyof React.JSX.IntrinsicElements> =
+export type ComponentProps<T extends keyof React.JSX.IntrinsicElements> =
   React.CSSProperties &
     Omit<
       React.JSX.IntrinsicElements[T],
