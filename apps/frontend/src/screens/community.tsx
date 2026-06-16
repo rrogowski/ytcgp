@@ -30,6 +30,8 @@ const RECENT_GOD_PACKS_CONSTRAINTS = [
   limit(20),
 ];
 
+const ACHIEVEMENT_CODES_TO_HIDE = ["MP1", "DDS", "SDY", "SDK", "TP1", "BPTV1"];
+
 export const Community: React.FC = () => {
   const user = useUser();
   const binders = useCollection(bindersRef);
@@ -64,7 +66,9 @@ export const Community: React.FC = () => {
 
   const achievementPacks = ALL_EXPANSIONS.map((expansion) =>
     expansion.codes.map(findPackByCode),
-  ).flat();
+  )
+    .flat()
+    .filter((p) => !ACHIEVEMENT_CODES_TO_HIDE.includes(p.code));
 
   return (
     <div
