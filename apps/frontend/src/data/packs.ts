@@ -13,6 +13,85 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "JMPV2",
+    name: "Shonen Jump Volumes 4 - 4",
+    cost: 800,
+    rarityTable: [[{ rarity: "Ultra Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Ultra Rare", odds: 1 / 1 }]],
+    imageUrl: "https://ms.yugipedia.com//9/90/SJ_4.1.png",
+  },
+  {
+    code: "TP3",
+    name: "Tournament Pack: 3rd Season",
+    cost: 300,
+    imageUrl: "https://ms.yugipedia.com//1/17/TP3-BoosterNA.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+  },
+  {
+    code: "SDJ",
+    name: "Starter Deck: Joey",
+    cost: 500,
+    imageUrl: "https://ms.yugipedia.com//5/56/SDJ-DeckNA.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Ultra Rare", odds: 1 / 1 }],
+    ],
+  },
+  {
+    code: "SDP",
+    name: "Starter Deck: Pegasus",
+    cost: 500,
+    imageUrl: "https://ms.yugipedia.com//3/35/SDP-DeckNA.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Ultra Rare", odds: 1 / 1 }],
+    ],
+  },
+  {
     code: "JMPV1",
     name: "Shonen Jump Volumes 1 - 4",
     cost: 800,

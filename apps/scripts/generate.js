@@ -14,9 +14,16 @@ const RELEASED_SET_NAMES = [
   // "Pharaoh's Servant",
   // "Booster Pack Collectors Tins 2002",
   // "Labyrinth of Nightmare",
-  "Shonen Jump Vol. 1 #1",
-  "Shonen Jump Vol. 2, Issue 1",
-  "Weekly Sh\u014dnen Jump 2003, Issue 3\u20134",
+  // "Shonen Jump Vol. 1 #1",
+  // "Shonen Jump Vol. 2, Issue 1",
+  // "Weekly Sh\u014dnen Jump 2003, Issue 3\u20134",
+  // "Starter Deck: Joey",
+  // "Starter Deck: Pegasus",
+  // "Tournament Pack: 3rd Season",
+  "Shonen Jump Vol. 4, Issue 10",
+  "Shonen Jump May 2006 subscription bonus",
+  "Shonen Jump Vol. 4, Issue 11",
+  "Shonen Jump Vol. 4, Issue 12",
 ];
 
 const sets = JSON.parse(
