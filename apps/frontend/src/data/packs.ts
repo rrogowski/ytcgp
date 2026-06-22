@@ -21,6 +21,22 @@ export const ALL_PACKS: Pack[] = [
     imageUrl: "https://ms.yugipedia.com//9/90/SJ_4.1.png",
   },
   {
+    code: "DOR",
+    name: "Yu-Gi-Oh! The Duelists of the Roses",
+    cost: 2400,
+    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    imageUrl: "https://ms.yugipedia.com//7/7a/DOR-VideoGame-NA.jpg",
+  },
+  {
+    code: "SDD",
+    name: "Yu-Gi-Oh! Worldwide Edition - Stairway to the Destined Duel",
+    cost: 2400,
+    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    imageUrl: "https://ms.yugipedia.com//b/bd/SDD-VideoGame-NA.jpg",
+  },
+  {
     code: "TP3",
     name: "Tournament Pack: 3rd Season",
     cost: 300,

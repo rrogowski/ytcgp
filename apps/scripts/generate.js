@@ -20,10 +20,12 @@ const RELEASED_SET_NAMES = [
   // "Starter Deck: Joey",
   // "Starter Deck: Pegasus",
   // "Tournament Pack: 3rd Season",
-  "Shonen Jump Vol. 4, Issue 10",
-  "Shonen Jump May 2006 subscription bonus",
-  "Shonen Jump Vol. 4, Issue 11",
-  "Shonen Jump Vol. 4, Issue 12",
+  // "Shonen Jump Vol. 4, Issue 10",
+  // "Shonen Jump May 2006 subscription bonus",
+  // "Shonen Jump Vol. 4, Issue 11",
+  // "Shonen Jump Vol. 4, Issue 12",
+  // "Yu-Gi-Oh! Worldwide Edition - Stairway to the Destined Duel - Bundles",
+  "Yu-Gi-Oh! The Duelists of the Roses",
 ];
 
 const sets = JSON.parse(
