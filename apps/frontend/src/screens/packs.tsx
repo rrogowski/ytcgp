@@ -86,7 +86,9 @@ export const Packs: React.FC = () => {
       <ui.div
         alignItems="center"
         display="flex"
+        flexWrap="wrap"
         justifyContent="center"
+        overflow="auto"
         width="100%"
       >
         {getExpansionPacks(expansionName).map((pack) => {

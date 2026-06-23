@@ -37,6 +37,22 @@ export const ALL_PACKS: Pack[] = [
     imageUrl: "https://ms.yugipedia.com//b/bd/SDD-VideoGame-NA.jpg",
   },
   {
+    code: "FMR",
+    name: "Yu-Gi-Oh! Forbidden Memories promotional cards",
+    cost: 2400,
+    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    imageUrl: "https://ms.yugipedia.com//8/88/FMR-VideoGame-NA.jpg",
+  },
+  {
+    code: "EDS",
+    name: "Yu-Gi-Oh! The Eternal Duelist Soul",
+    cost: 2400,
+    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    imageUrl: "https://ms.yugipedia.com//3/3d/EDS-VideoGame-NA.jpg",
+  },
+  {
     code: "TP3",
     name: "Tournament Pack: 3rd Season",
     cost: 300,

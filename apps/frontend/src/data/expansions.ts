@@ -4,7 +4,7 @@ export const ALL_EXPANSIONS = [
   { name: "Time & Illusion", codes: ["SDJ", "TP3", "SDP"] },
   { name: "Forbidden Steel", codes: ["PSV", "TP2", "LON"] },
   { name: "Shonen Jump", codes: ["JMPV1", "JMPV2"] },
-  { name: "Video Games", codes: ["DDS", "SDD", "DOR"] },
+  { name: "Video Games", codes: ["SDD", "DOR", "EDS", "FMR", "DDS"] },
   { name: "Collectible Tins", codes: ["BPTV1", "BPTV2"] },
   { name: "Mechanical Dominion", codes: ["MRD", "TP1", "SRL"] },
   { name: "Rivals Clash", codes: ["SDY", "SDK"] },

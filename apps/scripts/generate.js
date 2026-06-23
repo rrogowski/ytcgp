@@ -25,7 +25,9 @@ const RELEASED_SET_NAMES = [
   // "Shonen Jump Vol. 4, Issue 11",
   // "Shonen Jump Vol. 4, Issue 12",
   // "Yu-Gi-Oh! Worldwide Edition - Stairway to the Destined Duel - Bundles",
-  "Yu-Gi-Oh! The Duelists of the Roses",
+  // "Yu-Gi-Oh! The Duelists of the Roses",
+  "Yu-Gi-Oh! Forbidden Memories promotional cards",
+  "Yu-Gi-Oh! The Eternal Duelist Soul Bundles",
 ];
 
 const sets = JSON.parse(
@@ -67,8 +69,8 @@ const main = () => {
       cardsMetadata.push({
         code: `${locale.prefix}${instance.suffix}`,
         name: card.text.en.name,
+        rarity: "Common",
         imageUrl: locale.cardImages.unlimited?.[instance.id] ?? null,
-
         cardType: card.cardType,
         subcategory: card.subcategory,
         attribute: card.attribute,
