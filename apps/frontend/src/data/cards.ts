@@ -82,7 +82,7 @@ const ALL_CARDS: CardMetadata[] = [
   {
     code: "FMR-001",
     name: "Red-Eyes Black Metal Dragon",
-    rarity: "Common",
+    rarity: "Secret Rare",
     imageUrl:
       "https://ms.yugipedia.com//0/03/RedEyesBlackMetalDragon-FMR-NA-PScR-UE.png",
     cardType: "monster",
@@ -96,7 +96,7 @@ const ALL_CARDS: CardMetadata[] = [
   {
     code: "FMR-002",
     name: "Harpie's Pet Dragon",
-    rarity: "Common",
+    rarity: "Secret Rare",
     imageUrl:
       "https://ms.yugipedia.com//d/dc/HarpiesPetDragon-FMR-NA-PScR-UE.png",
     cardType: "monster",
@@ -110,7 +110,7 @@ const ALL_CARDS: CardMetadata[] = [
   {
     code: "FMR-003",
     name: "Metalmorph",
-    rarity: "Common",
+    rarity: "Secret Rare",
     imageUrl: "https://ms.yugipedia.com//2/21/Metalmorph-FMR-NA-PScR-UE.png",
     cardType: "trap",
     subcategory: "normal",
@@ -118,7 +118,7 @@ const ALL_CARDS: CardMetadata[] = [
   {
     code: "EDS-001",
     name: "Exchange",
-    rarity: "Common",
+    rarity: "Secret Rare",
     imageUrl: "https://ms.yugipedia.com//9/9b/Exchange-EDS-NA-PScR-UE.png",
     cardType: "spell",
     subcategory: "normal",
@@ -126,7 +126,7 @@ const ALL_CARDS: CardMetadata[] = [
   {
     code: "EDS-002",
     name: "Graceful Dice",
-    rarity: "Common",
+    rarity: "Secret Rare",
     imageUrl: "https://ms.yugipedia.com//5/50/GracefulDice-EDS-NA-PScR-UE.png",
     cardType: "spell",
     subcategory: "quickplay",
@@ -134,7 +134,7 @@ const ALL_CARDS: CardMetadata[] = [
   {
     code: "EDS-003",
     name: "Skull Dice",
-    rarity: "Common",
+    rarity: "Secret Rare",
     imageUrl: "https://ms.yugipedia.com//5/52/SkullDice-EDS-NA-PScR-UE.png",
     cardType: "trap",
     subcategory: "normal",
