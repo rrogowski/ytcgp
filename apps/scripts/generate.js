@@ -14,9 +14,20 @@ const RELEASED_SET_NAMES = [
   // "Pharaoh's Servant",
   // "Booster Pack Collectors Tins 2002",
   // "Labyrinth of Nightmare",
-  "Shonen Jump Vol. 1 #1",
-  "Shonen Jump Vol. 2, Issue 1",
-  "Weekly Sh\u014dnen Jump 2003, Issue 3\u20134",
+  // "Shonen Jump Vol. 1 #1",
+  // "Shonen Jump Vol. 2, Issue 1",
+  // "Weekly Sh\u014dnen Jump 2003, Issue 3\u20134",
+  // "Starter Deck: Joey",
+  // "Starter Deck: Pegasus",
+  // "Tournament Pack: 3rd Season",
+  // "Shonen Jump Vol. 4, Issue 10",
+  // "Shonen Jump May 2006 subscription bonus",
+  // "Shonen Jump Vol. 4, Issue 11",
+  // "Shonen Jump Vol. 4, Issue 12",
+  // "Yu-Gi-Oh! Worldwide Edition - Stairway to the Destined Duel - Bundles",
+  // "Yu-Gi-Oh! The Duelists of the Roses",
+  "Yu-Gi-Oh! Forbidden Memories promotional cards",
+  "Yu-Gi-Oh! The Eternal Duelist Soul Bundles",
 ];
 
 const sets = JSON.parse(
@@ -58,8 +69,8 @@ const main = () => {
       cardsMetadata.push({
         code: `${locale.prefix}${instance.suffix}`,
         name: card.text.en.name,
+        rarity: "Common",
         imageUrl: locale.cardImages.unlimited?.[instance.id] ?? null,
-
         cardType: card.cardType,
         subcategory: card.subcategory,
         attribute: card.attribute,
