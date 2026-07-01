@@ -30,7 +30,18 @@ const RECENT_GOD_PACKS_CONSTRAINTS = [
   limit(20),
 ];
 
-const ACHIEVEMENT_CODES_TO_HIDE = ["MP1", "DDS", "SDY", "SDK", "TP1", "BPTV1"];
+const ACHIEVEMENT_CODES_TO_HIDE = [
+  "BPTV1",
+  "BPTV2",
+  "DDS",
+  "JMPV1",
+  "MP1",
+  "MRD",
+  "SDK",
+  "SDY",
+  "TP1",
+  "TP2",
+];
 
 export const Community: React.FC = () => {
   const user = useUser();
