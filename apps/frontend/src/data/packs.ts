@@ -71,7 +71,6 @@ export const ALL_PACKS: Pack[] = [
       [{ rarity: "Common", odds: 1 / 1 }],
       [{ rarity: "Common", odds: 1 / 1 }],
       [
-        { rarity: "Super Short Print", odds: 1 / 60 },
         { rarity: "Short Print", odds: 1 / 30 },
         { rarity: "Common", odds: 1 / 1 },
       ],
