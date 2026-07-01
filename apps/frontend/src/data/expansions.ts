@@ -1,6 +1,7 @@
 import { findPackByCode } from "./packs";
 
 export const ALL_EXPANSIONS = [
+  { name: "Highlight & Shadow", codes: ["LOD", "TP4", "PGD"] },
   { name: "Time & Illusion", codes: ["SDJ", "TP3", "SDP"] },
   { name: "Forbidden Steel", codes: ["PSV", "TP2", "LON"] },
   { name: "Shonen Jump", codes: ["JMPV1", "JMPV2"] },

@@ -26,8 +26,11 @@ const RELEASED_SET_NAMES = [
   // "Shonen Jump Vol. 4, Issue 12",
   // "Yu-Gi-Oh! Worldwide Edition - Stairway to the Destined Duel - Bundles",
   // "Yu-Gi-Oh! The Duelists of the Roses",
-  "Yu-Gi-Oh! Forbidden Memories promotional cards",
-  "Yu-Gi-Oh! The Eternal Duelist Soul Bundles",
+  // "Yu-Gi-Oh! Forbidden Memories promotional cards",
+  // "Yu-Gi-Oh! The Eternal Duelist Soul Bundles",
+  // "Legacy of Darkness",
+  // "Pharaonic Guardian",
+  "Tournament Pack 4",
 ];
 
 const sets = JSON.parse(

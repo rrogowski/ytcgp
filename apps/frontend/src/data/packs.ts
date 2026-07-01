@@ -13,6 +13,129 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "LOD",
+    name: "Legacy of Darkness",
+    imageUrl: "https://ms.yugipedia.com//4/47/LOD-BoosterEN.png",
+    cost: 500,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+  },
+  {
+    code: "PGD",
+    name: "Pharaonic Guardian",
+    imageUrl: "https://ms.yugipedia.com//5/5b/PGD-BoosterNA.png",
+    cost: 500,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Super Short Print", odds: 1 / 60 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+  },
+  {
+    code: "TP4",
+    name: "Tournament Pack 4",
+    cost: 300,
+    imageUrl: "https://ms.yugipedia.com//b/b7/TP4-BoosterNA.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+  },
+  {
     code: "JMPV2",
     name: "Shonen Jump Volumes 4 - 4",
     cost: 800,
@@ -183,34 +306,34 @@ export const ALL_PACKS: Pack[] = [
     ],
     godPackRarityTable: [
       [
-        { rarity: "Super Short Print", odds: 1 / 60 },
-        { rarity: "Short Print", odds: 1 / 30 },
-        { rarity: "Secret Rare", odds: 1 / 24 },
-        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
-        { rarity: "Super Short Print", odds: 1 / 60 },
-        { rarity: "Short Print", odds: 1 / 30 },
-        { rarity: "Secret Rare", odds: 1 / 24 },
-        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
-        { rarity: "Super Short Print", odds: 1 / 60 },
-        { rarity: "Short Print", odds: 1 / 30 },
-        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
-        { rarity: "Super Short Print", odds: 1 / 60 },
-        { rarity: "Short Print", odds: 1 / 30 },
-        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 / 1 },
       ],
       [
-        { rarity: "Short Print", odds: 1 / 30 },
-        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
         { rarity: "Super Rare", odds: 1 / 1 },
       ],
     ],
