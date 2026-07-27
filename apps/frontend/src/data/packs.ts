@@ -13,6 +13,105 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "MFC",
+    name: "Magician's Force",
+    cost: 500,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Super Short Print", odds: 1 / 30 },
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Super Short Print", odds: 2 / 60 },
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl: "https://ms.yugipedia.com//c/c9/MFC-BoosterNA.png",
+  },
+  {
+    code: "DCR",
+    name: "Dark Crisis",
+    cost: 500,
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+    imageUrl:
+      "https://ms.yugipedia.com//8/8f/DCR-BoosterEN-25thAnniversaryEdition.png",
+  },
+  {
     code: "LOD",
     name: "Legacy of Darkness",
     imageUrl: "https://ms.yugipedia.com//4/47/LOD-BoosterEN.png",

@@ -30,7 +30,9 @@ const RELEASED_SET_NAMES = [
   // "Yu-Gi-Oh! The Eternal Duelist Soul Bundles",
   // "Legacy of Darkness",
   // "Pharaonic Guardian",
-  "Tournament Pack 4",
+  // "Tournament Pack 4",
+  "Magician's Force",
+  "Dark Crisis",
 ];
 
 const sets = JSON.parse(

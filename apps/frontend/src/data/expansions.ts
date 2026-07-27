@@ -1,6 +1,7 @@
 import { findPackByCode } from "./packs";
 
 export const ALL_EXPANSIONS = [
+  { name: "Advent of Discord", codes: ["MFC", "DCR"] },
   { name: "Highlight & Shadow", codes: ["LOD", "TP4", "PGD"] },
   { name: "Time & Illusion", codes: ["SDJ", "TP3", "SDP"] },
   { name: "Forbidden Steel", codes: ["PSV", "TP2", "LON"] },
