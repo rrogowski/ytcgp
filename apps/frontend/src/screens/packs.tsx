@@ -5,6 +5,10 @@ import { getCardsInSet, getCostOfRemainingCards } from "../data/cards";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
 import { getPackCostIncludingAdditionalPacks } from "../data/packs";
 import { Button } from "../design-system/components/button";
+import { Center } from "../design-system/components/center";
+import { Column } from "../design-system/components/column";
+import { Row } from "../design-system/components/row";
+import { Spacer } from "../design-system/components/spacer";
 import { Text } from "../design-system/components/text";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
@@ -66,149 +70,152 @@ export const Packs: React.FC = () => {
   const grandMasterSets = getGrandMasterSets(binder.data);
 
   return (
-    <ui.div justifyContent="center" margin="0 auto" maxWidth="40rem">
-      <ui.div display="flex" justifyContent="end">
-        <select
-          value={expansionName}
-          onChange={(event) => setExpansionName(event.currentTarget.value)}
-        >
-          {ALL_EXPANSIONS.map((expansion) => {
-            return <option key={expansion.name}>{expansion.name}</option>;
-          })}
-        </select>
-      </ui.div>
-      <ui.div
-        alignItems="center"
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="center"
-        overflow="auto"
-        width="100%"
-      >
-        {getExpansionPacks(expansionName).map((pack) => {
-          const cost = getPackCostIncludingAdditionalPacks(pack.code);
-          const cards = getCardsInSet(pack.code);
-          const uniques = cards.filter((c) => (binder.data?.[c.code] ?? 0) > 0);
-          const playsets = cards.filter(
-            (c) => (binder.data?.[c.code] ?? 0) >= 3,
-          );
-          const totalCardsAtOrBelow3Copies = cards.reduce((accumulator, c) => {
-            const quantity = binder.data?.[c.code] ?? 0;
-            return accumulator + (quantity > 3 ? 3 : quantity);
-          }, 0);
-          const packPoints = pointsWallet.data?.[pack.code] ?? 0;
-          const costOfRemainingCards = getCostOfRemainingCards(
-            cards,
-            binder.data,
-          );
-          return (
-            <ui.div
-              key={pack.code}
-              alignItems="center"
-              display="flex"
-              flexDirection="column"
-              padding="0.25rem"
-              width="33.33%"
-            >
-              <img
-                src={pack.imageUrl}
-                style={{ aspectRatio: 1 / 2, width: "100%" }}
-              ></img>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.25rem",
-                  marginTop: "0.5rem",
-                  width: "100%",
-                }}
+    <Center alignItems="unset" overflow="auto">
+      <Column alignItems="stretch" gap="0.25rem" maxWidth="40rem">
+        <Row>
+          <Spacer></Spacer>
+          <select
+            value={expansionName}
+            onChange={(event) => setExpansionName(event.currentTarget.value)}
+          >
+            {ALL_EXPANSIONS.map((expansion) => {
+              return <option key={expansion.name}>{expansion.name}</option>;
+            })}
+          </select>
+        </Row>
+        <Row flexWrap="wrap" justifyContent="center">
+          {getExpansionPacks(expansionName).map((pack) => {
+            const cost = getPackCostIncludingAdditionalPacks(pack.code);
+            const cards = getCardsInSet(pack.code);
+            const uniques = cards.filter(
+              (c) => (binder.data?.[c.code] ?? 0) > 0,
+            );
+            const playsets = cards.filter(
+              (c) => (binder.data?.[c.code] ?? 0) >= 3,
+            );
+            const totalCardsAtOrBelow3Copies = cards.reduce(
+              (accumulator, c) => {
+                const quantity = binder.data?.[c.code] ?? 0;
+                return accumulator + (quantity > 3 ? 3 : quantity);
+              },
+              0,
+            );
+            const packPoints = pointsWallet.data?.[pack.code] ?? 0;
+            const costOfRemainingCards = getCostOfRemainingCards(
+              cards,
+              binder.data,
+            );
+            return (
+              <ui.div
+                key={pack.code}
+                alignItems="center"
+                display="flex"
+                flexDirection="column"
+                padding="0.25rem"
+                width="33.33%"
               >
-                <Button
-                  disabled={
-                    isBuyingPack ||
-                    (profile.data?.money ?? 0) < cost ||
-                    (grandMasterSets.includes(pack) &&
-                      pack.code !== "BPTV1" &&
-                      pack.code !== "BPTV2")
-                  }
-                  onClick={() => handleBuyPack(user, pack.code)}
+                <img
+                  src={pack.imageUrl}
+                  style={{ aspectRatio: 1 / 2, width: "100%" }}
+                ></img>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.25rem",
+                    marginTop: "0.5rem",
+                    width: "100%",
+                  }}
                 >
-                  <Text lineHeight="2rem">
-                    {grandMasterSets.includes(pack) &&
-                    pack.code !== "BPTV1" &&
-                    pack.code !== "BPTV2"
-                      ? "👑"
-                      : `Buy (¥${cost})`}
-                  </Text>
-                </Button>
-                {grandMasterSets.includes(pack) ? (
                   <Button
                     disabled={
-                      (pointsWallet.data?.[pack.code] ?? 0) === 0 ||
-                      isConvertingPackPoints
+                      isBuyingPack ||
+                      (profile.data?.money ?? 0) < cost ||
+                      (grandMasterSets.includes(pack) &&
+                        pack.code !== "BPTV1" &&
+                        pack.code !== "BPTV2")
                     }
-                    lineHeight="2rem"
-                    onClick={() => handleConvertPackPoints(pack.code)}
-                  >
-                    👑
-                  </Button>
-                ) : (
-                  <Button
-                    disabled={isBuyingPack}
-                    onClick={() => router.navigate(`/craft?code=${pack.code}`)}
+                    onClick={() => handleBuyPack(user, pack.code)}
                   >
                     <Text lineHeight="2rem">
-                      Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
+                      {grandMasterSets.includes(pack) &&
+                      pack.code !== "BPTV1" &&
+                      pack.code !== "BPTV2"
+                        ? "👑"
+                        : `Buy (¥${cost})`}
                     </Text>
                   </Button>
-                )}
-                <ProgressBar
-                  backgroundColor="#ba964a"
-                  color="white"
-                  currentValue={uniques.length}
-                  height="1.5rem"
-                  maxValue={cards.length}
-                  marginTop="0.25rem"
-                  width="100%"
-                ></ProgressBar>
-                <Text
-                  fontSize="0.75rem"
-                  marginBottom="0.25rem"
-                  textAlign="center"
-                >
-                  {uniques.length} / {cards.length} Uniques
-                </Text>
-                <ProgressBar
-                  backgroundColor="#7d5646"
-                  color="white"
-                  currentValue={totalCardsAtOrBelow3Copies}
-                  height="1.5rem"
-                  maxValue={cards.length * 3}
-                  width="100%"
-                ></ProgressBar>
-                <Text
-                  fontSize="0.75rem"
-                  marginBottom="0.25rem"
-                  textAlign="center"
-                >
-                  {playsets.length} / {cards.length} Playsets
-                </Text>
-                <ProgressBar
-                  backgroundColor="#1780b8"
-                  color="white"
-                  currentValue={packPoints}
-                  height="1.5rem"
-                  maxValue={costOfRemainingCards}
-                  width="100%"
-                ></ProgressBar>
-                <Text fontSize="0.75rem" textAlign="center">
-                  {packPoints} / {costOfRemainingCards} ₱
-                </Text>
-              </div>
-            </ui.div>
-          );
-        })}
-      </ui.div>
-    </ui.div>
+                  {grandMasterSets.includes(pack) ? (
+                    <Button
+                      disabled={
+                        (pointsWallet.data?.[pack.code] ?? 0) === 0 ||
+                        isConvertingPackPoints
+                      }
+                      lineHeight="2rem"
+                      onClick={() => handleConvertPackPoints(pack.code)}
+                    >
+                      👑
+                    </Button>
+                  ) : (
+                    <Button
+                      disabled={isBuyingPack}
+                      onClick={() =>
+                        router.navigate(`/craft?code=${pack.code}`)
+                      }
+                    >
+                      <Text lineHeight="2rem">
+                        Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
+                      </Text>
+                    </Button>
+                  )}
+                  <ProgressBar
+                    backgroundColor="#ba964a"
+                    color="white"
+                    currentValue={uniques.length}
+                    height="1.5rem"
+                    maxValue={cards.length}
+                    marginTop="0.25rem"
+                    width="100%"
+                  ></ProgressBar>
+                  <Text
+                    fontSize="0.75rem"
+                    marginBottom="0.25rem"
+                    textAlign="center"
+                  >
+                    {uniques.length} / {cards.length} Uniques
+                  </Text>
+                  <ProgressBar
+                    backgroundColor="#7d5646"
+                    color="white"
+                    currentValue={totalCardsAtOrBelow3Copies}
+                    height="1.5rem"
+                    maxValue={cards.length * 3}
+                    width="100%"
+                  ></ProgressBar>
+                  <Text
+                    fontSize="0.75rem"
+                    marginBottom="0.25rem"
+                    textAlign="center"
+                  >
+                    {playsets.length} / {cards.length} Playsets
+                  </Text>
+                  <ProgressBar
+                    backgroundColor="#1780b8"
+                    color="white"
+                    currentValue={packPoints}
+                    height="1.5rem"
+                    maxValue={costOfRemainingCards}
+                    width="100%"
+                  ></ProgressBar>
+                  <Text fontSize="0.75rem" textAlign="center">
+                    {packPoints} / {costOfRemainingCards} ₱
+                  </Text>
+                </div>
+              </ui.div>
+            );
+          })}
+        </Row>
+      </Column>
+    </Center>
   );
 };

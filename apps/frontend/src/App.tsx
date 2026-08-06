@@ -3,7 +3,6 @@ import "./styles.css";
 
 import { FullPageText } from "./components/full-page-text";
 import { Icon } from "./components/icon";
-import { ui } from "./components/ui";
 import { Button } from "./design-system/components/button";
 import { Column } from "./design-system/components/column";
 import { Container } from "./design-system/components/container";
@@ -101,13 +100,12 @@ const Navbar: React.FC<{ type: "desktop" | "mobile" }> = (props) => {
   const auth = useAuth();
   const router = useRouter();
   const wonderPicks = useWonderPicks();
+  const Component = props.type === "desktop" ? Column : Row;
 
   return (
-    <Column
+    <Component
       backgroundColor="#7d5646"
       className={`Navbar ${props.type}`}
-      display="flex"
-      flexDirection={props.type === "desktop" ? "column" : "row"}
       gap="0.5rem"
       justifyContent={props.type === "mobile" ? "space-around" : ""}
       padding={props.type === "desktop" ? "1rem 0.5rem" : "0.5rem"}
@@ -115,7 +113,7 @@ const Navbar: React.FC<{ type: "desktop" | "mobile" }> = (props) => {
       {NAVBAR_BUTTONS.map(({ icon, path, aliases = [] }) => {
         const isActive = [path, ...aliases].includes(router.path);
         return (
-          <ui.button
+          <Button
             key={path}
             alignItems="center"
             aspectRatio="1 / 1"
@@ -132,7 +130,7 @@ const Navbar: React.FC<{ type: "desktop" | "mobile" }> = (props) => {
           >
             <Icon>{icon}</Icon>
             {path === "/wonder-pick" && wonderPicks.hasNewPicks && (
-              <ui.span
+              <Text
                 backgroundColor="red"
                 borderRadius="0.25rem"
                 color="white"
@@ -144,12 +142,12 @@ const Navbar: React.FC<{ type: "desktop" | "mobile" }> = (props) => {
                 top="-0.5rem"
               >
                 New
-              </ui.span>
+              </Text>
             )}
-          </ui.button>
+          </Button>
         );
       })}
-    </Column>
+    </Component>
   );
 };
 
@@ -169,14 +167,14 @@ const View: React.FC = () => {
   if (auth.user === null) {
     return (
       <FullPageText>
-        <ui.button
+        <Button
           borderColor="black"
           borderRadius="0.75rem"
           padding="0.5rem 1rem"
           onClick={auth.signInWithGoogle}
         >
           Sign In With Google
-        </ui.button>
+        </Button>
       </FullPageText>
     );
   }
