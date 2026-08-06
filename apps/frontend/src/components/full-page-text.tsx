@@ -1,14 +1,13 @@
-import { ui } from "./ui";
+import { Center } from "../design-system/components/center";
+import { Expanded } from "../design-system/components/expanded";
+import { Text } from "../design-system/components/text";
 
 export const FullPageText: React.FC<React.PropsWithChildren> = (props) => {
   return (
-    <ui.div
-      alignItems="center"
-      display="flex"
-      justifyContent="center"
-      height="100%"
-    >
-      {props.children}
-    </ui.div>
+    <Expanded>
+      <Center>
+        <Text>{props.children}</Text>
+      </Center>
+    </Expanded>
   );
 };

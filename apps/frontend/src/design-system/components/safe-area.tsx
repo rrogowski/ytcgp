@@ -1,18 +1,20 @@
+import React from "react";
 import type { StyledElementProps } from "../types";
 import { splitProps } from "../utils";
 
-export const Row: React.FC<StyledElementProps<"div">> = (props) => {
+export const SafeArea: React.FC<StyledElementProps<"div">> = (props) => {
   const { elementProps, styleProps } = splitProps(props);
   return (
     <div
       style={{
-        alignItems: "center",
         display: "flex",
-        flexDirection: "row",
-        width: "100%",
+        flexDirection: "column",
+        height: "100dvh",
+        overflow: "hidden",
+        width: "100dvw",
         ...styleProps,
       }}
       {...elementProps}
-    />
+    ></div>
   );
 };

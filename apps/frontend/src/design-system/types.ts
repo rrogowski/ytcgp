@@ -7,5 +7,5 @@ export type StyleProps = React.CSSProperties;
 
 export type ElementProps<T extends keyof JSX.IntrinsicElements> = Omit<
   JSX.IntrinsicElements[T],
-  "style" | keyof StyleProps
+  "height" | "width" | "style" | keyof StyleProps
 >;

@@ -5,7 +5,12 @@ export const Column: React.FC<StyledElementProps<"div">> = (props) => {
   const { elementProps, styleProps } = splitProps(props);
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", ...styleProps }}
+      style={{
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column",
+        ...styleProps,
+      }}
       {...elementProps}
     />
   );

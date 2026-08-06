@@ -5,7 +5,6 @@ import { getCardsInSet, getCostOfRemainingCards } from "../data/cards";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
 import { getPackCostIncludingAdditionalPacks } from "../data/packs";
 import { Button } from "../design-system/components/button";
-import { Column } from "../design-system/components/column";
 import { Text } from "../design-system/components/text";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
@@ -67,7 +66,7 @@ export const Packs: React.FC = () => {
   const grandMasterSets = getGrandMasterSets(binder.data);
 
   return (
-    <Column justifyContent="center" margin="0 auto" maxWidth="40rem">
+    <ui.div justifyContent="center" margin="0 auto" maxWidth="40rem">
       <ui.div display="flex" justifyContent="end">
         <select
           value={expansionName}
@@ -210,6 +209,6 @@ export const Packs: React.FC = () => {
           );
         })}
       </ui.div>
-    </Column>
+    </ui.div>
   );
 };

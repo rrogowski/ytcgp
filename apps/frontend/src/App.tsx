@@ -1,9 +1,16 @@
+import "./App.css";
+import "./styles.css";
+
 import { FullPageText } from "./components/full-page-text";
 import { Icon } from "./components/icon";
 import { ui } from "./components/ui";
-import { Center } from "./design-system/components/center";
+import { Button } from "./design-system/components/button";
+import { Column } from "./design-system/components/column";
+import { Container } from "./design-system/components/container";
+import { Expanded } from "./design-system/components/expanded";
 import { Image } from "./design-system/components/image";
 import { Row } from "./design-system/components/row";
+import { SafeArea } from "./design-system/components/safe-area";
 import { Spacer } from "./design-system/components/spacer";
 import { Text } from "./design-system/components/text";
 import logo from "./images/logo.png";
@@ -23,9 +30,6 @@ import { Packs } from "./screens/packs";
 import { Search } from "./screens/search";
 import { WonderPick } from "./screens/wonder-pick";
 import { claimAllowanceTransaction } from "./transactions/allowance";
-
-import "./App.css";
-import "./styles.css";
 
 const NAVBAR_BUTTONS = [
   { icon: "book_5", path: "/binder", aliases: ["/", "/search"] },
@@ -51,28 +55,18 @@ const App: React.FC = () => {
   const code = router.params["code"] ?? "";
 
   return (
-    <ui.div
-      display="flex"
-      flexDirection="column"
-      height="100dvh"
-      overflow="hidden"
-      width="100dvw"
-    >
+    <SafeArea>
       <Row gap="0.5rem" padding="0.5rem 1rem">
-        <Center>
-          <Image src={logo} height="32px"></Image>
-        </Center>
+        <Image src={logo} height="32px"></Image>
         <Spacer></Spacer>
-        <Center>
-          {profile.data && pointsWallet.data ? (
-            <Text>
-              ¥{profile.data?.money} | {profile.data?.wonderPoints} ₩
-              {router.path === "/craft" &&
-                ` | ${pointsWallet.data?.[code] ?? 0} ₱`}
-            </Text>
-          ) : null}
-        </Center>
-        <ui.button
+        {profile.data && pointsWallet.data ? (
+          <Text>
+            ¥{profile.data?.money} | {profile.data?.wonderPoints} ₩
+            {router.path === "/craft" &&
+              ` | ${pointsWallet.data?.[code] ?? 0} ₱`}
+          </Text>
+        ) : null}
+        <Button
           disabled={allowance.count === 0 || isClaimingAllowance}
           onClick={() => auth.user && claimAllowance(auth.user)}
         >
@@ -86,16 +80,20 @@ const App: React.FC = () => {
               Claim Daily<br></br>Allowance
             </Text>
           )}
-        </ui.button>
+        </Button>
       </Row>
-      <ui.div display="flex" flexGrow={1} overflow="auto">
-        <Navbar type="desktop"></Navbar>
-        <ui.div backgroundColor="#efecea" padding="0.5rem" flexGrow={1}>
-          <View></View>
-        </ui.div>
-      </ui.div>
+      <Expanded>
+        <Row alignItems="stretch" overflow="auto">
+          <Navbar type="desktop"></Navbar>
+          <Expanded>
+            <Container backgroundColor="#efecea" padding="0.5rem">
+              <View></View>
+            </Container>
+          </Expanded>
+        </Row>
+      </Expanded>
       <Navbar type="mobile"></Navbar>
-    </ui.div>
+    </SafeArea>
   );
 };
 
@@ -105,7 +103,7 @@ const Navbar: React.FC<{ type: "desktop" | "mobile" }> = (props) => {
   const wonderPicks = useWonderPicks();
 
   return (
-    <ui.div
+    <Column
       backgroundColor="#7d5646"
       className={`Navbar ${props.type}`}
       display="flex"
@@ -151,7 +149,7 @@ const Navbar: React.FC<{ type: "desktop" | "mobile" }> = (props) => {
           </ui.button>
         );
       })}
-    </ui.div>
+    </Column>
   );
 };
 
