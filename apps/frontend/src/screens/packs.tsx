@@ -4,6 +4,9 @@ import { ui } from "../components/ui";
 import { getCardsInSet, getCostOfRemainingCards } from "../data/cards";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
 import { getPackCostIncludingAdditionalPacks } from "../data/packs";
+import { Button } from "../design-system/components/button";
+import { Column } from "../design-system/components/column";
+import { Text } from "../design-system/components/text";
 import { useUser } from "../lib/auth";
 import { useDocumentWithId } from "../lib/firestore";
 import { useLocalStorageState } from "../lib/local-storage";
@@ -64,15 +67,7 @@ export const Packs: React.FC = () => {
   const grandMasterSets = getGrandMasterSets(binder.data);
 
   return (
-    <ui.div
-      display="flex"
-      flexDirection="column"
-      height="100%"
-      justifyContent="center"
-      margin="0 auto"
-      maxWidth="40rem"
-      width="100%"
-    >
+    <Column justifyContent="center" margin="0 auto" maxWidth="40rem">
       <ui.div display="flex" justifyContent="end">
         <select
           value={expansionName}
@@ -129,7 +124,7 @@ export const Packs: React.FC = () => {
                   width: "100%",
                 }}
               >
-                <ui.button
+                <Button
                   disabled={
                     isBuyingPack ||
                     (profile.data?.money ?? 0) < cost ||
@@ -137,19 +132,18 @@ export const Packs: React.FC = () => {
                       pack.code !== "BPTV1" &&
                       pack.code !== "BPTV2")
                   }
-                  lineHeight="2rem"
                   onClick={() => handleBuyPack(user, pack.code)}
                 >
-                  {grandMasterSets.includes(pack) &&
-                  pack.code !== "BPTV1" &&
-                  pack.code !== "BPTV2" ? (
-                    <ui.span>👑</ui.span>
-                  ) : (
-                    <ui.span>Buy (¥{cost})</ui.span>
-                  )}
-                </ui.button>
+                  <Text lineHeight="2rem">
+                    {grandMasterSets.includes(pack) &&
+                    pack.code !== "BPTV1" &&
+                    pack.code !== "BPTV2"
+                      ? "👑"
+                      : `Buy (¥${cost})`}
+                  </Text>
+                </Button>
                 {grandMasterSets.includes(pack) ? (
-                  <ui.button
+                  <Button
                     disabled={
                       (pointsWallet.data?.[pack.code] ?? 0) === 0 ||
                       isConvertingPackPoints
@@ -158,15 +152,16 @@ export const Packs: React.FC = () => {
                     onClick={() => handleConvertPackPoints(pack.code)}
                   >
                     👑
-                  </ui.button>
+                  </Button>
                 ) : (
-                  <ui.button
+                  <Button
                     disabled={isBuyingPack}
-                    lineHeight="2rem"
                     onClick={() => router.navigate(`/craft?code=${pack.code}`)}
                   >
-                    Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
-                  </ui.button>
+                    <Text lineHeight="2rem">
+                      Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
+                    </Text>
+                  </Button>
                 )}
                 <ProgressBar
                   backgroundColor="#ba964a"
@@ -177,13 +172,13 @@ export const Packs: React.FC = () => {
                   marginTop="0.25rem"
                   width="100%"
                 ></ProgressBar>
-                <ui.span
+                <Text
                   fontSize="0.75rem"
                   marginBottom="0.25rem"
                   textAlign="center"
                 >
                   {uniques.length} / {cards.length} Uniques
-                </ui.span>
+                </Text>
                 <ProgressBar
                   backgroundColor="#7d5646"
                   color="white"
@@ -192,13 +187,13 @@ export const Packs: React.FC = () => {
                   maxValue={cards.length * 3}
                   width="100%"
                 ></ProgressBar>
-                <ui.span
+                <Text
                   fontSize="0.75rem"
                   marginBottom="0.25rem"
                   textAlign="center"
                 >
                   {playsets.length} / {cards.length} Playsets
-                </ui.span>
+                </Text>
                 <ProgressBar
                   backgroundColor="#1780b8"
                   color="white"
@@ -207,14 +202,14 @@ export const Packs: React.FC = () => {
                   maxValue={costOfRemainingCards}
                   width="100%"
                 ></ProgressBar>
-                <ui.span fontSize="0.75rem" textAlign="center">
+                <Text fontSize="0.75rem" textAlign="center">
                   {packPoints} / {costOfRemainingCards} ₱
-                </ui.span>
+                </Text>
               </div>
             </ui.div>
           );
         })}
       </ui.div>
-    </ui.div>
+    </Column>
   );
 };

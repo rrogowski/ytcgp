@@ -1,6 +1,11 @@
 import { FullPageText } from "./components/full-page-text";
 import { Icon } from "./components/icon";
 import { ui } from "./components/ui";
+import { Center } from "./design-system/components/center";
+import { Image } from "./design-system/components/image";
+import { Row } from "./design-system/components/row";
+import { Spacer } from "./design-system/components/spacer";
+import { Text } from "./design-system/components/text";
 import logo from "./images/logo.png";
 import { useAllowance } from "./lib/allowance";
 import { useAuth } from "./lib/auth";
@@ -53,44 +58,36 @@ const App: React.FC = () => {
       overflow="hidden"
       width="100dvw"
     >
-      <ui.div
-        alignItems="center"
-        display="flex"
-        gap="1rem"
-        padding="0.5rem 1rem"
-      >
-        <ui.img src={logo} height="32px"></ui.img>
-        <ui.div
-          alignItems="center"
-          display="flex"
-          flexGrow={1}
-          gap="0.5rem"
-          justifyContent="end"
-        >
+      <Row gap="0.5rem" padding="0.5rem 1rem">
+        <Center>
+          <Image src={logo} height="32px"></Image>
+        </Center>
+        <Spacer></Spacer>
+        <Center>
           {profile.data && pointsWallet.data ? (
-            <ui.span>
+            <Text>
               ¥{profile.data?.money} | {profile.data?.wonderPoints} ₩
               {router.path === "/craft" &&
                 ` | ${pointsWallet.data?.[code] ?? 0} ₱`}
-            </ui.span>
+            </Text>
           ) : null}
-          <ui.button
-            disabled={allowance.count === 0 || isClaimingAllowance}
-            onClick={() => auth.user && claimAllowance(auth.user)}
-          >
-            {allowance.count === 0 ? (
-              <ui.span>
-                Claim in<br></br>
-                {formatMsRemaining(allowance.msRemaining)}
-              </ui.span>
-            ) : (
-              <ui.span>
-                Claim Daily<br></br>Allowance
-              </ui.span>
-            )}
-          </ui.button>
-        </ui.div>
-      </ui.div>
+        </Center>
+        <ui.button
+          disabled={allowance.count === 0 || isClaimingAllowance}
+          onClick={() => auth.user && claimAllowance(auth.user)}
+        >
+          {allowance.count === 0 ? (
+            <Text>
+              Claim in<br></br>
+              {formatMsRemaining(allowance.msRemaining)}
+            </Text>
+          ) : (
+            <Text>
+              Claim Daily<br></br>Allowance
+            </Text>
+          )}
+        </ui.button>
+      </Row>
       <ui.div display="flex" flexGrow={1} overflow="auto">
         <Navbar type="desktop"></Navbar>
         <ui.div backgroundColor="#efecea" padding="0.5rem" flexGrow={1}>
