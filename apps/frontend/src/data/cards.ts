@@ -13,7 +13,7 @@ export interface CardMetadata {
     | "Short Print"
     | "Super Short Print";
   imageUrl: string;
-  thumbnailUrl?: string;
+  thumbnailSize?: number;
   cardType: "monster" | "spell" | "trap";
   subcategory?: string;
   attribute?: string;
@@ -59,6 +59,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Oppressed People",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//3/33/OppressedPeople-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["normal"],
@@ -124,6 +125,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Dark Blade",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//5/5c/DarkBlade-MFC-NA-R-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -150,6 +152,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Kiryu",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//8/85/Kiryu-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -176,6 +179,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Zombie Tiger",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//1/1a/ZombieTiger-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -215,6 +219,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Vampiric Orchis",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//1/1b/VampiricOrchis-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -254,6 +259,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Freezing Beast",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//6/62/FreezingBeast-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["effect"],
@@ -267,6 +273,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Union Rider",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//c/ce/UnionRider-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -280,6 +287,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "D.D. Crazy Beast",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//0/00/DDCrazyBeast-MFC-NA-R-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -293,6 +301,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Spell Canceller",
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//c/c6/SpellCanceller-MFC-NA-UR-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -305,8 +314,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "MFC-021",
     name: "Neko Mane King",
     rarity: "Common",
-    imageUrl:
-      "https://ms.yugipedia.com//archive/f/f3/20250915135148%21NekoManeKing-MFC-NA-C-UE.png",
+    imageUrl: "https://ms.yugipedia.com//f/f3/NekoManeKing-MFC-NA-C-UE.png",
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -321,6 +329,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//f/f9/HelpingRoboforCombat-MFC-NA-R-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -334,6 +343,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Dimension Jar",
     rarity: "Short Print",
     imageUrl: "https://ms.yugipedia.com//f/fb/DimensionJar-MFC-NA-SP-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -348,6 +358,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//7/77/GreatPhantomThief-MFC-NA-R-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -361,6 +372,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Roulette Barrel",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//e/e8/RouletteBarrel-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -390,6 +402,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//5/54/WhiteDragonRitual-MFC-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "ritual",
   },
@@ -398,6 +411,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Frontline Base",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//8/87/FrontlineBase-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -406,6 +420,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Demotion",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//8/8e/Demotion-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "equip",
   },
@@ -465,6 +480,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Raregold Armor",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//d/d0/RaregoldArmor-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "equip",
   },
@@ -505,6 +521,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Huge Revolution",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//b/b9/HugeRevolution-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -513,6 +530,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Thunder of Ruler",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//9/96/ThunderofRuler-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -522,6 +540,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//7/7c/SpellShieldType8-MFC-NA-SR-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "counter",
   },
@@ -579,6 +598,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Adhesion Trap Hole",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//3/31/AdhesionTrapHole-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -777,6 +797,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//b/bf/SkilledDarkMagician-MFC-NA-SR-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -846,6 +867,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Pixie Knight",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//0/0a/PixieKnight-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -941,6 +963,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Des Koala",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//c/c3/DesKoala-MFC-NA-R-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -1053,6 +1076,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Big Bang Shot",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//b/b6/BigBangShot-MFC-NA-R-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "equip",
   },
@@ -1069,6 +1093,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Mass Driver",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//5/5b/MassDriver-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -1094,6 +1119,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Jar Robber",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//6/61/JarRobber-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "quickplay",
   },
@@ -1162,6 +1188,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Hidden Spellbook",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//5/50/HiddenSpellbook-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -1170,6 +1197,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Miracle Restoring",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//5/5d/MiracleRestoring-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -1179,6 +1207,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//1/16/RemoveBrainwashing-MFC-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -1226,6 +1255,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Double Spell",
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//b/bf/DoubleSpell-MFC-NA-UR-UE.png",
+    thumbnailSize: 177,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -1525,7 +1555,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Exodia Necross",
     rarity: "Ultra Rare",
     imageUrl:
-      "https://ms.yugipedia.com//archive/5/5d/20250422173025%21ExodiaNecross-DCR-EN-UR-UE-25thAnniversaryEdition.png",
+      "https://ms.yugipedia.com//5/5d/ExodiaNecross-DCR-EN-UR-UE-25thAnniversaryEdition.png",
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -2573,8 +2603,8 @@ const ALL_CARDS: CardMetadata[] = [
     code: "TP4-008",
     name: "Exile of the Wicked",
     rarity: "Rare",
-    imageUrl:
-      "https://ms.yugipedia.com//archive/3/3f/20190304200442%21ExileoftheWicked-TP4-NA-R-UE.png",
+    imageUrl: "https://ms.yugipedia.com//3/3f/ExileoftheWicked-TP4-NA-R-UE.png",
+    thumbnailSize: 240,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -2682,6 +2712,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Gravity Bind",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//b/b3/GravityBind-TP4-NA-C-UE.jpg",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -2716,6 +2747,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Yata-Garasu",
     rarity: "Secret Rare",
     imageUrl: "https://ms.yugipedia.com//5/54/YataGarasu-LOD-EN-ScR-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -2743,6 +2775,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//c/c5/DarkBaltertheTerrible-LOD-EN-SR-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -2823,6 +2856,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Twin-Headed Wolf",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//a/a2/TwinHeadedWolf-LOD-EN-C-UE.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -2875,6 +2909,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/7c/ThePuppetMagicofDarkRuler-LOD-EN-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -2891,6 +2926,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Double Snare",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//1/15/DoubleSnare-LOD-EN-C-UE.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -3109,6 +3145,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Tyrant Dragon",
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//d/d0/TyrantDragon-LOD-EN-UR-UE.jpg",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["effect"],
@@ -3176,6 +3213,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//f/f9/FiendSkullDragon-LOD-EN-SR-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -3190,6 +3228,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Cave Dragon",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//d/d0/CaveDragon-LOD-EN-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -3264,6 +3303,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/f9/SuperRejuvenation-LOD-EN-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "quickplay",
   },
@@ -3381,6 +3421,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/d4/SerpentinePrincess-LOD-EN-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["effect"],
@@ -3511,8 +3552,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LOD-EN067",
     name: "Yamata Dragon",
     rarity: "Ultra Rare",
-    imageUrl:
-      "https://ms.yugipedia.com//archive/8/8b/20230511225631%21YamataDragon-LOD-EN-UR-UE.png",
+    imageUrl: "https://ms.yugipedia.com//8/8b/YamataDragon-LOD-EN-UR-UE.png",
     cardType: "monster",
     attribute: "fire",
     type: "dragon",
@@ -3667,6 +3707,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Creature Swap",
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//3/32/CreatureSwap-LOD-EN-UR-UE.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -3676,6 +3717,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/c8/SpiritualEnergySettleMachine-LOD-EN-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -3802,6 +3844,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Drop Off",
     rarity: "Super Rare",
     imageUrl: "https://ms.yugipedia.com//1/1f/DropOff-LOD-EN-SR-UE.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -3826,7 +3869,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Injection Fairy Lily",
     rarity: "Secret Rare",
     imageUrl:
-      "https://ms.yugipedia.com//archive/9/97/20230511231226%21InjectionFairyLily-LOD-EN-ScR-UE.png",
+      "https://ms.yugipedia.com//9/97/InjectionFairyLily-LOD-EN-ScR-UE.png",
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -3841,6 +3884,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Secret Rare",
     imageUrl:
       "https://ms.yugipedia.com//3/3b/RingofDestruction-PGD-NA-ScR-UE.png",
+    thumbnailSize: 177,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -3849,6 +3893,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Molten Behemoth",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//5/52/MoltenBehemoth-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["normal"],
@@ -3862,6 +3907,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Shapesnatch",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//0/0a/Shapesnatch-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -3888,6 +3934,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "King Tiger Wanghu",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//0/02/KingTigerWanghu-PGD-NA-R-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -4033,6 +4080,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Sasuke Samurai",
     rarity: "Super Rare",
     imageUrl: "https://ms.yugipedia.com//7/76/SasukeSamurai-PGD-NA-SR-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -4046,6 +4094,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Poison Mummy",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//a/a8/PoisonMummy-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -4059,6 +4108,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Dark Dust Spirit",
     rarity: "Short Print",
     imageUrl: "https://ms.yugipedia.com//5/5b/DarkDustSpirit-PGD-NA-SP-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     type: "zombie",
@@ -4071,6 +4121,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Royal Keeper",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//0/08/RoyalKeeper-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -4110,6 +4161,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Swarm of Scarabs",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//1/16/SwarmofScarabs-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -4175,6 +4227,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Pyramid Turtle",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//e/ea/PyramidTurtle-PGD-NA-R-UE.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -4215,6 +4268,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Don Zaloog",
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//d/d9/DonZaloog-PGD-NA-UR-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -4228,6 +4282,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Des Lacooda",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//e/e8/DesLacooda-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -4292,6 +4347,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//8/83/MirageofNightmare-PGD-NA-SR-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -4301,6 +4357,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/a0/SecretPasstotheTreasures-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -4309,6 +4366,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Call of the Mummy",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//b/b0/CalloftheMummy-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -4317,6 +4375,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Timidity",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//7/75/Timidity-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -4325,6 +4384,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Pyramid Energy",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//e/e8/PyramidEnergy-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "quickplay",
   },
@@ -4367,6 +4427,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Needle Ceiling",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//d/d9/NeedleCeiling-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -4400,6 +4461,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Trap Dustshoot",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//2/28/TrapDustshoot-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -4409,6 +4471,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/ae/PyroClockofDestiny-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -4425,6 +4488,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Pharaoh's Treasure",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//4/49/PharaohsTreasure-PGD-NA-R-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -4433,6 +4497,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Master Kyonshee",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//4/43/MasterKyonshee-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -4446,6 +4511,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Kabazauls",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//0/0d/Kabazauls-PGD-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "water",
     classifications: ["normal"],
@@ -4459,6 +4525,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Inpachi",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//6/67/Inpachi-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -4472,6 +4539,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Dark Jeroid",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//8/8c/DarkJeroid-PGD-NA-R-UE.jpg",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -4486,6 +4554,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//7/77/Newdoria-PGD-NA-R-UE.png",
     cardType: "monster",
+    thumbnailSize: 176,
     attribute: "dark",
     classifications: ["effect"],
     type: "fiend",
@@ -4499,6 +4568,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//3/32/Helpoemer-PGD-NA-UR-UE.png",
     cardType: "monster",
+    thumbnailSize: 179,
     attribute: "dark",
     classifications: ["effect"],
     type: "fiend",
@@ -4512,6 +4582,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//3/34/GravekeepersSpy-PGD-NA-C-UE.png",
     cardType: "monster",
+    thumbnailSize: 179,
     attribute: "dark",
     classifications: ["effect"],
     type: "spellcaster",
@@ -4526,6 +4597,7 @@ const ALL_CARDS: CardMetadata[] = [
     imageUrl:
       "https://ms.yugipedia.com//c/c3/GravekeepersCurse-PGD-NA-C-UE.png",
     cardType: "monster",
+    thumbnailSize: 179,
     attribute: "dark",
     classifications: ["effect"],
     type: "spellcaster",
@@ -4540,6 +4612,7 @@ const ALL_CARDS: CardMetadata[] = [
     imageUrl:
       "https://ms.yugipedia.com//6/61/GravekeepersGuard-PGD-NA-C-UE.png",
     cardType: "monster",
+    thumbnailSize: 179,
     attribute: "dark",
     classifications: ["effect"],
     type: "spellcaster",
@@ -4554,6 +4627,7 @@ const ALL_CARDS: CardMetadata[] = [
     imageUrl:
       "https://ms.yugipedia.com//6/6d/GravekeepersSpearSoldier-PGD-NA-C-UE.png",
     cardType: "monster",
+    thumbnailSize: 179,
     attribute: "dark",
     classifications: ["effect"],
     type: "spellcaster",
@@ -4568,6 +4642,7 @@ const ALL_CARDS: CardMetadata[] = [
     imageUrl:
       "https://ms.yugipedia.com//a/a0/GravekeepersVassal-PGD-NA-C-UE.png",
     cardType: "monster",
+    thumbnailSize: 179,
     attribute: "dark",
     classifications: ["effect"],
     type: "spellcaster",
@@ -4609,6 +4684,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//b/bb/GravekeepersCannonholder-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -4689,6 +4765,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Winged Sage Falcos",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//6/6f/WingedSageFalcos-PGD-NA-R-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -4728,6 +4805,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Cobra Jar",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//4/4b/CobraJar-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -4782,6 +4860,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Dark Designator",
     rarity: "Rare",
     imageUrl: "https://ms.yugipedia.com//b/b2/DarkDesignator-PGD-NA-R-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -4798,6 +4877,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Reasoning",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//4/4a/Reasoning-PGD-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -4816,6 +4896,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/d7/DifferentDimensionCapsule-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -4832,6 +4913,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Buster Rancher",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//7/7a/BusterRancher-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "equip",
   },
@@ -4841,6 +4923,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/0c/HieroglyphLithograph-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -4866,6 +4949,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Banner of Courage",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//9/9d/BannerofCourage-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -4906,6 +4990,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Curse of Aging",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//f/f0/CurseofAging-PGD-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -4915,6 +5000,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//2/2a/BarrelBehindtheDoor-PGD-NA-SR-UE.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "counter",
   },
@@ -4941,6 +5027,7 @@ const ALL_CARDS: CardMetadata[] = [
     imageUrl:
       "https://ms.yugipedia.com//1/19/DisturbanceStrategy-PGD-NA-C-UE.png",
     cardType: "trap",
+    thumbnailSize: 179,
     subcategory: "normal",
   },
   {
@@ -4950,6 +5037,7 @@ const ALL_CARDS: CardMetadata[] = [
     imageUrl:
       "https://ms.yugipedia.com//6/6c/TrapofBoardEraser-PGD-NA-SR-UE.png",
     cardType: "trap",
+    thumbnailSize: 179,
     subcategory: "counter",
   },
   {
@@ -4958,6 +5046,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//7/7a/RiteofSpirit-PGD-NA-C-UE.png",
     cardType: "trap",
+    thumbnailSize: 179,
     subcategory: "normal",
   },
   {
@@ -4982,6 +5071,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Byser Shock",
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//c/cc/ByserShock-PGD-NA-UR-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -4995,6 +5085,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Question",
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//a/af/Question-PGD-NA-UR-UE.png",
+    thumbnailSize: 177,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -5447,6 +5538,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Relinquished",
     rarity: "Ultra Rare",
     imageUrl: "https://ms.yugipedia.com//9/96/Relinquished-SDP-NA-UR-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -5488,6 +5580,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/0b/IllusionistFacelessMage-SDP-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -5528,6 +5621,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/0c/GiantSoldierofStone-SDP-NA-C-UE.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -5567,6 +5661,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Hane-Hane",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//1/11/HaneHane-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -5580,6 +5675,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Sonic Bird",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//0/00/SonicBird-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -5593,6 +5689,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Jigen Bakudan",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//0/04/JigenBakudan-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["effect"],
@@ -5606,6 +5703,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Mask of Darkness",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//3/3f/MaskofDarkness-SDP-NA-C-UE.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -5633,6 +5731,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Man-Eater Bug",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//9/92/ManEaterBug-SDP-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -5699,6 +5798,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/28/BlueEyesToonDragon-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -5713,6 +5813,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/0b/ToonSummonedSkull-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -5726,6 +5827,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Manga Ryu-Ran",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//c/c7/MangaRyuRan-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["effect"],
@@ -5760,6 +5862,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Black Pendant",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//0/05/BlackPendant-SDP-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "equip",
   },
@@ -5768,6 +5871,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Dark Hole",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//7/78/DarkHole-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -5777,6 +5881,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//4/49/DianKetotheCureMaster-SDP-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -5818,6 +5923,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//e/e0/MysticalSpaceTyphoon-SDP-NA-C-UE.png",
+    thumbnailSize: 177,
     cardType: "spell",
     subcategory: "quickplay",
   },
@@ -5842,6 +5948,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Monster Reborn",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//5/59/MonsterReborn-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -5850,6 +5957,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Soul Release",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//2/23/SoulRelease-SDP-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -5858,6 +5966,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Yami",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//a/a5/Yami-SDP-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "field",
   },
@@ -5867,6 +5976,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/f5/BlackIllusionRitual-SDP-NA-C-UE.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "ritual",
   },
@@ -5899,6 +6009,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Reinforcements",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//c/c7/Reinforcements-SDP-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -5924,6 +6035,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/23/SevenToolsoftheBandit-SDP-NA-C-UE.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "counter",
   },
@@ -5964,6 +6076,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Gryphon Wing",
     rarity: "Super Rare",
     imageUrl: "https://ms.yugipedia.com//3/37/GryphonWing-SDP-NA-SR-UE.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -6158,6 +6271,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Time Wizard",
     rarity: "Common",
     imageUrl: "https://ms.yugipedia.com//d/d7/TimeWizard-SDJ-NA-C-UE.png",
+    thumbnailSize: 236,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -6788,6 +6902,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN018",
     name: "Mask of Restrict",
     imageUrl: "https://ms.yugipedia.com//c/c8/MaskofRestrict-LON-EN-UR-UE.png",
+    thumbnailSize: 179,
     rarity: "Ultra Rare",
     cardType: "trap",
     subcategory: "continuous",
@@ -6797,6 +6912,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Mask of the Accursed",
     imageUrl:
       "https://ms.yugipedia.com//6/61/MaskoftheAccursed-LON-EN-SR-UE.png",
+    thumbnailSize: 178,
     rarity: "Super Rare",
     cardType: "spell",
     subcategory: "equip",
@@ -6822,6 +6938,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN022",
     name: "Lightning Blade",
     imageUrl: "https://ms.yugipedia.com//b/ba/LightningBlade-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "spell",
     subcategory: "equip",
@@ -6881,6 +6998,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Card of Safe Return",
     imageUrl:
       "https://ms.yugipedia.com//d/de/CardofSafeReturn-LON-EN-UR-UE.png",
+    thumbnailSize: 178,
     rarity: "Ultra Rare",
     cardType: "spell",
     subcategory: "continuous",
@@ -6889,6 +7007,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN030",
     name: "Lady Panther",
     imageUrl: "https://ms.yugipedia.com//7/7b/LadyPanther-LON-EN-C-UE.png",
+    thumbnailSize: 178,
     rarity: "Common",
     cardType: "monster",
     attribute: "earth",
@@ -7088,6 +7207,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN045",
     name: "St. Joan",
     imageUrl: "https://ms.yugipedia.com//0/0f/StJoan-LON-EN-C-UE.png",
+    thumbnailSize: 178,
     rarity: "Common",
     cardType: "monster",
     attribute: "light",
@@ -7123,6 +7243,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Scroll of Bewitchment",
     imageUrl:
       "https://ms.yugipedia.com//7/7b/ScrollofBewitchment-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "spell",
     subcategory: "equip",
@@ -7171,6 +7292,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "The Gross Ghost of Fled Dreams",
     imageUrl:
       "https://ms.yugipedia.com//4/46/TheGrossGhostofFledDreams-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "monster",
     attribute: "dark",
@@ -7184,6 +7306,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN054",
     name: "Headless Knight",
     imageUrl: "https://ms.yugipedia.com//1/1e/HeadlessKnight-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "monster",
     attribute: "earth",
@@ -7223,6 +7346,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN057",
     name: "Boneheimer",
     imageUrl: "https://ms.yugipedia.com//2/28/Boneheimer-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "monster",
     attribute: "water",
@@ -7318,6 +7442,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Bazoo the Soul-Eater",
     imageUrl:
       "https://ms.yugipedia.com//9/94/BazootheSoulEater-LON-EN-SR-UE.png",
+    thumbnailSize: 179,
     rarity: "Super Rare",
     cardType: "monster",
     attribute: "earth",
@@ -7345,6 +7470,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Soul of Purity and Light",
     imageUrl:
       "https://ms.yugipedia.com//4/40/SoulofPurityandLight-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "monster",
     attribute: "light",
@@ -7398,6 +7524,7 @@ const ALL_CARDS: CardMetadata[] = [
     name: "Garuda the Wind Spirit",
     imageUrl:
       "https://ms.yugipedia.com//1/10/GarudatheWindSpirit-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "monster",
     attribute: "wind",
@@ -7424,6 +7551,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN072",
     name: "Tornado Bird",
     imageUrl: "https://ms.yugipedia.com//f/f5/TornadoBird-LON-EN-R-UE.png",
+    thumbnailSize: 178,
     rarity: "Rare",
     cardType: "monster",
     attribute: "wind",
@@ -7463,6 +7591,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN075",
     name: "Supply",
     imageUrl: "https://ms.yugipedia.com//3/35/Supply-LON-EN-C-UE.png",
+    thumbnailSize: 178,
     rarity: "Super Short Print",
     cardType: "monster",
     attribute: "earth",
@@ -7512,7 +7641,8 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN079",
     name: "Dark Spirit of the Silent",
     imageUrl:
-      "https://ms.yugipedia.com//archive/0/0b/20250917124521%21DarkSpiritoftheSilent-LON-EN-SR-UE.png",
+      "https://ms.yugipedia.com//0/0b/DarkSpiritoftheSilent-LON-EN-SR-UE.png",
+    thumbnailSize: 239,
     rarity: "Super Rare",
     cardType: "trap",
     subcategory: "normal",
@@ -7554,6 +7684,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN084",
     name: "Deal of Phantom",
     imageUrl: "https://ms.yugipedia.com//c/c8/DealofPhantom-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "trap",
     subcategory: "normal",
@@ -7595,6 +7726,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN089",
     name: 'Spirit Message "I"',
     imageUrl: "https://ms.yugipedia.com//8/86/SpiritMessageI-LON-NA-R-UE.png",
+    thumbnailSize: 179,
     rarity: "Rare",
     cardType: "spell",
     subcategory: "continuous",
@@ -7635,6 +7767,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN094",
     name: "Spiritualism",
     imageUrl: "https://ms.yugipedia.com//4/40/Spiritualism-LON-EN-R-UE.png",
+    thumbnailSize: 179,
     rarity: "Rare",
     cardType: "spell",
     subcategory: "normal",
@@ -7675,6 +7808,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN099",
     name: "Ekibyo Drakmord",
     imageUrl: "https://ms.yugipedia.com//0/0b/EkibyoDrakmord-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "spell",
     subcategory: "equip",
@@ -7691,6 +7825,7 @@ const ALL_CARDS: CardMetadata[] = [
     code: "LON-EN101",
     name: "Dragonic Attack",
     imageUrl: "https://ms.yugipedia.com//a/a2/DragonicAttack-LON-EN-C-UE.png",
+    thumbnailSize: 179,
     rarity: "Common",
     cardType: "spell",
     subcategory: "equip",
@@ -7727,8 +7862,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Secret Rare",
     imageUrl:
       "https://ms.yugipedia.com//d/df/Jinzo-PSV-EN-ScR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/df/Jinzo-PSV-EN-ScR-UE-25thAnniversaryEdition.png/179px-Jinzo-PSV-EN-ScR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -7757,8 +7891,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/f1/ThreeHeadedGeedo-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/f1/ThreeHeadedGeedo-PSV-EN-C-UE-25thAnniversaryEdition.png/177px-ThreeHeadedGeedo-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -7773,8 +7906,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//4/4b/ParasiteParacide-PSV-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/4/4b/ParasiteParacide-PSV-EN-SR-UE-25thAnniversaryEdition.png/179px-ParasiteParacide-PSV-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -7789,8 +7921,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/df/7Completed-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/df/7Completed-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-7Completed-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "equip",
   },
@@ -7800,8 +7931,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//d/dd/LightforceSword-PSV-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/dd/LightforceSword-PSV-EN-R-UE-25thAnniversaryEdition.png/178px-LightforceSword-PSV-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7811,8 +7941,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Ultra Rare",
     imageUrl:
       "https://ms.yugipedia.com//e/e1/ChainDestruction-PSV-EN-UR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/e/e1/ChainDestruction-PSV-EN-UR-UE-25thAnniversaryEdition.png/179px-ChainDestruction-PSV-EN-UR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7822,8 +7951,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//b/ba/TimeSeal-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/ba/TimeSeal-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-TimeSeal-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7833,8 +7961,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//5/56/Graverobber-PSV-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/56/Graverobber-PSV-EN-SR-UE-25thAnniversaryEdition.png/179px-Graverobber-PSV-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7844,8 +7971,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//6/6f/GiftofTheMysticalElf-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/6f/GiftofTheMysticalElf-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-GiftofTheMysticalElf-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7855,8 +7981,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//6/6c/TheEyeofTruth-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/6c/TheEyeofTruth-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-TheEyeofTruth-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -7866,8 +7991,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//2/2f/DustTornado-PSV-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/2f/DustTornado-PSV-EN-SR-UE-25thAnniversaryEdition.png/178px-DustTornado-PSV-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7886,8 +8010,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//9/9a/SolomonsLawbook-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/9/9a/SolomonsLawbook-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-SolomonsLawbook-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7897,8 +8020,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//8/8e/Earthshaker-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/8e/Earthshaker-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-Earthshaker-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7917,8 +8039,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//f/fd/MirrorWall-PSV-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/fd/MirrorWall-PSV-EN-SR-UE-25thAnniversaryEdition.png/179px-MirrorWall-PSV-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -7928,8 +8049,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//9/99/Gust-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/9/99/Gust-PSV-EN-C-UE-25thAnniversaryEdition.png/177px-Gust-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7939,8 +8059,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/d1/DrivingSnow-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d1/DrivingSnow-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-DrivingSnow-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7950,8 +8069,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//8/8b/ArmoredGlass-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/8b/ArmoredGlass-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-ArmoredGlass-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7961,8 +8079,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/71/WorldSuppression-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/71/WorldSuppression-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-WorldSuppression-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7972,8 +8089,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/da/MysticProbe-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/da/MysticProbe-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-MysticProbe-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -7992,8 +8108,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Short Print",
     imageUrl:
       "https://ms.yugipedia.com//b/b4/NuminousHealer-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/b4/NuminousHealer-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-NuminousHealer-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -8012,8 +8127,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//f/f3/ForcedRequisition-PSV-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/f3/ForcedRequisition-PSV-EN-R-UE-25thAnniversaryEdition.png/179px-ForcedRequisition-PSV-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -8023,8 +8137,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//b/ba/DNASurgery-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/ba/DNASurgery-PSV-EN-C-UE-25thAnniversaryEdition.png/177px-DNASurgery-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -8052,8 +8165,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//9/9f/MajorRiot-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/9/9f/MajorRiot-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-MajorRiot-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -8072,8 +8184,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//1/18/LightofIntervention-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/18/LightofIntervention-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-LightofIntervention-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -8083,8 +8194,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/fa/RespectPlay-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/fa/RespectPlay-PSV-EN-C-UE-25thAnniversaryEdition.png/177px-RespectPlay-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -8112,8 +8222,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//8/88/NoblemanofExtermination-PSV-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/88/NoblemanofExtermination-PSV-EN-R-UE-25thAnniversaryEdition.png/177px-NoblemanofExtermination-PSV-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -8132,8 +8241,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Ultra Rare",
     imageUrl:
       "https://ms.yugipedia.com//5/5a/PrematureBurial-PSV-EN-UR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/5a/PrematureBurial-PSV-EN-UR-UE-25thAnniversaryEdition.png/179px-PrematureBurial-PSV-EN-UR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "equip",
   },
@@ -8143,8 +8251,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//b/b2/Inspection-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/b2/Inspection-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-Inspection-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -8154,8 +8261,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//8/8f/Prohibition-PSV-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/8f/Prohibition-PSV-EN-R-UE-25thAnniversaryEdition.png/179px-Prohibition-PSV-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -8165,8 +8271,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//1/1e/MorphingJar2-PSV-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/1e/MorphingJar2-PSV-EN-R-UE-25thAnniversaryEdition.png/178px-MorphingJar2-PSV-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -8181,8 +8286,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//e/e5/FlameChampion-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/e/e5/FlameChampion-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-FlameChampion-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["normal"],
@@ -8197,8 +8301,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//1/14/TwinHeadedFireDragon-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/14/TwinHeadedFireDragon-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-TwinHeadedFireDragon-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["normal"],
@@ -8213,8 +8316,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/fd/DarkfireSoldier1-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/fd/DarkfireSoldier1-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-DarkfireSoldier1-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["normal"],
@@ -8229,8 +8331,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//6/62/MrVolcano-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/62/MrVolcano-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-MrVolcano-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["normal"],
@@ -8245,8 +8346,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//5/53/DarkfireSoldier2-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/53/DarkfireSoldier2-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-DarkfireSoldier2-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["normal"],
@@ -8261,8 +8361,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/74/Kiseitai-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/74/Kiseitai-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-Kiseitai-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -8277,8 +8376,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/f0/CyberFalcon-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/f0/CyberFalcon-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-CyberFalcon-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -8293,8 +8391,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/ae/FlyingKamakiri2-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/ae/FlyingKamakiri2-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-FlyingKamakiri2-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -8309,8 +8406,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/21/SkyScout-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/21/SkyScout-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-SkyScout-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -8325,8 +8421,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Ultra Rare",
     imageUrl:
       "https://ms.yugipedia.com//e/e6/BusterBlader-PSV-EN-UR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/e/e6/BusterBlader-PSV-EN-UR-UE-25thAnniversaryEdition.png/178px-BusterBlader-PSV-EN-UR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -8350,8 +8445,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/c4/MinorGoblinOfficial-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/c4/MinorGoblinOfficial-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-MinorGoblinOfficial-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -8361,8 +8455,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/d9/Gamble-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d9/Gamble-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-Gamble-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -8372,8 +8465,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//9/9b/AttackandReceive-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/9/9b/AttackandReceive-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-AttackandReceive-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -8383,8 +8475,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/2b/SolemnWishes-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/2b/SolemnWishes-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-SolemnWishes-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -8394,8 +8485,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//8/86/SkullInvitation-PSV-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/86/SkullInvitation-PSV-EN-R-UE-25thAnniversaryEdition.png/178px-SkullInvitation-PSV-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "continuous",
   },
@@ -8405,8 +8495,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/cf/BubonicVermin-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/cf/BubonicVermin-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-BubonicVermin-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -8421,8 +8510,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/76/DarkBat-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/76/DarkBat-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-DarkBat-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -8437,8 +8525,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/24/OniTankT34-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/24/OniTankT34-PSV-EN-C-UE-25thAnniversaryEdition.png/177px-OniTankT34-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -8453,8 +8540,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/00/Overdrive-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/0/00/Overdrive-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-Overdrive-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -8469,8 +8555,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//9/90/BurningLand-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/9/90/BurningLand-PSV-EN-C-UE-25thAnniversaryEdition.png/179px-BurningLand-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "continuous",
   },
@@ -8480,8 +8565,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/fc/ColdWave-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/fc/ColdWave-PSV-EN-C-UE-25thAnniversaryEdition.png/177px-ColdWave-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -8491,8 +8575,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//3/3f/FairyMeteorCrush-PSV-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/3/3f/FairyMeteorCrush-PSV-EN-SR-UE-25thAnniversaryEdition.png/179px-FairyMeteorCrush-PSV-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "equip",
   },
@@ -8502,8 +8585,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//4/45/LimiterRemoval-PSV-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/4/45/LimiterRemoval-PSV-EN-SR-UE-25thAnniversaryEdition.png/179px-LimiterRemoval-PSV-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "quickplay",
   },
@@ -8513,8 +8595,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/f3/RainofMercy-PSV-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/f3/RainofMercy-PSV-EN-C-UE-25thAnniversaryEdition.png/178px-RainofMercy-PSV-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -9546,8 +9627,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Secret Rare",
     imageUrl:
       "https://ms.yugipedia.com//1/1a/GateGuardian-MRD-EN-ScR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/1a/GateGuardian-MRD-EN-ScR-UE-25thAnniversaryEdition.png/179px-GateGuardian-MRD-EN-ScR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -9562,8 +9642,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/26/FeralImp-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/26/FeralImp-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-FeralImp-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -9578,8 +9657,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//5/52/WingedDragonGuardianoftheFortress1-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/52/WingedDragonGuardianoftheFortress1-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-WingedDragonGuardianoftheFortress1-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -9594,8 +9672,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Ultra Rare",
     imageUrl:
       "https://ms.yugipedia.com//b/bc/SummonedSkull-MRD-EN-UR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/bc/SummonedSkull-MRD-EN-UR-UE-25thAnniversaryEdition.png/179px-SummonedSkull-MRD-EN-UR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -9610,8 +9687,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/cd/RockOgreGrotto1-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/cd/RockOgreGrotto1-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-RockOgreGrotto1-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -9626,8 +9702,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/f9/ArmoredLizard-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/f9/ArmoredLizard-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-ArmoredLizard-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -9642,8 +9717,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/72/KillerNeedle-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/72/KillerNeedle-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-KillerNeedle-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -9658,8 +9732,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/fe/LarvaeMoth-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/fe/LarvaeMoth-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-LarvaeMoth-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -9674,8 +9747,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//8/80/HarpieLady-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/80/HarpieLady-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-HarpieLady-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -9690,8 +9762,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//1/12/HarpieLadySisters-MRD-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/12/HarpieLadySisters-MRD-EN-SR-UE-25thAnniversaryEdition.png/179px-HarpieLadySisters-MRD-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -9706,8 +9777,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//3/37/Kojikocy-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/3/37/Kojikocy-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Kojikocy-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -9722,8 +9792,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//d/da/CocoonofEvolution-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/da/CocoonofEvolution-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-CocoonofEvolution-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -9738,8 +9807,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//5/5d/CrawlingDragon-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/5d/CrawlingDragon-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-CrawlingDragon-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -9754,8 +9822,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/7a/ArmoredZombie-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/7a/ArmoredZombie-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-ArmoredZombie-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -9770,8 +9837,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//6/63/MaskofDarkness-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/63/MaskofDarkness-MRD-EN-R-UE-25thAnniversaryEdition.png/178px-MaskofDarkness-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -9800,8 +9866,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//3/37/WhiteMagicalHat-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/3/37/WhiteMagicalHat-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-WhiteMagicalHat-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -9816,8 +9881,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//1/1f/BigEye-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/1f/BigEye-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-BigEye-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -9832,8 +9896,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Ultra Rare",
     imageUrl:
       "https://ms.yugipedia.com//6/68/BlackSkullDragon-MRD-EN-UR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/68/BlackSkullDragon-MRD-EN-UR-UE-25thAnniversaryEdition.png/179px-BlackSkullDragon-MRD-EN-UR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     monsterCardTypes: ["fusion"],
@@ -9848,8 +9911,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//5/5d/MaskedSorcerer-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/5d/MaskedSorcerer-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-MaskedSorcerer-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -9864,8 +9926,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/aa/RoaringOceanSnake-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/aa/RoaringOceanSnake-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-RoaringOceanSnake-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "water",
     monsterCardTypes: ["fusion"],
@@ -9880,8 +9941,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/d0/WaterOmotics-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d0/WaterOmotics-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-WaterOmotics-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["normal"],
@@ -9896,8 +9956,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//8/81/GroundAttackerBugroth-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/81/GroundAttackerBugroth-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-GroundAttackerBugroth-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -9912,8 +9971,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/d1/PetitMoth-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d1/PetitMoth-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-PetitMoth-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -9928,8 +9986,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//6/60/ElegantEgotist-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/60/ElegantEgotist-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-ElegantEgotist-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -9939,8 +9996,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//0/05/SangaoftheThunder-MRD-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/0/05/SangaoftheThunder-MRD-EN-SR-UE-25thAnniversaryEdition.png/178px-SangaoftheThunder-MRD-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -9955,8 +10011,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//c/cb/Kazejin-MRD-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/cb/Kazejin-MRD-EN-SR-UE-25thAnniversaryEdition.png/178px-Kazejin-MRD-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -9971,8 +10026,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//1/16/Suijin-MRD-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/16/Suijin-MRD-EN-SR-UE-25thAnniversaryEdition.png/179px-Suijin-MRD-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["effect"],
@@ -9987,8 +10041,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//d/dd/MysticLamp-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/dd/MysticLamp-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-MysticLamp-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -10003,8 +10056,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/a5/SteelScorpion-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/a5/SteelScorpion-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-SteelScorpion-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -10019,8 +10071,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/07/Ocubeam-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/0/07/Ocubeam-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Ocubeam-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["normal"],
@@ -10035,8 +10086,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//c/ce/Leghul-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/ce/Leghul-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Leghul-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -10051,8 +10101,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//1/17/Ooguchi-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/17/Ooguchi-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-Ooguchi-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "water",
     classifications: ["effect"],
@@ -10081,8 +10130,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//8/85/BlastJuggler-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/85/BlastJuggler-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-BlastJuggler-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["effect"],
@@ -10097,8 +10145,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//f/f9/Jinzo7-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/f9/Jinzo7-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-Jinzo7-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -10113,8 +10160,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//6/64/MagicianofFaith-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/64/MagicianofFaith-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-MagicianofFaith-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -10129,8 +10175,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/a8/AncientElf-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/a8/AncientElf-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-AncientElf-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["normal"],
@@ -10145,8 +10190,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/23/DeepseaShark-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/23/DeepseaShark-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-DeepseaShark-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "water",
     monsterCardTypes: ["fusion"],
@@ -10175,8 +10219,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/02/DestroyerGolem-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/0/02/DestroyerGolem-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-DestroyerGolem-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10191,8 +10234,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//b/b6/KaminariAttack-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/b6/KaminariAttack-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-KaminariAttack-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "wind",
     monsterCardTypes: ["fusion"],
@@ -10221,8 +10263,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//6/6f/Morinphen-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/6f/Morinphen-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Morinphen-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -10237,8 +10278,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/73/MegaThunderball-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/73/MegaThunderball-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-MegaThunderball-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -10267,8 +10307,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//f/fd/EmpressJudge-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/f/fd/EmpressJudge-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-EmpressJudge-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     monsterCardTypes: ["fusion"],
@@ -10283,8 +10322,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/a4/PaleBeast-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/a4/PaleBeast-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-PaleBeast-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10299,8 +10337,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//8/8b/ElectricLizard-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/8b/ElectricLizard-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-ElectricLizard-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -10315,8 +10352,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//4/45/HunterSpider-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/4/45/HunterSpider-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-HunterSpider-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10331,8 +10367,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//8/84/AncientLizardWarrior-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/84/AncientLizardWarrior-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-AncientLizardWarrior-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10361,8 +10396,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/df/Trent-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/df/Trent-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Trent-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10377,8 +10411,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/2c/DiskMagician-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/2c/DiskMagician-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-DiskMagician-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -10393,8 +10426,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/ce/Hyosube-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/ce/Hyosube-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Hyosube-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["normal"],
@@ -10423,8 +10455,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//2/23/FakeTrap-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/23/FakeTrap-MRD-EN-R-UE-25thAnniversaryEdition.png/178px-FakeTrap-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "trap",
     subcategory: "normal",
   },
@@ -10443,8 +10474,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//9/9e/SoulRelease-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/9/9e/SoulRelease-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-SoulRelease-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -10454,8 +10484,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//6/60/TheCheerfulCoffin-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/60/TheCheerfulCoffin-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-TheCheerfulCoffin-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -10474,8 +10503,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//d/d2/BabyDragon-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d2/BabyDragon-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-BabyDragon-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "wind",
     classifications: ["normal"],
@@ -10490,8 +10518,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/03/BlacklandFireDragon-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/0/03/BlacklandFireDragon-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-BlacklandFireDragon-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -10506,8 +10533,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/aa/SwampBattleguard-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/aa/SwampBattleguard-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-SwampBattleguard-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -10522,8 +10548,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/a4/BattleSteer-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/a4/BattleSteer-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-BattleSteer-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10552,8 +10577,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//e/e0/SaggitheDarkClown-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/e/e0/SaggitheDarkClown-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-SaggitheDarkClown-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -10568,8 +10592,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//6/60/DragonPiper-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/60/DragonPiper-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-DragonPiper-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "fire",
     classifications: ["effect"],
@@ -10584,8 +10607,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/0b/IllusionistFacelessMage-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/0/0b/IllusionistFacelessMage-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-IllusionistFacelessMage-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -10600,8 +10622,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//c/cf/Sangan-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/cf/Sangan-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-Sangan-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -10616,8 +10637,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//c/c9/GreatMoth-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/c9/GreatMoth-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-GreatMoth-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -10632,8 +10652,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//7/7e/Kuriboh-MRD-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/7e/Kuriboh-MRD-EN-SR-UE-25thAnniversaryEdition.png/178px-Kuriboh-MRD-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -10648,8 +10667,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/c3/Jellyfish-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/c3/Jellyfish-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Jellyfish-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["normal"],
@@ -10678,8 +10696,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//5/56/KingofYamimakai-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/56/KingofYamimakai-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-KingofYamimakai-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -10694,8 +10711,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Super Rare",
     imageUrl:
       "https://ms.yugipedia.com//1/19/CatapultTurtle-MRD-EN-SR-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/19/CatapultTurtle-MRD-EN-SR-UE-25thAnniversaryEdition.png/179px-CatapultTurtle-MRD-EN-SR-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["effect"],
@@ -10710,8 +10726,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/d1/MysticHorseman-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d1/MysticHorseman-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-MysticHorseman-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10726,8 +10741,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/c9/RabidHorseman-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/c9/RabidHorseman-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-RabidHorseman-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     monsterCardTypes: ["fusion"],
@@ -10742,8 +10756,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//d/d7/CrassClown-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d7/CrassClown-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-CrassClown-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -10758,8 +10771,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/7c/PumpkingtheKingofGhosts-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/7c/PumpkingtheKingofGhosts-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-PumpkingtheKingofGhosts-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -10774,8 +10786,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//8/84/DreamClown-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/8/84/DreamClown-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-DreamClown-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -10804,8 +10815,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/c3/AncientBrain-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/c3/AncientBrain-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-AncientBrain-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -10820,8 +10830,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//3/3c/GuardianoftheLabyrinth-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/3/3c/GuardianoftheLabyrinth-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-GuardianoftheLabyrinth-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10850,8 +10859,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//3/34/TheLittleSwordsmanofAile-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/3/34/TheLittleSwordsmanofAile-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-TheLittleSwordsmanofAile-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "water",
     classifications: ["effect"],
@@ -10866,8 +10874,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//b/ba/PrincessofTsurugi-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/ba/PrincessofTsurugi-MRD-EN-R-UE-25thAnniversaryEdition.png/178px-PrincessofTsurugi-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -10882,8 +10889,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//e/e8/ProtectoroftheThrone-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/e/e8/ProtectoroftheThrone-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-ProtectoroftheThrone-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -10898,8 +10904,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//4/44/TremendousFire-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/4/44/TremendousFire-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-TremendousFire-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "spell",
     subcategory: "normal",
   },
@@ -10909,8 +10914,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/db/JiraiGumo-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/db/JiraiGumo-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-JiraiGumo-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -10925,8 +10929,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//7/73/ShadowGhoul-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/73/ShadowGhoul-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-ShadowGhoul-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -10941,8 +10944,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//0/0f/LabyrinthTank-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/0/0f/LabyrinthTank-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-LabyrinthTank-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     monsterCardTypes: ["fusion"],
@@ -10957,8 +10959,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//b/b7/RyuKishinPowered-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/b7/RyuKishinPowered-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-RyuKishinPowered-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["normal"],
@@ -10973,8 +10974,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//d/d6/Bickuribox-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d6/Bickuribox-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Bickuribox-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     monsterCardTypes: ["fusion"],
@@ -10989,8 +10989,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//5/56/GiltiatheDKnight-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/56/GiltiatheDKnight-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-GiltiatheDKnight-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "light",
     monsterCardTypes: ["fusion"],
@@ -11005,8 +11004,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//9/99/LauncherSpider-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/9/99/LauncherSpider-MRD-EN-C-UE-25thAnniversaryEdition.png/177px-LauncherSpider-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 177,
     cardType: "monster",
     attribute: "fire",
     classifications: ["normal"],
@@ -11021,8 +11019,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//c/cf/GigaTechWolf-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/c/cf/GigaTechWolf-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-GigaTechWolf-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["normal"],
@@ -11037,8 +11034,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Short Print",
     imageUrl:
       "https://ms.yugipedia.com//3/36/ThunderDragon-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/3/36/ThunderDragon-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-ThunderDragon-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -11053,8 +11049,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/7a/7ColoredFish-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/7a/7ColoredFish-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-7ColoredFish-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "water",
     classifications: ["normal"],
@@ -11069,8 +11064,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//5/52/TheImmortalofThunder-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/52/TheImmortalofThunder-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-TheImmortalofThunder-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -11085,8 +11079,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//3/38/PunishedEagle-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/3/38/PunishedEagle-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-PunishedEagle-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     monsterCardTypes: ["fusion"],
@@ -11101,8 +11094,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//a/a3/InsectSoldiersoftheSky-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/a3/InsectSoldiersoftheSky-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-InsectSoldiersoftheSky-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "wind",
     classifications: ["effect"],
@@ -11117,8 +11109,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//d/d5/Hoshiningen-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/d/d5/Hoshiningen-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-Hoshiningen-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     classifications: ["effect"],
@@ -11133,8 +11124,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//6/66/MusicianKing-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/6/66/MusicianKing-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-MusicianKing-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "light",
     monsterCardTypes: ["fusion"],
@@ -11149,8 +11139,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//2/2b/YadoKaru-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/2/2b/YadoKaru-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-YadoKaru-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "water",
     classifications: ["effect"],
@@ -11165,8 +11154,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//e/ec/CyberSaurus-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/e/ec/CyberSaurus-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-CyberSaurus-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     monsterCardTypes: ["fusion"],
@@ -11181,8 +11169,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//b/b4/CannonSoldier-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/b/b4/CannonSoldier-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-CannonSoldier-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -11197,8 +11184,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//1/13/MukaMuka-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/13/MukaMuka-MRD-EN-R-UE-25thAnniversaryEdition.png/178px-MukaMuka-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -11213,8 +11199,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//1/16/TheBistroButcher-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/16/TheBistroButcher-MRD-EN-C-UE-25thAnniversaryEdition.png/178px-TheBistroButcher-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -11229,8 +11214,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//7/7f/StarBoy-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/7f/StarBoy-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-StarBoy-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "water",
     classifications: ["effect"],
@@ -11245,8 +11229,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//a/ae/MilusRadiant-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/a/ae/MilusRadiant-MRD-EN-R-UE-25thAnniversaryEdition.png/178px-MilusRadiant-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -11275,8 +11258,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/78/Niwatori-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/78/Niwatori-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-Niwatori-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["normal"],
@@ -11291,8 +11273,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//4/47/DarkElf-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/4/47/DarkElf-MRD-EN-R-UE-25thAnniversaryEdition.png/178px-DarkElf-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -11307,8 +11288,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//7/73/MushroomMan2-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/7/73/MushroomMan2-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-MushroomMan2-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -11323,8 +11303,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Common",
     imageUrl:
       "https://ms.yugipedia.com//5/5a/LavaBattleguard-MRD-EN-C-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/5/5a/LavaBattleguard-MRD-EN-C-UE-25thAnniversaryEdition.png/179px-LavaBattleguard-MRD-EN-C-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "earth",
     classifications: ["effect"],
@@ -11339,8 +11318,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//3/34/WitchoftheBlackForest-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/3/34/WitchoftheBlackForest-MRD-EN-R-UE-25thAnniversaryEdition.png/178px-WitchoftheBlackForest-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 178,
     cardType: "monster",
     attribute: "dark",
     classifications: ["effect"],
@@ -11355,8 +11333,7 @@ const ALL_CARDS: CardMetadata[] = [
     rarity: "Rare",
     imageUrl:
       "https://ms.yugipedia.com//1/10/LittleChimera-MRD-EN-R-UE-25thAnniversaryEdition.png",
-    thumbnailUrl:
-      "https://ms.yugipedia.com//thumb/1/10/LittleChimera-MRD-EN-R-UE-25thAnniversaryEdition.png/179px-LittleChimera-MRD-EN-R-UE-25thAnniversaryEdition.png",
+    thumbnailSize: 179,
     cardType: "monster",
     attribute: "fire",
     classifications: ["effect"],
@@ -16276,10 +16253,14 @@ export const getDisenchantValue = (card: CardMetadata) => {
 };
 
 export const getThumbnailUrl = (card: CardMetadata) => {
-  if (card.thumbnailUrl) {
-    return card.thumbnailUrl;
-  }
+  return generateThumbnailUrl(card);
+};
+
+const generateThumbnailUrl = (card: CardMetadata) => {
   const url = new URL(card.imageUrl);
+  const [, , dir1, dir2, filename] = url.pathname.split("/");
+  const { thumbnailSize = 180 } = card;
+  url.pathname = `//thumb/${dir1}/${dir2}/${filename}/${thumbnailSize}px-${filename}`;
   return url.href;
 };
 
