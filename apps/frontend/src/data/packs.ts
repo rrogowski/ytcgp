@@ -13,6 +13,159 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "IOC",
+    name: "Invasion of Chaos",
+    cost: 500,
+    imageUrl:
+      "https://ms.yugipedia.com//9/96/IOC-BoosterEN-25thAnniversaryEdition.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+  },
+  {
+    code: "AST",
+    name: "Ancient Sanctuary",
+    cost: 500,
+    imageUrl: "https://ms.yugipedia.com//b/b6/AST-BoosterEN.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 2 / 24 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+  },
+  {
+    code: "SYE",
+    name: "Starter Deck: Yugi Evolution",
+    cost: 500,
+    imageUrl:
+      "https://cubiccreativity.wordpress.com/wp-content/uploads/2022/10/starter-deck-yugi-evolution-header.jpg?w=300",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Ultra Rare", odds: 1 }],
+    ],
+  },
+  {
+    code: "SKE",
+    name: "Starter Deck: Kaiba Evolution",
+    cost: 500,
+    imageUrl:
+      "https://tcgplayer-cdn.tcgplayer.com/product/212808_in_1000x1000.jpg",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Ultra Rare", odds: 1 }],
+    ],
+  },
+  {
+    code: "CT1",
+    name: "Collectible Tins 2004",
+    cost: 1100,
+    imageUrl:
+      "https://static.wikia.nocookie.net/yugioh/images/e/e4/CT1-PromoEN.jpg",
+    rarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    godPackRarityTable: [[{ rarity: "Secret Rare", odds: 1 / 1 }]],
+    additionalPacksCodes: ["PGD", "MFC", "DCR", "IOC", "AST"],
+  },
+  {
     code: "MFC",
     name: "Magician's Force",
     cost: 500,

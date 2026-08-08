@@ -1,15 +1,16 @@
 import { findPackByCode } from "./packs";
 
 export const ALL_EXPANSIONS = [
+  { name: "Bending Order", codes: ["IOC", "AST"] },
   { name: "Advent of Discord", codes: ["MFC", "DCR"] },
   { name: "Highlight & Shadow", codes: ["LOD", "TP4", "PGD"] },
   { name: "Time & Illusion", codes: ["SDJ", "TP3", "SDP"] },
   { name: "Forbidden Steel", codes: ["PSV", "TP2", "LON"] },
   { name: "Shonen Jump", codes: ["JMPV1", "JMPV2"] },
   { name: "Video Games", codes: ["SDD", "DOR", "EDS", "FMR", "DDS"] },
-  { name: "Collectible Tins", codes: ["BPTV1", "BPTV2"] },
+  { name: "Collectible Tins", codes: ["BPTV1", "BPTV2", "CT1"] },
   { name: "Mechanical Dominion", codes: ["MRD", "TP1", "SRL"] },
-  { name: "Rivals Clash", codes: ["SDY", "SDK"] },
+  { name: "Rivals Clash", codes: ["SDY", "SDK", "SYE", "SKE"] },
   { name: "Genesis", codes: ["LOB", "MP1"] },
 ];
 

@@ -31,8 +31,13 @@ const RELEASED_SET_NAMES = [
   // "Legacy of Darkness",
   // "Pharaonic Guardian",
   // "Tournament Pack 4",
-  "Magician's Force",
-  "Dark Crisis",
+  // "Magician's Force",
+  // "Dark Crisis",
+  "Invasion of Chaos",
+  "Ancient Sanctuary",
+  "Starter Deck: Yugi Evolution",
+  "Starter Deck: Kaiba Evolution",
+  "Collectible Tins 2004",
 ];
 
 const sets = JSON.parse(
