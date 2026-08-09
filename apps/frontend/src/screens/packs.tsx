@@ -133,14 +133,16 @@ export const Packs: React.FC = () => {
                       (profile.data?.money ?? 0) < cost ||
                       (grandMasterSets.includes(pack) &&
                         pack.code !== "BPTV1" &&
-                        pack.code !== "BPTV2")
+                        pack.code !== "BPTV2" &&
+                        pack.code !== "CT1")
                     }
                     onClick={() => handleBuyPack(user, pack.code)}
                   >
                     <Text lineHeight="2rem">
                       {grandMasterSets.includes(pack) &&
                       pack.code !== "BPTV1" &&
-                      pack.code !== "BPTV2"
+                      pack.code !== "BPTV2" &&
+                      pack.code !== "CT1"
                         ? "👑"
                         : `Buy (¥${cost})`}
                     </Text>
