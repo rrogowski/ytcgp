@@ -34,15 +34,22 @@ const ACHIEVEMENT_CODES_TO_HIDE = [
   "BPTV1",
   "BPTV2",
   "DDS",
+  "DOR",
+  "EDS",
+  "FMR",
   "JMPV1",
   "JMPV2",
+  "LOB",
   "MP1",
   "MRD",
+  "SDD",
   "SDK",
   "SDP",
   "SDY",
   "TP1",
   "TP2",
+  "TP3",
+  "TP4",
 ];
 
 export const Community: React.FC = () => {
