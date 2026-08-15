@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Card } from "../components/card";
 import { CardPreview } from "../components/card-preview";
 import { CardRarity } from "../components/card-rarity";
+import { ui } from "../components/ui";
 import { findCardByCode, getThumbnailUrl } from "../data/cards";
+import { findPackByCode } from "../data/packs";
 import { useRouter } from "../lib/router";
 
 export const Pack: React.FC = () => {
@@ -39,6 +41,8 @@ export const Pack: React.FC = () => {
         onClick={() => setPreviewImageUrl("")}
       ></CardPreview>
       {codes.map((packContents, i) => {
+        const code = packContents.split("-")[0] ?? "";
+        const pack = findPackByCode(code);
         return (
           <div
             key={`pack-${i}`}
@@ -52,6 +56,16 @@ export const Pack: React.FC = () => {
             }}
           >
             {i > 0 && <hr style={{ width: "100%" }}></hr>}
+            <ui.span
+              color="gray"
+              fontWeight="bold"
+              fontSize="0.75rem"
+              marginBottom="0.25rem"
+              textAlign="center"
+              width="100%"
+            >
+              {pack.name}
+            </ui.span>
             {packContents.split(",").map((code) => {
               const card = findCardByCode(code);
               const isNew = newCodes.includes(code);
