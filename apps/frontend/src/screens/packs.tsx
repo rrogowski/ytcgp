@@ -3,7 +3,10 @@ import { ProgressBar } from "../components/progress-bar";
 import { ui } from "../components/ui";
 import { getCardsInSet, getCostOfRemainingCards } from "../data/cards";
 import { ALL_EXPANSIONS, getExpansionPacks } from "../data/expansions";
-import { getPackCostIncludingAdditionalPacks } from "../data/packs";
+import {
+  findPackByCode,
+  getPackCostIncludingAdditionalPacks,
+} from "../data/packs";
 import { Button } from "../design-system/components/button";
 import { Center } from "../design-system/components/center";
 import { Column } from "../design-system/components/column";
@@ -71,7 +74,7 @@ export const Packs: React.FC = () => {
 
   return (
     <Center alignItems="unset" overflow="auto">
-      <Column alignItems="stretch" gap="0.25rem" maxWidth="40rem">
+      <Column alignItems="stretch" gap="0.25rem" maxWidth="30rem">
         <Row>
           <Spacer></Spacer>
           <select
@@ -138,7 +141,7 @@ export const Packs: React.FC = () => {
                     }
                     onClick={() => handleBuyPack(user, pack.code)}
                   >
-                    <Text lineHeight="2rem">
+                    <Text fontSize="0.75rem" lineHeight="1.5rem">
                       {grandMasterSets.includes(pack) &&
                       pack.code !== "BPTV1" &&
                       pack.code !== "BPTV2" &&
@@ -153,7 +156,7 @@ export const Packs: React.FC = () => {
                         (pointsWallet.data?.[pack.code] ?? 0) === 0 ||
                         isConvertingPackPoints
                       }
-                      lineHeight="2rem"
+                      lineHeight="1.5rem"
                       onClick={() => handleConvertPackPoints(pack.code)}
                     >
                       👑
@@ -165,7 +168,7 @@ export const Packs: React.FC = () => {
                         router.navigate(`/craft?code=${pack.code}`)
                       }
                     >
-                      <Text lineHeight="2rem">
+                      <Text fontSize="0.75rem" lineHeight="1.5rem">
                         Craft ({pointsWallet.data?.[pack.code] ?? 0} ₱)
                       </Text>
                     </Button>
@@ -174,13 +177,13 @@ export const Packs: React.FC = () => {
                     backgroundColor="#ba964a"
                     color="white"
                     currentValue={uniques.length}
-                    height="1.5rem"
+                    height="1.25rem"
                     maxValue={cards.length}
                     marginTop="0.25rem"
                     width="100%"
                   ></ProgressBar>
                   <Text
-                    fontSize="0.75rem"
+                    fontSize="0.7rem"
                     marginBottom="0.25rem"
                     textAlign="center"
                   >
@@ -190,12 +193,12 @@ export const Packs: React.FC = () => {
                     backgroundColor="#7d5646"
                     color="white"
                     currentValue={totalCardsAtOrBelow3Copies}
-                    height="1.5rem"
+                    height="1.25rem"
                     maxValue={cards.length * 3}
                     width="100%"
                   ></ProgressBar>
                   <Text
-                    fontSize="0.75rem"
+                    fontSize="0.7rem"
                     marginBottom="0.25rem"
                     textAlign="center"
                   >
@@ -205,13 +208,50 @@ export const Packs: React.FC = () => {
                     backgroundColor="#1780b8"
                     color="white"
                     currentValue={packPoints}
-                    height="1.5rem"
+                    height="1.25rem"
                     maxValue={costOfRemainingCards}
                     width="100%"
                   ></ProgressBar>
-                  <Text fontSize="0.75rem" textAlign="center">
+                  <Text fontSize="0.7rem" textAlign="center">
                     {packPoints} / {costOfRemainingCards} ₱
                   </Text>
+                  {pack.additionalPacksCodes?.map((code) => {
+                    const pack = findPackByCode(code);
+                    const cards = getCardsInSet(pack.code);
+                    const packPoints = pointsWallet.data?.[pack.code] ?? 0;
+                    const costOfRemainingCards = getCostOfRemainingCards(
+                      cards,
+                      binder.data,
+                    );
+                    return (
+                      <>
+                        <Text
+                          color="gray"
+                          fontSize="0.7rem"
+                          fontWeight="bold"
+                          marginBottom="-0.25rem"
+                          overflow="hidden"
+                          textAlign="center"
+                          textOverflow="ellipsis"
+                          textWrap="nowrap"
+                          title={pack.name}
+                        >
+                          {pack.name}
+                        </Text>
+                        <ProgressBar
+                          backgroundColor="#4734f6"
+                          color="white"
+                          currentValue={packPoints}
+                          height="1.25rem"
+                          maxValue={costOfRemainingCards}
+                          width="100%"
+                        ></ProgressBar>
+                        <Text fontSize="0.7rem" textAlign="center">
+                          {packPoints} / {costOfRemainingCards} ₱
+                        </Text>
+                      </>
+                    );
+                  })}
                 </div>
               </ui.div>
             );

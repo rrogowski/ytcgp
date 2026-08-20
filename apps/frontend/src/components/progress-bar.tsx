@@ -33,7 +33,7 @@ export const ProgressBar: React.FC<Props> = (props) => {
       <ui.div
         alignItems="center"
         display="flex"
-        fontSize="0.875rem"
+        fontSize="0.8rem"
         justifyContent="center"
         position="absolute"
         height="100%"
