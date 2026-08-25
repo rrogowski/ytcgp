@@ -132,6 +132,7 @@ export const Draft: React.FC = () => {
           </Button>
         </Row>
       )}
+      {!draft.data && "Waiting for Roman to create a draft..."}
       {draft.data && (
         <>
           {(hasRemainingPacks || (router.params["codes"]?.length ?? 0) > 0) && (
