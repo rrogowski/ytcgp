@@ -117,7 +117,11 @@ export const Draft: React.FC = () => {
               return <option key={pack.code}>{pack.code}</option>;
             })}
           </Select>
-          <Input type="number" onChange={handlePackCountChange}></Input>
+          <Input
+            type="number"
+            value={packCount}
+            onChange={handlePackCountChange}
+          ></Input>
           <Button
             disabled={
               packCodes.length === 0 || !(packCount > 0) || isCreatingNewDraft
