@@ -4,6 +4,7 @@ interface RouterContextValue {
   path: string;
   params: SearchParams;
   navigate: (path: string) => void;
+  updateParams: (params: object) => void;
 }
 
 export type SearchParams = Record<string, string | undefined>;

@@ -46,11 +46,11 @@ export const Packs: React.FC = () => {
   );
 
   const handleBuyPack = async (user: User, code: string) => {
-    const [cards, newCards, twoCards, threeCards, isGodPack] = await buyPack(
+    const [packs, newCards, twoCards, threeCards, isGodPack] = await buyPack(
       user,
       code,
     );
-    const codes = cards
+    const codes = packs
       .map((pack) => pack.map((card) => card.code).join(","))
       .join("|");
     const newCodes = newCards.map((card) => card.code).join(",");

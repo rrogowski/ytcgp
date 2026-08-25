@@ -7,7 +7,11 @@ import { findCardByCode, getThumbnailUrl } from "../data/cards";
 import { findPackByCode } from "../data/packs";
 import { useRouter } from "../lib/router";
 
-export const Pack: React.FC = () => {
+interface Props {
+  onPreviewImageUrl?: (url: string) => void;
+}
+
+export const Pack: React.FC<Props> = (props) => {
   const router = useRouter();
 
   const [previewImageUrl, setPreviewImageUrl] = useState("");
@@ -38,7 +42,11 @@ export const Pack: React.FC = () => {
     >
       <CardPreview
         imageUrl={previewImageUrl}
-        onClick={() => setPreviewImageUrl("")}
+        onClick={() =>
+          props.onPreviewImageUrl
+            ? props.onPreviewImageUrl("")
+            : setPreviewImageUrl("")
+        }
       ></CardPreview>
       {codes.map((packContents, i) => {
         const code = packContents.split("-")[0] ?? "";
@@ -131,7 +139,11 @@ export const Pack: React.FC = () => {
                     imageUrl={getThumbnailUrl(card)}
                     height="9rem"
                     isPartOfGodPack={isGodPack}
-                    onClick={() => setPreviewImageUrl(card.imageUrl)}
+                    onClick={() =>
+                      props.onPreviewImageUrl
+                        ? props.onPreviewImageUrl(card.imageUrl)
+                        : setPreviewImageUrl(card.imageUrl)
+                    }
                   ></Card>
                   <span style={{ position: "absolute", bottom: "-.75rem" }}>
                     <CardRarity rarity={card.rarity}></CardRarity>

@@ -1,6 +1,8 @@
 import { shuffle } from "../lib/random";
 import { findCardByCode, getCardsInSet, type CardMetadata } from "./cards";
 
+export const GOD_PACK_CHANCE = 1 / 2555;
+
 interface Pack {
   code: string;
   name: string;

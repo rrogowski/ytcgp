@@ -14,6 +14,7 @@ const NAVBAR_BUTTONS = [
   { icon: "store", path: "/packs", aliases: ["/pack", "/craft"] },
   { icon: "diversity_3", path: "/community" },
   { icon: "select_all", path: "/wonder-pick" },
+  { icon: "draft", path: "/draft" },
 ];
 
 export const Navbar: React.FC<{ type: "desktop" | "mobile" }> = (props) => {

@@ -27,9 +27,29 @@ export const RouterProvider: React.FC<React.PropsWithChildren> = ({
     setUrl(url);
   }, []);
 
+  const updateParams = useCallback(
+    (params: object) => {
+      const oldParams = Object.fromEntries(url.searchParams);
+      const newUrl = buildUrl(url.pathname, { ...oldParams, ...params });
+      window.history.replaceState(null /* state */, "" /* unused */, newUrl);
+      setUrl(newUrl);
+    },
+    [url],
+  );
+
   return (
-    <RouterContext.Provider value={{ path: url.pathname, params, navigate }}>
+    <RouterContext.Provider
+      value={{ path: url.pathname, params, navigate, updateParams }}
+    >
       {children}
     </RouterContext.Provider>
   );
+};
+
+const buildUrl = (path: string, params: object = {}) => {
+  const url = new URL(path, window.location.origin);
+  Object.entries(params).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+  return url;
 };

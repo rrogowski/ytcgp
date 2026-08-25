@@ -21,6 +21,7 @@ import { useProfile } from "./models/profile";
 import { Binder } from "./screens/binder";
 import { Community } from "./screens/community";
 import { Craft } from "./screens/craft";
+import { Draft } from "./screens/draft";
 import { Pack } from "./screens/pack";
 import { Packs } from "./screens/packs";
 import { Search } from "./screens/search";
@@ -138,6 +139,8 @@ const View: React.FC = () => {
       return <Community></Community>;
     case "/wonder-pick":
       return <WonderPick></WonderPick>;
+    case "/draft":
+      return <Draft></Draft>;
     default:
       return <FullPageText>Page Not Found: {router.path}</FullPageText>;
   }

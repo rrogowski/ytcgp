@@ -3,6 +3,7 @@ import { doc, Timestamp } from "firebase/firestore";
 import {
   generatePack,
   getPackCostIncludingAdditionalPacks,
+  GOD_PACK_CHANCE,
 } from "../data/packs";
 import { executeTransaction } from "../lib/firestore";
 import { shuffle } from "../lib/random";
@@ -11,7 +12,6 @@ import { packsRef } from "../models/pack";
 import { pointsWalletsRef } from "../models/points-wallet";
 import { profilesRef } from "../models/profile";
 
-const GOD_PACK_CHANCE = 1 / 2555;
 export const YEN_PER_PACK_POINT = 25;
 
 export const buyPackTransaction = async (user: User, code: string) => {
