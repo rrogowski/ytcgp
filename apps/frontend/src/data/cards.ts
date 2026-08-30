@@ -20078,7 +20078,6 @@ export const getDisenchantValue = (card: CardMetadata) => {
 };
 
 export const getThumbnailUrl = (card: CardMetadata) => {
-  console.debug(card);
   const url = new URL(card.imageUrl);
   const [, , dir1, dir2, filename] = url.pathname.split("/");
   const { thumbnailSize = 180 } = card;

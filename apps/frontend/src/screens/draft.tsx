@@ -44,14 +44,18 @@ export const Draft: React.FC = () => {
   );
 
   const cardsInDraft = useMemo(() => {
-    return (draft.data?.packCodes ?? [])
-      .map((packCode) => {
-        const pack = findPackByCode(packCode);
-        return [packCode, ...(pack.additionalPacksCodes ?? [])]
-          .map(getCardsInSet)
-          .flat();
-      })
-      .flat();
+    return [
+      ...new Set(
+        (draft.data?.packCodes ?? [])
+          .map((packCode) => {
+            const pack = findPackByCode(packCode);
+            return [packCode, ...(pack.additionalPacksCodes ?? [])]
+              .map(getCardsInSet)
+              .flat();
+          })
+          .flat(),
+      ),
+    ];
   }, [draft.data]);
 
   const handlePackCodesChange = (
