@@ -136,7 +136,12 @@ export const Draft: React.FC = () => {
       {draft.data && (
         <>
           {(hasRemainingPacks || (router.params["codes"]?.length ?? 0) > 0) && (
-            <Row justifyContent="center">
+            <Row
+              flexWrap="wrap"
+              gap="0.25rem"
+              justifyContent="center"
+              overflowY="scroll"
+            >
               {draft.data.packCodes.map((packCode) => {
                 const pack = findPackByCode(packCode);
                 const remainingPacks =
