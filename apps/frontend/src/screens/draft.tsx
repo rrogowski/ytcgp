@@ -28,6 +28,7 @@ export const Draft: React.FC = () => {
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [packCodes, setPackCodes] = useState<string[]>([]);
   const [packCount, setPackCount] = useState<number>(12);
+  const [toggledCodes, setToggledCodes] = useState<string[]>([]);
 
   const router = useRouter();
   const user = useUser();
@@ -89,6 +90,15 @@ export const Draft: React.FC = () => {
     const twoCodes = twoCards.map((card) => card.code).join(",");
     const threeCodes = threeCards.map((card) => card.code).join(",");
     router.updateParams({ codes, newCodes, twoCodes, threeCodes, isGodPack });
+  };
+
+  const handleCardRightClick = (event: React.MouseEvent, code: string) => {
+    event.preventDefault();
+    setToggledCodes((codes) => {
+      return codes.includes(code)
+        ? codes.filter((c) => c != code)
+        : [...codes, code];
+    });
   };
 
   const hasRemainingPacks = Object.values(
@@ -193,6 +203,9 @@ export const Draft: React.FC = () => {
                         flexDirection: "column",
                         width: "110px",
                       }}
+                      onContextMenu={(event) =>
+                        handleCardRightClick(event, card.code)
+                      }
                     >
                       <div
                         style={{
@@ -215,6 +228,9 @@ export const Draft: React.FC = () => {
                               display: "flex",
                               height: "1.5rem",
                               justifyContent: "center",
+                              opacity: toggledCodes.includes(card.code)
+                                ? 0.2
+                                : 1,
                               position: "absolute",
                               right: "-0.25rem",
                               width: "1.5rem",
@@ -237,7 +253,13 @@ export const Draft: React.FC = () => {
                               <Card
                                 height="8rem"
                                 imageUrl={getThumbnailUrl(card)}
-                                opacity={quantity > 2 - i ? 1 : 0.3}
+                                opacity={
+                                  toggledCodes.includes(card.code)
+                                    ? 0.3
+                                    : quantity > 2 - i
+                                      ? 1
+                                      : 0.3
+                                }
                                 onClick={() =>
                                   setPreviewImageUrl(card.imageUrl)
                                 }
