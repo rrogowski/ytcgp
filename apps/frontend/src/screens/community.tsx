@@ -6,7 +6,7 @@ import { CardRarity } from "../components/card-rarity";
 import { FullPageText } from "../components/full-page-text";
 import { findCardByCode, getCardsInSet, getThumbnailUrl } from "../data/cards";
 import { ALL_EXPANSIONS } from "../data/expansions";
-import { findPackByCode } from "../data/packs";
+import { ALL_PACKS, findPackByCode } from "../data/packs";
 import { useUser } from "../lib/auth";
 import { useCollection } from "../lib/firestore";
 import { useTransaction } from "../lib/transaction";
@@ -159,9 +159,15 @@ export const Community: React.FC = () => {
               const binder = binders.docs.find((d) => d.id === profile.id);
               const masterSets = getMasterSets(binder?.data ?? null);
               const grandMasterSets = getGrandMasterSets(binder?.data ?? null);
+              const isFullGrandmaster =
+                grandMasterSets.length === ALL_PACKS.length;
               return (
                 <tr key={profile.id}>
-                  <td>{profile.data.displayName}</td>
+                  <td>
+                    {isFullGrandmaster && "👑 "}
+                    {profile.data.displayName}
+                    {isFullGrandmaster && " 👑"}
+                  </td>
                   <td>{getTotalCards(binder?.data ?? null)}</td>
                   <td>{getTotalUniques(binder?.data ?? null)}</td>
                   <td>{getTotalPlaysets(binder?.data ?? null)}</td>
