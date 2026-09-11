@@ -33,11 +33,14 @@ const RELEASED_SET_NAMES = [
   // "Tournament Pack 4",
   // "Magician's Force",
   // "Dark Crisis",
-  "Invasion of Chaos",
-  "Ancient Sanctuary",
-  "Starter Deck: Yugi Evolution",
-  "Starter Deck: Kaiba Evolution",
-  "Collectible Tins 2004",
+  // "Invasion of Chaos",
+  // "Ancient Sanctuary",
+  // "Starter Deck: Yugi Evolution",
+  // "Starter Deck: Kaiba Evolution",
+  // "Collectible Tins 2004",
+  "Soul of the Duelist",
+  "Dark Beginning 1",
+  "Tournament Pack 5",
 ];
 
 const sets = JSON.parse(

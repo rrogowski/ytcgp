@@ -38,6 +38,7 @@ export const Pack: React.FC<Props> = (props) => {
         height: "100%",
         justifyContent: codes.length === 1 ? "center" : "",
         overflow: "auto",
+        position: "relative",
       }}
     >
       <CardPreview
@@ -58,7 +59,7 @@ export const Pack: React.FC<Props> = (props) => {
               alignItems: "center",
               display: "flex",
               flexWrap: "wrap",
-              gap: "0.25rem",
+              gap: "0.5rem 0.25rem",
               justifyContent: "center",
               position: "relative",
             }}

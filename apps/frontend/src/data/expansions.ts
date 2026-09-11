@@ -1,6 +1,7 @@
 import { findPackByCode } from "./packs";
 
 export const ALL_EXPANSIONS = [
+  { name: "Hallowed Spirits", codes: ["SOD", "TP5", "DB1"] },
   { name: "Bending Order", codes: ["IOC", "AST"] },
   { name: "Advent of Discord", codes: ["MFC", "DCR"] },
   { name: "Highlight & Shadow", codes: ["LOD", "TP4", "PGD"] },

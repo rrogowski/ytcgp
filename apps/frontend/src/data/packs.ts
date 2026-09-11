@@ -15,6 +15,94 @@ interface Pack {
 
 export const ALL_PACKS: Pack[] = [
   {
+    code: "SOD",
+    name: "Soul of the Duelist",
+    cost: 500,
+    imageUrl: "https://ms.yugipedia.com//5/5d/SOD-BoosterEN.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Short Print", odds: 1 / 30 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [
+        { rarity: "Secret Rare", odds: 1 / 24 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Short Print", odds: 2 / 30 },
+        { rarity: "Secret Rare", odds: 1 / 1 },
+      ],
+      [{ rarity: "Secret Rare", odds: 1 / 1 }],
+      [{ rarity: "Secret Rare", odds: 1 / 1 }],
+      [{ rarity: "Secret Rare", odds: 1 / 1 }],
+      [{ rarity: "Secret Rare", odds: 1 / 1 }],
+    ],
+  },
+  {
+    code: "DB1",
+    name: "Dark Beginning 1",
+    cost: 500,
+    imageUrl: "https://ms.yugipedia.com//4/42/DB1-BoosterEN.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+      [
+        { rarity: "Ultra Rare", odds: 2 / 12 },
+        { rarity: "Super Rare", odds: 1 / 1 },
+      ],
+    ],
+  },
+  {
+    code: "TP5",
+    name: "Tournament Pack 5",
+    cost: 300,
+    imageUrl: "https://ms.yugipedia.com//2/28/TP5-BoosterEN.png",
+    rarityTable: [
+      [{ rarity: "Common", odds: 1 / 1 }],
+      [{ rarity: "Rare", odds: 1 / 1 }],
+      [
+        { rarity: "Ultra Rare", odds: 1 / 12 },
+        { rarity: "Super Rare", odds: 1 / 5 },
+        { rarity: "Common", odds: 1 / 1 },
+      ],
+    ],
+    godPackRarityTable: [
+      [{ rarity: "Ultra Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+      [{ rarity: "Super Rare", odds: 1 / 1 }],
+    ],
+  },
+  {
     code: "IOC",
     name: "Invasion of Chaos",
     cost: 500,
