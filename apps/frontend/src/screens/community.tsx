@@ -107,7 +107,8 @@ export const Community: React.FC = () => {
         onClick={() => setPreviewImageUrl("")}
       ></CardPreview>
       <h3>Collection Stats</h3>
-      {user.displayName === "Roman Rogowski" && (
+      {(user.displayName === "Roman Rogowski" ||
+        user.displayName === "Will Hairfield") && (
         <>
           <button
             onClick={() =>
