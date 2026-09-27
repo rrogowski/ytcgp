@@ -11,6 +11,7 @@ export interface ProfileModel {
   lastViewedWonderPicksAt?: Timestamp;
   nextAllowanceAt: Timestamp;
   numberOfGodPacksOpened: number;
+  numberOfGodTinsOpened: number;
   money: number;
   wonderPoints: number;
 }

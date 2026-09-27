@@ -17,6 +17,7 @@ export const YEN_PER_PACK_POINT = 25;
 export const buyPackTransaction = async (user: User, code: string) => {
   const isGodPack = Math.random() < GOD_PACK_CHANCE;
   const packs = generatePack(code, isGodPack);
+  const isGodTin = isGodPack && packs.length > 1;
   return executeTransaction(async (t) => {
     const profileRef = doc(profilesRef, user.uid);
     const profile = (await t.get(profileRef)).data();
@@ -49,7 +50,8 @@ export const buyPackTransaction = async (user: User, code: string) => {
     t.update(profileRef, {
       money: profile.money - cost,
       numberOfGodPacksOpened:
-        profile.numberOfGodPacksOpened + (isGodPack ? 1 : 0),
+        profile.numberOfGodPacksOpened + (isGodPack && !isGodTin ? 1 : 0),
+      numberOfGodTinsOpened: profile.numberOfGodTinsOpened + (isGodTin ? 1 : 0),
     });
     if (binder) {
       t.update(binderRef, binderUpdate);

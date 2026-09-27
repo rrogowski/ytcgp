@@ -150,6 +150,7 @@ export const Community: React.FC = () => {
               <th># Playsets</th>
               <th>Binder Value</th>
               <th># God Packs</th>
+              <th># God Tins</th>
               <th># Master Sets</th>
               <th># GM Sets</th>
               <th>Achievements</th>
@@ -174,6 +175,7 @@ export const Community: React.FC = () => {
                   <td>{getTotalPlaysets(binder?.data ?? null)}</td>
                   <td>¥{getTotalBinderValue(binder?.data ?? null)}</td>
                   <td>{profile.data.numberOfGodPacksOpened}</td>
+                  <td>{profile.data.numberOfGodTinsOpened}</td>
                   <td>{masterSets.length}</td>
                   <td>{grandMasterSets.length}</td>
                   <td

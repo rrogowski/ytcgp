@@ -23,6 +23,7 @@ export const claimAllowanceTransaction = (user: User) => {
         displayName: user.displayName ?? "",
         nextAllowanceAt: Timestamp.fromDate(nextAllowanceAt),
         numberOfGodPacksOpened: 0,
+        numberOfGodTinsOpened: 0,
         money: ALLOWANCE_AMOUNT,
         wonderPoints: WONDER_POINTS_AMOUNT,
       });
