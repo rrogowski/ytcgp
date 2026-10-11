@@ -234,6 +234,7 @@ export const Community: React.FC = () => {
       <div
         style={{
           display: "grid",
+          columnGap: "2rem",
           gridTemplateColumns: "1fr 1fr",
           overflow: "hidden",
           textAlign: "center",
